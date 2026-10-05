@@ -1,0 +1,6 @@
+model,macro_mre_mm
+C0_Population_Atlas,87.59
+C5_Internal_SSM_PCA,167.49
+C2_PointNet2_Ensemble,68.89
+C3_DGCNN_Ensemble,71.31
+C4_Proposed_Ensemble,71.23

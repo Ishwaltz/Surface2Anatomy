@@ -1,0 +1,88 @@
+{
+  "targets": [
+    "liver",
+    "spleen",
+    "pancreas",
+    "gallbladder",
+    "urinary_bladder",
+    "aorta",
+    "trachea",
+    "kidney_right",
+    "kidney_left",
+    "stomach",
+    "inferior_vena_cava"
+  ],
+  "indices": [
+    4,
+    0,
+    6,
+    3,
+    20,
+    51,
+    15,
+    1,
+    2,
+    5,
+    62
+  ],
+  "proposed_mre_mm": 27.029660658402875,
+  "proposed_median_mm": 21.19928550720215,
+  "literature_same_mre_mm": 53.67,
+  "target_breakdown": [
+    {
+      "target": "liver",
+      "proposed_mre": 28.21336555480957,
+      "support": 145
+    },
+    {
+      "target": "spleen",
+      "proposed_mre": 29.20461082458496,
+      "support": 143
+    },
+    {
+      "target": "pancreas",
+      "proposed_mre": 27.392269134521484,
+      "support": 131
+    },
+    {
+      "target": "gallbladder",
+      "proposed_mre": 38.82484436035156,
+      "support": 108
+    },
+    {
+      "target": "urinary_bladder",
+      "proposed_mre": 23.032808303833008,
+      "support": 100
+    },
+    {
+      "target": "aorta",
+      "proposed_mre": 19.68251609802246,
+      "support": 158
+    },
+    {
+      "target": "trachea",
+      "proposed_mre": 19.693744659423828,
+      "support": 84
+    },
+    {
+      "target": "kidney_right",
+      "proposed_mre": 29.355300903320312,
+      "support": 127
+    },
+    {
+      "target": "kidney_left",
+      "proposed_mre": 26.874530792236328,
+      "support": 130
+    },
+    {
+      "target": "stomach",
+      "proposed_mre": 31.824298858642578,
+      "support": 145
+    },
+    {
+      "target": "inferior_vena_cava",
+      "proposed_mre": 23.227977752685547,
+      "support": 146
+    }
+  ]
+}

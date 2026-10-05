@@ -1,0 +1,2326 @@
+======================================================================
+SURFACE2ANATOMY — FINAL IPMI 2027 EVIDENCE GENERATION PROTOCOL
+121-TARGET VERSION
+======================================================================
+
+ROLE
+======================================================================
+
+You are acting simultaneously as:
+
+1. Senior medical-image-computing researcher
+2. 3D geometric deep-learning engineer
+3. Computational anatomy researcher
+4. Statistical reviewer
+5. Data-leakage / reproducibility auditor
+6. IPMI reviewer
+7. Scientific-software engineer
+
+The objective is NOT to write the manuscript yet.
+
+The objective is to produce the definitive empirical and methodological
+evidence from which one strong IPMI 2027 manuscript can be written.
+
+PROJECT ROOT:
+E:\3D-Organ-Location-Prediction-Model
+
+PROJECT:
+Surface2Anatomy
+
+AUTHORS:
+Khushi Mhamane
+Sharon Melhi
+Deepak Raina
+
+TARGET VENUE:
+IPMI 2027
+
+======================================================================
+0. CENTRAL SCIENTIFIC QUESTION
+======================================================================
+
+The paper must NOT be framed merely as:
+
+"PointNet++ + Transformer predicts organ centroids."
+
+That is insufficient methodological novelty.
+
+The central scientific problem is:
+
+    WHAT HIDDEN INTERNAL ANATOMY IS OBSERVABLE AND IDENTIFIABLE
+    FROM EXTERNAL 3D HUMAN BODY GEOMETRY?
+
+The work must study:
+
+A. Target-conditioned hidden-anatomy inference
+B. External-surface observability
+C. Coordinate-frame identifiability under FOV shift
+D. Missing-region vs missing-point information
+E. Target-specific anatomical ambiguity
+F. Cranial / whole-body FOV failure and repair
+G. Female pelvic anatomy
+H. Realistic partial-view sensing
+I. External generalization
+J. Calibrated uncertainty
+
+The deep model is the instrument used to investigate this inverse problem.
+
+======================================================================
+1. ABSOLUTE NON-NEGOTIABLE RULE: 121 TARGETS
+======================================================================
+
+The final model and final benchmark MUST use exactly:
+
+    K = 121 anatomical targets
+
+Do NOT silently reuse:
+
+    104 primary targets
+    107 targets
+    117 model slots
+
+Those are historical configurations.
+
+Create a NEW study version:
+
+    Surface2Anatomy-IPMI-121-v1
+
+First locate the authoritative 121-target ontology.
+
+Search every:
+
+CSV
+JSON
+PT
+PKL
+manifest
+segmentation map
+target map
+previous ontology
+dataset builder
+
+Do not assume names.
+
+Create:
+
+reports/ipmi121/01_TARGET_ONTOLOGY_121.csv
+
+Columns:
+
+target_index
+canonical_name
+anatomical_group
+laterality
+sex_specific
+label_source
+train_support
+val_support
+test_support
+external_support
+status
+notes
+
+Hard requirement:
+
+TARGET_COUNT_EXACT = 121
+
+If exactly 121 scientifically valid targets cannot be reconstructed,
+STOP and report why.
+
+DO NOT pad the ontology with fake targets.
+
+======================================================================
+2. LABEL AVAILABILITY MUST BE HANDLED CORRECTLY
+======================================================================
+
+For every subject-target pair define:
+
+m_ik ∈ {0,1}
+
+where:
+
+m_ik = 1
+only if valid ground truth exists for target k in subject i.
+
+Distinguish:
+
+A. anatomically absent
+B. not applicable
+C. unlabeled / missing annotation
+D. corrupted label
+E. valid label
+
+Never treat missing anatomy as coordinate (0,0,0).
+
+For female-specific anatomy such as:
+
+uterus
+left ovary
+right ovary
+
+and any other verified female targets in the 121 ontology:
+
+evaluate only cases with valid corresponding ground truth.
+
+Do NOT artificially inject targets.
+
+Do NOT infer a target coordinate for anatomically non-applicable cases
+and score it as an error.
+
+======================================================================
+3. ONE AND ONLY ONE FINAL HEADLINE ERROR NUMBER
+======================================================================
+
+The final manuscript must have exactly ONE headline localization metric.
+
+For test subject i and target k:
+
+    e_ik = || c_hat_ik - c_ik ||_2
+
+For every target:
+
+    MRE_k =
+      mean_i(e_ik)
+      over valid test cases where m_ik = 1
+
+The final number is:
+
+    FINAL_121_MACRO_MRE_MM
+      = (1 / 121) * Σ_k MRE_k
+
+Every target receives equal weight.
+
+This is the ONE headline error number.
+
+The final prediction must come from:
+
+    3-seed coordinate ensemble
+    seeds = {42, 43, 44}
+
+where:
+
+    c_ensemble =
+      (c_42 + c_43 + c_44) / 3
+
+The paper must NOT alternate between:
+
+23.22
+23.34
+26.30
+27.25
+31.33
+etc.
+
+Those belong to different historical configurations or experiments.
+
+For the NEW IPMI-121 study there must be:
+
+    ONE FINAL MODEL
+    ONE FINAL TEST
+    ONE FINAL MACRO MRE
+
+Secondary statistics may include:
+
+95% CI
+median error
+P90
+SDR@10
+SDR@20
+
+but they are NOT alternate headline error numbers.
+
+Primary manuscript wording must always reference:
+
+    FINAL_121_MACRO_MRE_MM
+
+======================================================================
+4. CREATE A COMPLETELY CLEAN EXPERIMENTAL LINEAGE
+======================================================================
+
+Historical experiments are useful scientifically,
+but they must not be mixed with the final benchmark.
+
+Create:
+
+reports/ipmi121/00_EXPERIMENT_LINEAGE.md
+
+Divide all experiments into:
+
+LEGACY
+-------
+Phase 1...
+Phase 10R...
+Phase 11...
+Phase 12...
+Phase 15...
+104-target benchmarks
+117-slot models
+
+FINAL IPMI121
+-------------
+new ontology
+new model
+new train/validation/test split
+new checkpoints
+new preprocessing freeze
+new canonicalizer
+new results
+
+Never copy a legacy metric into a final table unless clearly labelled
+"historical diagnostic."
+
+======================================================================
+5. FRESH FINAL TEST SET
+======================================================================
+
+The old test sets have already been examined many times.
+
+For IPMI-quality evaluation, attempt to construct a fresh final test set.
+
+FIRST:
+
+hash every subject ever used in:
+
+train
+validation
+test
+FLARE
+CT-ORG
+AMOS
+V2
+V3
+TotalSegmentator experiments
+camera studies
+debug experiments
+
+Use SHA256 of source volumes and/or stable patient identifiers.
+
+Create:
+
+reports/ipmi121/02_ALL_PRIOR_EXPOSURES.csv
+
+Then identify cases that have NEVER been used for:
+
+model selection
+hyperparameter tuning
+ablation selection
+debugging
+architecture design
+
+Preferred:
+
+    genuinely new eligible subjects.
+
+If additional valid public cases exist:
+use them.
+
+If an unused pool exists:
+seal a final subset BEFORE new model development.
+
+Do NOT use pseudo-ground-truth segmentations as primary test labels
+without explicit validation.
+
+If no truly fresh test pool exists:
+
+set:
+
+FRESH_FINAL_TEST_AVAILABLE=NO
+
+and state the limitation explicitly.
+
+Do not falsely call an exposed split "untouched."
+
+======================================================================
+6. SPLIT CONSTRUCTION FOR 121 TARGETS
+======================================================================
+
+Use patient-disjoint splitting.
+
+Because label presence differs by target, use iterative multilabel
+stratification over target-availability vectors.
+
+Goal:
+
+train
+validation
+final test
+
+while maximizing support for all 121 targets.
+
+Recommended:
+
+~80 / 10 / 10
+
+but target support takes precedence over exact percentages.
+
+Hard minimum final-test support:
+
+    >= 10 valid subjects per target
+
+Preferred:
+
+    >= 20 per target
+
+If any target has <10:
+
+attempt to increase dataset coverage.
+
+Do not silently remove the target.
+
+Report:
+
+TARGETS_WITH_TEST_N_LT_10=
+
+The final benchmark can only be called "121-target" if all 121
+contribute valid test observations.
+
+======================================================================
+7. DATA FORENSICS — REPEAT EVERYTHING
+======================================================================
+
+Before training anything, re-run a full audit.
+
+Check:
+
+1. CT / segmentation pairing
+2. affine consistency
+3. qform / sform
+4. RAS orientation
+5. voxel-to-world mapping
+6. world-to-voxel inversion
+7. left/right correctness
+8. superior/inferior correctness
+9. duplicate patients
+10. near-duplicate scans
+11. split leakage
+12. target-index ordering
+13. ontology consistency
+14. body-surface extraction
+15. target independence of surface extraction
+16. scale preservation
+17. point-cloud units
+18. surface-target coordinate parity
+19. NaN / Inf
+20. disconnected or corrupted surfaces
+
+Roundtrip criterion:
+
+    max coordinate roundtrip error < 0.001 mm
+
+Create:
+
+reports/ipmi121/audit/
+
+with all scripts and outputs.
+
+No model training until:
+
+DATA_AUDIT=PASS
+
+======================================================================
+8. SURFACE EXTRACTION RULE
+======================================================================
+
+The external surface MUST be generated independently of internal targets.
+
+Forbidden:
+
+organ labels controlling surface dimensions
+target bbox controlling skin
+target centroids entering preprocessing
+internal landmarks entering online inference
+
+Allowed:
+
+raw CT/MRI intensity
+external body segmentation
+optical depth geometry
+surface mesh
+external geometric descriptors
+
+At runtime:
+
+INPUT =
+    external XYZ geometry
+    +
+    requested anatomical target identity
+
+No CT/MRI voxel tensor.
+
+======================================================================
+9. BASELINE MODEL: REPRODUCE CURRENT TARGET-QUERY SYSTEM
+======================================================================
+
+First reproduce the current target-query model in 121-target form.
+
+Input:
+
+4096 x 3 XYZ
+
+Encoder:
+
+PointNet++ multi-scale
+
+SA1:
+1024 points
+
+SA2:
+256 points
+
+SA3:
+64 points
+
+Memory:
+
+256 mid-scale
++
+64 coarse-scale
+=
+320 surface tokens
+
+Token dimension:
+
+d = 256
+
+Decoder:
+
+121 learned target query slots
+
+Cross-attention:
+
+4 layers
+8 heads
+
+Residual coordinate output.
+
+Replace any 117-sized ontology-dependent tensor with 121 only after
+verifying exact target ordering.
+
+This model is:
+
+BASELINE_TQ121
+
+It is NOT yet the proposed final methodological contribution.
+
+======================================================================
+10. NEW METHODOLOGICAL CONTRIBUTION #1
+FOV-STABLE EXTERNAL CANONICALIZATION
+======================================================================
+
+One of the strongest scientific findings is that coordinate definition
+can create apparent domain failure.
+
+Develop a deployment-valid:
+
+    FOV-Stable External Canonicalizer
+    abbreviation: FSEC
+
+FSEC MUST use only external geometry.
+
+No organ locations.
+No spine landmarks.
+No internal CT landmarks.
+
+Problem:
+
+partial scans or different FOVs can move naive:
+
+bbox center
+surface mean
+visible-height midpoint
+
+even when the anatomy has not moved.
+
+We want:
+
+    Cψ(S_partial) ≈ canonical frame of S_complete
+
+using external information only.
+
+--------------------------------------------------
+10A. TRAINING TARGET FOR FSEC
+--------------------------------------------------
+
+For each TRAINING surface with full available external geometry:
+
+derive a stable full-surface EXTERNAL reference:
+
+    c_full_ext
+
+This reference must itself use external geometry only.
+
+Then synthetically create:
+
+superior crop
+inferior crop
+anterior occlusion
+posterior occlusion
+left/right partial view
+random axial FOV crop
+camera visibility masks
+
+Train FSEC:
+
+    Cψ(S_partial, v) -> c_full_ext
+
+where:
+
+v = surface-coverage descriptor
+
+No internal targets are used.
+
+--------------------------------------------------
+10B. GEOMETRIC FEATURES
+--------------------------------------------------
+
+Candidate external descriptors:
+
+robust coordinate quantiles
+surface median
+width
+depth
+visible height
+covariance eigenvalues
+symmetry-plane features
+anterior/posterior extent
+left/right extent
+axial percentiles
+surface moments
+
+Compare:
+
+bbox center
+point mean
+point median
+legacy ridge center
+robust quantile center
+FSEC learned center
+
+--------------------------------------------------
+10C. FSEC METRICS
+--------------------------------------------------
+
+Measure canonical-center error under synthetic cropping.
+
+Primary frame metric:
+
+    || c_pred - c_full_ext ||
+
+Also calculate final organ-localization degradation after each frame.
+
+Do NOT select the final model using final test data.
+
+======================================================================
+11. NEW METHODOLOGICAL CONTRIBUTION #2
+ANATOMICAL SURFACE OBSERVABILITY
+======================================================================
+
+Formalize which external surface regions contain predictive information
+about which hidden anatomical targets.
+
+Define a canonical 12-region external partition.
+
+Recommended:
+
+3 axial bands:
+
+superior
+middle
+inferior
+
+x
+
+4 circumferential sectors:
+
+anterior
+posterior
+left
+right
+
+Total:
+
+R = 12 regions
+
+Use deterministic canonical-coordinate boundaries.
+
+Save exact equations.
+
+--------------------------------------------------
+11A. OBSERVABILITY MATRIX
+--------------------------------------------------
+
+For every target k and surface region r:
+
+run inference with region r removed.
+
+Define:
+
+    A[k,r]
+      =
+      MRE_k(mask region r)
+      -
+      MRE_k(full surface)
+
+A ∈ R^(121 x 12)
+
+This is the:
+
+    Anatomical Surface Observability Matrix
+    ASOM
+
+Interpretation:
+
+large A[k,r]
+=
+target k strongly depends on visible information from region r
+
+near-zero A[k,r]
+=
+target k relatively insensitive to that region
+
+Bootstrap a confidence interval for every entry.
+
+Save:
+
+reports/ipmi121/asom/ASOM_121x12.csv
+
+--------------------------------------------------
+11B. NORMALIZED OBSERVABILITY
+--------------------------------------------------
+
+Also compute:
+
+    A_norm[k,r]
+      =
+      A[k,r] /
+      (MRE_k(full) + epsilon)
+
+This permits comparison between easy and difficult targets.
+
+--------------------------------------------------
+11C. OBSERVABILITY ENTROPY
+--------------------------------------------------
+
+For positive degradations:
+
+p[k,r] =
+    max(A[k,r],0)
+    /
+    sum_r max(A[k,r],0)
+
+Then:
+
+H_k =
+    -Σ_r p[k,r] log(p[k,r])
+      /
+      log(R)
+
+Interpretation:
+
+low H:
+target depends strongly on a few regions
+
+high H:
+information is distributed broadly over the surface
+
+Create:
+
+TARGET_OBSERVABILITY_ENTROPY_121.csv
+
+--------------------------------------------------
+11D. ANATOMICAL GROUP COMPARISON
+--------------------------------------------------
+
+Compare ASOM profiles for:
+
+brain / skull
+cervical anatomy
+thorax
+cardiovascular
+abdomen
+spine
+ribs
+pelvis
+female pelvic anatomy
+
+Cluster targets based ONLY on observability profile.
+
+Determine whether anatomically related targets exhibit similar external
+observability signatures.
+
+Use:
+
+Spearman correlation
+hierarchical clustering
+bootstrap stability
+
+Do NOT overinterpret clustering.
+
+======================================================================
+12. NEW METHODOLOGICAL CONTRIBUTION #3
+COVERAGE-CONDITIONED TARGET QUERY DECODER
+======================================================================
+
+Now use the observability concept inside the model.
+
+Call the method:
+
+    Coverage-Conditioned Target Query
+    CCTQ
+
+Do not make an unnecessarily huge architecture.
+
+Keep the encoder mostly fixed.
+
+For each surface compute visibility vector:
+
+    v ∈ [0,1]^12
+
+where v_r is fraction of expected surface support visible in region r.
+
+Learn:
+
+    E_target(k)
+    E_region(r)
+
+and a target-region affinity matrix:
+
+    O ∈ R^(121 x 12)
+
+Use coverage in query formation:
+
+    q'_k =
+      q_k
+      +
+      MLP(
+          O_k ⊙ v
+      )
+
+Optionally also bias cross-attention logits:
+
+    attention_bias(k,m)
+      =
+      β * O[k, region(m)] * v[region(m)]
+
+where:
+
+region(m)
+=
+surface region containing token m.
+
+The network is therefore explicitly aware of:
+
+    WHICH TARGET IS REQUESTED
+    +
+    WHICH EXTERNAL REGIONS ARE ACTUALLY VISIBLE
+
+This must be ablated rigorously.
+
+======================================================================
+13. STRUCTURED-MASK CONSISTENCY TRAINING
+======================================================================
+
+During training only:
+
+with predefined probability, create a second partial observation
+S_partial from the same patient.
+
+Possible perturbations:
+
+random 25–75% point drop
+one anatomical region masked
+partial axial FOV
+1-camera visibility
+2-camera visibility
+
+Compute:
+
+full prediction:
+    c_full
+
+partial prediction:
+    c_partial
+
+Add:
+
+    L_consistency
+      =
+      mean ||
+        c_partial - stopgrad(c_full)
+      ||
+
+for valid targets.
+
+Total loss:
+
+    L =
+      L_coordinate
+      +
+      lambda_cons * L_consistency
+
+Tune lambda only on validation.
+
+Test values:
+
+0
+0.05
+0.10
+0.20
+
+No final-test tuning.
+
+======================================================================
+14. NEW METHODOLOGICAL CONTRIBUTION #4
+EMPIRICAL IDENTIFIABILITY / AMBIGUITY ANALYSIS
+======================================================================
+
+A central scientific question:
+
+Can two people have similar external geometry but different internal anatomy?
+
+Estimate this without making an unjustified information-theoretic claim.
+
+Call it:
+
+    Empirical Local Anatomical Ambiguity
+    ELAA
+
+DO NOT call it a mathematical lower bound unless formally proven.
+
+--------------------------------------------------
+14A. GEOMETRIC NEIGHBORS
+--------------------------------------------------
+
+For each validation/test patient:
+
+construct an external-only representation using:
+
+A. handcrafted geometric descriptor
+AND
+B. frozen encoder surface embedding
+
+For target k:
+
+find nearest TRAINING patients with valid target k.
+
+Use:
+
+KNN = 5
+10
+20
+
+--------------------------------------------------
+14B. LOCAL TARGET DISPERSION
+--------------------------------------------------
+
+For neighbor set N_i,k:
+
+    μ_i,k =
+      mean_j c_j,k
+
+    Cov_i,k =
+      covariance_j(c_j,k)
+
+Define:
+
+    ambiguity_i,k =
+      sqrt(trace(Cov_i,k))
+
+Target-level:
+
+    ELAA_k =
+      mean_i ambiguity_i,k
+
+--------------------------------------------------
+14C. QUESTIONS
+--------------------------------------------------
+
+Test:
+
+1. Does ELAA_k correlate with target MRE_k?
+2. Are mobile viscera more ambiguous?
+3. Are vertebrae lower ambiguity?
+4. Are brain/skull errors driven more by FOV than ambiguity?
+5. Are uterus/ovary targets intrinsically more variable?
+6. Does learned embedding produce similar rankings to handcrafted geometry?
+
+Report:
+
+Spearman rho
+bootstrap CI
+scatter plots
+
+Again:
+
+this is an EMPIRICAL AMBIGUITY PROXY.
+
+Do not call it Bayes error.
+
+======================================================================
+15. FEMALE ANATOMY — MAKE THIS A REAL EXPERIMENT
+======================================================================
+
+Do not merely list uterus and ovaries.
+
+Use them scientifically.
+
+First identify all verified female-specific targets in the 121 ontology.
+
+Likely examples may include:
+
+uterus
+ovary_left
+ovary_right
+
+but use ONLY actual ontology entries.
+
+For each:
+
+report:
+
+N train
+N validation
+N test
+MRE
+median
+P90
+SDR@20
+observability profile
+ELAA ambiguity
+
+Compare against anatomically nearby non-sex-specific structures:
+
+bladder
+pelvis
+rectum if available
+sacrum
+femoral heads
+other verified pelvic targets
+
+Questions:
+
+1. Are female pelvic targets localizable from external geometry?
+2. Which external regions are informative?
+3. Does inferior/pelvic surface occlusion disproportionately affect them?
+4. Is their error explained by higher ELAA ambiguity?
+5. Do they benefit from CCTQ more than ordinary TargetQuery?
+
+Do NOT train a sex classifier unless scientifically necessary.
+
+Do NOT infer biological sex from body geometry merely for novelty.
+
+Handle target availability directly through masks.
+
+======================================================================
+16. BRAIN / CRANIAL FOV REPAIR EXPERIMENT
+======================================================================
+
+The old work showed brain vulnerability under whole-body / extreme-FOV
+conditions.
+
+This must now become a formal experiment.
+
+--------------------------------------------------
+16A. INTERNAL BRAIN SUPPORT
+--------------------------------------------------
+
+Report exact support for:
+
+brain
+skull
+cervical targets
+
+within the 121 benchmark.
+
+--------------------------------------------------
+16B. FOV STRATIFICATION
+--------------------------------------------------
+
+For every brain-valid subject measure:
+
+visible height
+surface width
+surface depth
+superior extent
+inferior extent
+FOV diagonal
+
+Create FOV bins:
+
+in-distribution
+moderate shift
+extreme shift
+
+based only on predefined training-distribution percentiles.
+
+Recommended:
+
+ID:
+within 5th–95th percentile training FOV
+
+Moderate:
+95th–99th
+
+Extreme:
+outside 1st–99th
+
+--------------------------------------------------
+16C. COMPARE CANONICALIZERS
+--------------------------------------------------
+
+Evaluate:
+
+bbox centering
+legacy canonicalizer
+FSEC
+
+Report brain error by FOV bin.
+
+--------------------------------------------------
+16D. NEW EXTERNAL BRAIN COHORT
+--------------------------------------------------
+
+The previous CT-ORG brain subset was tiny.
+
+Search existing available datasets for a NEW,
+previously unused,
+licensed whole-body or head-to-torso cohort containing valid:
+
+brain
+skull
+
+ground truth.
+
+Target:
+
+N >= 30
+
+Prefer:
+
+N >= 50
+
+If no such dataset exists:
+
+state:
+
+EXTERNAL_BRAIN_POWER_LIMITATION=TRUE
+
+Do NOT make strong generalization claims from N=9.
+
+======================================================================
+17. REAL-SENSOR VALIDATION
+======================================================================
+
+If HuMMan / TrueDepth or another real depth dataset is available:
+
+DO NOT claim organ localization accuracy without internal GT.
+
+Instead evaluate:
+
+A. point-cloud validity
+B. canonical-frame stability
+C. cross-view consistency
+D. temporal prediction stability
+E. sensitivity to sensor noise
+F. runtime
+
+For repeated frames of same subject:
+
+calculate predicted-centroid temporal jitter:
+
+    J_k =
+      RMS deviation from within-subject mean prediction
+
+Report across 121 targets.
+
+This validates deployment stability,
+NOT anatomical accuracy.
+
+======================================================================
+18. CAMERA VIEW EXPERIMENTS
+======================================================================
+
+Simulate realistic external sensing.
+
+Evaluate:
+
+full 360 surface
+front only
+posterior only
+left oblique
+right oblique
+2-camera
+3-camera
+4-camera if meaningful
+
+Use calibrated visibility assumptions.
+
+Also evaluate noise:
+
+1 mm
+3 mm
+5 mm
+10 mm
+
+and random point drop:
+
+25%
+50%
+75%
+90%
+
+Core claim to test:
+
+    COVERAGE MATTERS MORE THAN POINT COUNT.
+
+Quantify this formally.
+
+Example:
+
+compare:
+
+75% random dropout
+
+vs
+
+25% structured superior occlusion
+
+even when fewer total points are removed in the structured case.
+
+Use paired bootstrap significance.
+
+======================================================================
+19. REQUIRED BASELINES
+======================================================================
+
+All neural baselines must receive:
+
+same training subjects
+same validation subjects
+same final test
+same 121 targets
+same target masks
+same preprocessing
+same canonical frame
+same 4096 points
+same epochs
+same augmentation unless architecture-specific
+same checkpoint selection rule
+
+Required:
+
+B0 Population atlas
+
+B1 Ridge regression using external geometry
+
+B2 kNN external-surface retrieval
+
+B3 SSM/PCA
+
+B4 PointNet++ direct 121-target regression
+
+B5 DGCNN 121-target regression
+
+B6 global pooled encoder + target MLP
+
+B7 existing TargetQuery121
+
+B8 TargetQuery121 + FSEC
+
+B9 TargetQuery121 + CCTQ
+
+B10 TargetQuery121 + structured-mask consistency
+
+B11 FULL PROPOSED:
+    FSEC + CCTQ + structured-mask consistency
+
+Strongly preferred if compute allows:
+
+Point Transformer / PointNeXt family baseline
+
+Do not intentionally under-tune competing neural baselines.
+
+======================================================================
+20. MATCHED TRAINING BUDGET
+======================================================================
+
+Default matched budget:
+
+epochs = 65
+batch size = 16
+
+optimizer:
+AdamW
+
+weight decay:
+1e-4
+
+Use fixed LR policy across neural models where reasonable.
+
+Existing starting point:
+
+encoder LR 2e-4
+decoder LR 5e-4
+
+cosine annealing.
+
+All hyperparameter decisions:
+
+TRAIN + VALIDATION ONLY.
+
+No final-test tuning.
+
+Run seeds:
+
+42
+43
+44
+
+for every serious neural baseline.
+
+======================================================================
+21. ABLATION MATRIX FOR THE PROPOSED METHOD
+======================================================================
+
+Run:
+
+A0 full final model
+
+A1 remove FSEC
+A2 remove CCTQ
+A3 remove observability affinity O
+A4 remove visibility vector
+A5 remove structured-mask consistency
+A6 single global surface token
+A7 coarse tokens only
+A8 no target identity
+A9 query permutation
+A10 patient surface shuffle
+A11 no cross-attention
+A12 no atlas prior if still used
+A13 2 decoder layers
+A14 6 decoder layers
+
+Purpose:
+
+show exactly what matters.
+
+Especially preserve destructive controls:
+
+QUERY PERMUTATION
+PATIENT SURFACE SHUFFLE
+
+These demonstrate:
+
+target identity matters
+patient geometry matters
+
+======================================================================
+22. ATLAS-MEMORIZATION TEST
+======================================================================
+
+A reviewer will ask:
+
+"Is this just learning average organ locations?"
+
+Test explicitly.
+
+For each target:
+
+calculate:
+
+population atlas prediction
+
+and:
+
+model displacement from atlas:
+
+    delta_k =
+      c_model - c_atlas
+
+Test:
+
+1. Is model improvement correlated with patient-specific geometry?
+2. Does patient-shuffle destroy improvement?
+3. Does query permutation destroy improvement?
+4. Does atlas-free query initialization remain competitive?
+5. How much patient-level variance is recovered beyond atlas?
+
+Report target-wise:
+
+atlas MRE
+model MRE
+relative improvement
+
+Correct FDR over 121 targets.
+
+======================================================================
+23. SURFACE INFORMATION SANITY CONTROLS
+======================================================================
+
+Run these destructive controls:
+
+surface from wrong patient
+surface mirrored left-right
+surface randomly rotated
+surface isotropically rescaled
+surface anisotropically rescaled
+surface z-shifted
+query shuffled
+target atlas shuffled
+point order shuffled
+
+Point order shuffling SHOULD have no effect.
+
+Wrong-patient surface SHOULD significantly hurt.
+
+Left-right reflection SHOULD particularly hurt lateralized targets.
+
+These are powerful sanity tests.
+
+======================================================================
+24. DOMAIN TRANSFER EXPERIMENT
+======================================================================
+
+If V2 and TotalSegmentator-like domains remain:
+
+train:
+
+V2 only
+TS only
+pooled
+
+evaluate on:
+
+V2 validation
+TS validation
+
+using identical 121-compatible target subsets.
+
+Questions:
+
+Does pooled training help?
+
+Is there negative transfer?
+
+Does FSEC reduce domain discrepancy?
+
+Does CCTQ improve FOV robustness across domains?
+
+Do not use external test cohorts for architecture selection.
+
+======================================================================
+25. EXTERNAL ZERO-SHOT VALIDATION
+======================================================================
+
+Use only AFTER final model freeze.
+
+Potential cohorts:
+
+FLARE
+AMOS
+CT-ORG
+other verified datasets
+
+No fine-tuning.
+
+No adaptation.
+
+No threshold tuning.
+
+No target removal based on observed error.
+
+For every external dataset:
+
+define ontology intersection BEFORE looking at results.
+
+Report external results as:
+
+SECONDARY GENERALIZATION EXPERIMENTS.
+
+They are NOT the one final headline error number.
+
+======================================================================
+26. ONTOLOGY-MISMATCH AUDIT
+======================================================================
+
+External labels are often not semantically identical.
+
+For every external target pair assign:
+
+EXACT_MATCH
+PARTIAL_MATCH
+TRUNCATED_STRUCTURE
+COMBINED_STRUCTURE
+INCOMPATIBLE
+
+Primary cross-cohort comparison:
+
+EXACT_MATCH only.
+
+Do not compare:
+
+whole aorta
+against
+abdominal aorta segment
+
+as though identical.
+
+Create:
+
+EXTERNAL_ONTOLOGY_MAPPING.csv
+
+======================================================================
+27. UNCERTAINTY — USE CONFORMAL CALIBRATION
+======================================================================
+
+Do not call raw ensemble disagreement "confidence."
+
+Use:
+
+ensemble disagreement
++
+split-conformal calibration.
+
+On validation only:
+
+nonconformity score:
+
+    s_i,k =
+      || c_hat_i,k - c_i,k ||_2
+
+Option A:
+pooled conformal radius
+
+Option B:
+target-specific radius where target support is sufficient
+
+Primary:
+
+90% prediction ball.
+
+Find validation quantile q_0.90.
+
+At final test:
+
+prediction region:
+
+    B(c_hat, q_0.90)
+
+Measure:
+
+empirical coverage
+mean radius
+
+Also test:
+
+95% coverage.
+
+These are uncertainty/calibration results,
+not alternative accuracy metrics.
+
+======================================================================
+28. STATISTICAL ANALYSIS
+======================================================================
+
+Primary test comparison:
+
+FULL PROPOSED
+vs
+strongest matched neural baseline
+
+using subject-level paired bootstrap
+AND
+paired Wilcoxon signed-rank where appropriate.
+
+Use:
+
+10,000 bootstrap resamples.
+
+Report:
+
+difference in Macro MRE
+95% CI
+p-value
+effect size
+
+For 121 target-wise hypothesis tests:
+
+Benjamini-Hochberg FDR
+q = 0.05
+
+Do not cherry-pick significant organs.
+
+======================================================================
+29. FINAL TEST FREEZE
+======================================================================
+
+Before final test:
+
+create:
+
+FINAL_FREEZE.json
+
+containing hashes of:
+
+dataset manifest
+train IDs
+validation IDs
+test IDs
+121 ontology
+preprocessing code
+surface extraction code
+canonicalizer
+model architecture
+hyperparameters
+checkpoint-selection rule
+statistical code
+baseline configs
+random seeds
+
+SHA256 the freeze file.
+
+Then print:
+
+FINAL_TEST_LOCKED=YES
+
+From that point:
+
+NO architecture modification
+NO hyperparameter change
+NO target removal
+NO case removal
+NO metric change
+NO checkpoint reselection
+
+Compute final test exactly once.
+
+======================================================================
+30. FINAL HEADLINE NUMBER
+======================================================================
+
+After freeze:
+
+compute:
+
+FINAL_121_MACRO_MRE_MM
+
+using:
+
+3-seed ensemble
+all 121 targets
+sealed final test
+valid-target masks
+equal target weighting
+
+Also compute its:
+
+95% patient-bootstrap CI.
+
+Write:
+
+reports/ipmi121/FINAL_HEADLINE_RESULT.txt
+
+EXACT FORMAT:
+
+SURFACE2ANATOMY_IPMI121_FINAL
+TARGETS=121
+TEST_SUBJECTS=
+ENSEMBLE_SEEDS=42,43,44
+FINAL_121_MACRO_MRE_MM=
+BOOTSTRAP_95CI_LOW=
+BOOTSTRAP_95CI_HIGH=
+TEST_EVALUATED_ONCE=YES
+POST_TEST_TUNING=NO
+TARGETS_DROPPED=0
+
+This file defines the ONLY final headline accuracy.
+
+======================================================================
+31. PER-TARGET RESULTS
+======================================================================
+
+Save:
+
+TARGET_RESULTS_121.csv
+
+Columns:
+
+target
+support
+MRE
+median
+P90
+SDR10
+SDR20
+atlas_MRE
+PointNet_MRE
+proposed_gain
+ELAA
+observability_entropy
+most_informative_surface_region
+
+Do not use these to redefine the primary endpoint.
+
+======================================================================
+32. FEMALE ANATOMY TABLE
+======================================================================
+
+Create:
+
+FEMALE_ANATOMY_RESULTS.csv
+
+Use verified female-specific targets only.
+
+Include:
+
+support
+MRE
+95CI
+atlas error
+strongest baseline error
+full-model error
+inferior-occlusion error
+anterior-occlusion error
+ELAA ambiguity
+observability entropy
+
+This table should establish whether inclusion of female anatomy is
+scientifically meaningful rather than cosmetic.
+
+======================================================================
+33. BRAIN/FOV TABLE
+======================================================================
+
+Create:
+
+BRAIN_FOV_RESULTS.csv
+
+Columns:
+
+dataset
+case_count
+visible_height
+FOV_class
+canonicalizer
+brain_MRE
+skull_MRE
+cervical_MRE
+
+Show:
+
+legacy canonicalization
+FSEC
+
+Do not hide difficult cases.
+
+======================================================================
+34. OBSERVABILITY FIGURES
+======================================================================
+
+Generate publication-quality:
+
+FIG 1:
+overall methodology
+
+FIG 2:
+ASOM 121 x 12 heatmap
+
+FIG 3:
+random sparsity vs structured occlusion
+
+FIG 4:
+FOV/canonicalization stability
+
+FIG 5:
+target MRE vs ELAA ambiguity
+
+FIG 6:
+female pelvic observability
+
+FIG 7:
+brain error vs visible FOV
+
+FIG 8:
+final baseline comparison
+
+Use PDF/SVG.
+
+Do not use screenshots.
+
+======================================================================
+35. TIKZ / PAPER-READY DIAGRAM SPECS
+======================================================================
+
+Also generate TikZ source for:
+
+A. overall inference architecture
+B. FSEC
+C. CCTQ
+D. observability matrix concept
+E. final experiment governance / freeze
+
+Store:
+
+reports/ipmi121/tikz/
+
+======================================================================
+36. CLAIMS THAT MUST BE TESTED DIRECTLY
+======================================================================
+
+CLAIM 1
+External body geometry contains patient-specific information about hidden anatomy.
+
+Required evidence:
+
+patient shuffle
+atlas comparison
+kNN
+query controls
+
+--------------------------------------------------
+
+CLAIM 2
+Target identity is necessary.
+
+Required:
+
+query permutation
+no-query baseline
+
+--------------------------------------------------
+
+CLAIM 3
+Surface coverage matters more than point density.
+
+Required:
+
+random dropout
+structured masking
+paired statistical test
+
+--------------------------------------------------
+
+CLAIM 4
+External coordinate definition is a first-order domain-generalization factor.
+
+Required:
+
+multiple canonicalizers
+synthetic FOV crops
+external cohorts
+FSEC comparison
+
+--------------------------------------------------
+
+CLAIM 5
+Different anatomical structures have distinct external observability signatures.
+
+Required:
+
+ASOM
+bootstrap
+cross-seed stability
+anatomical clustering
+
+--------------------------------------------------
+
+CLAIM 6
+Some targets are fundamentally more ambiguous from the exterior.
+
+Required:
+
+ELAA
+target-wise correlation with error
+
+Do not call this information-theoretic impossibility.
+
+--------------------------------------------------
+
+CLAIM 7
+Female pelvic anatomy can be retained within a unified surface-to-anatomy benchmark.
+
+Required:
+
+actual uterus/ovary support
+target-wise evaluation
+matched pelvic comparisons
+observability analysis
+
+--------------------------------------------------
+
+CLAIM 8
+Brain failure is primarily associated with extreme FOV / coordinate extrapolation.
+
+Required:
+
+FOV stratification
+FSEC experiment
+larger external brain cohort if possible
+
+--------------------------------------------------
+
+CLAIM 9
+Real depth sensing is geometrically compatible with deployment.
+
+Required:
+
+real sensor data
+canonical stability
+temporal consistency
+
+Do NOT claim clinical organ accuracy without internal GT.
+
+======================================================================
+37. NEGATIVE RESULTS MUST BE RETAINED
+======================================================================
+
+Never delete an experiment because it performs poorly.
+
+Create:
+
+NEGATIVE_RESULTS_LEDGER.md
+
+Examples:
+
+targets that remain difficult
+canonicalizers that fail
+camera views that fail
+brain conditions that fail
+female targets with high ambiguity
+architecture additions that do not help
+
+IPMI reviewers value well-understood failure modes.
+
+======================================================================
+38. LITERATURE NOVELTY AUDIT
+======================================================================
+
+Perform a new literature review up to the current date.
+
+Explicitly compare against:
+
+LOOC
+Depth to Anatomy
+From Surface to Viscera
+HIT
+SAMe
+BOSS
+and any newer relevant paper.
+
+For each paper record:
+
+input modality
+dataset size
+number of targets
+centroid vs full shape
+female-specific structures
+brain / cranial coverage
+external validation
+real sensor use
+FOV robustness study
+observability study
+canonical-frame study
+uncertainty
+open code
+metric
+
+Create:
+
+LITERATURE_POSITIONING.csv
+
+Do NOT claim "first" unless exhaustively supported.
+
+The novelty should be framed around:
+
+observability
+coordinate identifiability
+121-target breadth
+female anatomy inclusion
+coverage-vs-density
+external-only canonicalization
+failure-boundary characterization
+
+not merely:
+"uses a transformer."
+
+======================================================================
+39. INDEPENDENT REVIEW PASSES
+======================================================================
+
+After all experiments finish, perform FIVE independent review passes.
+
+REVIEWER A — IPMI METHOD REVIEWER
+
+Question:
+Is there a real methodological contribution beyond PointNet++ + attention?
+
+Attack:
+
+FSEC
+CCTQ
+ASOM
+ELAA
+
+Output:
+
+reviews/IPMI_METHOD_REVIEW.md
+
+--------------------------------------------------
+
+REVIEWER B — STATISTICS REVIEWER
+
+Check:
+
+bootstrap
+paired testing
+multiple comparisons
+sample support
+target masking
+confidence intervals
+effect sizes
+external cohort power
+
+Output:
+
+reviews/STATISTICS_REVIEW.md
+
+--------------------------------------------------
+
+REVIEWER C — DATA-LEAKAGE REVIEWER
+
+Try to find:
+
+duplicates
+patient overlap
+target leakage
+internal-reference leakage
+test tuning
+ontology leakage
+case exclusions
+
+Output:
+
+reviews/LEAKAGE_REVIEW.md
+
+--------------------------------------------------
+
+REVIEWER D — MEDICAL ANATOMY REVIEWER
+
+Check:
+
+target definitions
+laterality
+female anatomy
+organ truncation
+brain/skull definitions
+cross-dataset ontology equivalence
+
+Output:
+
+reviews/ANATOMY_REVIEW.md
+
+--------------------------------------------------
+
+REVIEWER E — HOSTILE REVIEWER
+
+Act as a reviewer trying to reject the paper.
+
+List the strongest 15 rejection arguments.
+
+For each:
+
+evidence that answers it
+or
+unresolved weakness
+
+Output:
+
+reviews/HOSTILE_REVIEW.md
+
+======================================================================
+40. REPAIR LOOP
+======================================================================
+
+If a review identifies a genuine methodological or implementation flaw:
+
+repair it using:
+
+TRAIN + VALIDATION ONLY.
+
+Then rerun affected validation experiments.
+
+Do NOT inspect or reuse final test to make improvements.
+
+Once reviewer passes are satisfactory:
+
+freeze.
+
+Then evaluate final test once.
+
+======================================================================
+41. REPRODUCIBILITY
+======================================================================
+
+Every experiment must record:
+
+git commit
+dataset hash
+target ontology hash
+seed
+GPU
+CUDA
+PyTorch
+command
+wall-clock time
+config file
+checkpoint hash
+
+No absolute machine-specific paths.
+
+Create:
+
+REPRODUCE_ALL.sh
+
+and:
+
+environment.yml
+requirements-lock.txt
+
+======================================================================
+42. FINAL DIRECTORY
+======================================================================
+
+reports/ipmi121/
+
+00_EXPERIMENT_LINEAGE.md
+01_TARGET_ONTOLOGY_121.csv
+02_ALL_PRIOR_EXPOSURES.csv
+
+audit/
+splits/
+configs/
+checkpoints/
+predictions/
+statistics/
+asom/
+ambiguity/
+female_anatomy/
+brain_fov/
+external/
+sensor/
+figures/
+tikz/
+reviews/
+
+FINAL_FREEZE.json
+FINAL_FREEZE.sha256
+FINAL_HEADLINE_RESULT.txt
+MASTER_RESULTS.json
+PUBLICATION_CLAIM_LEDGER.md
+FINAL_IPMI_EVIDENCE_REPORT.md
+
+======================================================================
+43. MASTER_RESULTS.JSON
+======================================================================
+
+Must contain:
+
+{
+  "study_version": "Surface2Anatomy-IPMI-121-v1",
+  "target_count": 121,
+
+  "final_headline": {
+    "metric": "Macro MRE",
+    "value_mm": ...,
+    "ci95": [..., ...]
+  },
+
+  "dataset": {
+    "train_n": ...,
+    "val_n": ...,
+    "test_n": ...
+  },
+
+  "model": {
+    "seeds": [42,43,44],
+    "ensemble": true
+  },
+
+  "baseline_results": {...},
+
+  "ablation_results": {...},
+
+  "observability": {...},
+
+  "ambiguity": {...},
+
+  "female_anatomy": {...},
+
+  "brain_fov": {...},
+
+  "external": {...},
+
+  "sensor": {...},
+
+  "statistics": {...},
+
+  "audit": {...}
+}
+
+======================================================================
+44. GO / NO-GO CRITERIA FOR IPMI
+======================================================================
+
+The agent must NOT automatically say the paper is strong.
+
+After all evidence is available, give one of:
+
+GO_IPMI
+BORDERLINE_IPMI
+REDIRECT_VENUE
+
+Consider:
+
+A. Full model vs strongest fair neural baseline
+B. Whether FSEC is demonstrably useful
+C. Whether CCTQ improves partial-FOV robustness
+D. Whether ASOM produces reproducible anatomy-specific structure
+E. Whether ELAA explains target difficulty
+F. Whether 121-target support is genuine
+G. Whether female anatomy evidence is adequate
+H. Whether external results survive clean ontology matching
+I. Whether a fresh final test exists
+J. Whether the method is reproducible
+
+Do NOT base GO_IPMI solely on a low MRE.
+
+======================================================================
+45. FINAL RESPONSE FORMAT
+======================================================================
+
+Return:
+
+======================================================================
+SURFACE2ANATOMY — IPMI 2027 FINAL EVIDENCE REPORT
+======================================================================
+
+STUDY_VERSION=
+
+TARGET_COUNT=
+TARGET_COUNT_VERIFIED=
+
+TRAIN_N=
+VAL_N=
+FINAL_TEST_N=
+FRESH_FINAL_TEST=
+
+FINAL_MODEL=
+
+FINAL_121_MACRO_MRE_MM=
+FINAL_121_MACRO_MRE_95CI=
+
+THIS_IS_THE_ONLY_HEADLINE_ERROR=YES
+
+STRONGEST_NEURAL_BASELINE=
+STRONGEST_NEURAL_BASELINE_MRE=
+ABSOLUTE_IMPROVEMENT_MM=
+RELATIVE_IMPROVEMENT_PERCENT=
+P_VALUE=
+EFFECT_SIZE=
+
+FSEC_FRAME_STABILITY_GAIN=
+CCTQ_PARTIAL_VIEW_GAIN=
+
+ASOM_COMPLETED=
+ASOM_DIMENSIONS=121x12
+ASOM_CROSS_SEED_STABILITY=
+ASOM_CROSS_COHORT_STABILITY=
+
+ELAA_COMPLETED=
+ELAA_ERROR_CORRELATION_RHO=
+ELAA_ERROR_CORRELATION_P=
+
+FEMALE_TARGETS=
+UTERUS_MRE=
+OVARY_LEFT_MRE=
+OVARY_RIGHT_MRE=
+FEMALE_TARGET_SUPPORT_OK=
+
+BRAIN_MRE=
+SKULL_MRE=
+BRAIN_FOV_RELATIONSHIP=
+EXTERNAL_BRAIN_N=
+BRAIN_FOV_REPAIR_GAIN=
+
+FLARE_ZERO_SHOT=
+AMOS_ZERO_SHOT=
+CTORG_ZERO_SHOT=
+
+REAL_SENSOR_N_SUBJECTS=
+REAL_SENSOR_N_FRAMES=
+REAL_SENSOR_TEMPORAL_STABILITY=
+
+CONFORMAL_90_COVERAGE=
+CONFORMAL_90_MEAN_RADIUS_MM=
+
+PATIENT_SHUFFLE_MRE=
+QUERY_PERMUTATION_MRE=
+GLOBAL_TOKEN_MRE=
+NO_CROSS_ATTENTION_MRE=
+
+DATA_AUDIT=
+LEAKAGE_AUDIT=
+STATISTICS_REVIEW=
+ANATOMY_REVIEW=
+HOSTILE_REVIEW=
+
+POST_TEST_TUNING=NO
+
+IPMI_DECISION=
+GO_IPMI / BORDERLINE_IPMI / REDIRECT_VENUE
+
+TOP_5_DEFENSIBLE_NOVELTY_CLAIMS=
+1.
+2.
+3.
+4.
+5.
+
+TOP_5_REMAINING_WEAKNESSES=
+1.
+2.
+3.
+4.
+5.
+
+======================================================================
+
+ABSOLUTE RULE:
+
+DO NOT invent a result.
+
+DO NOT substitute an expected result for a measured result.
+
+DO NOT silently reuse legacy numbers.
+
+DO NOT change the final test after seeing performance.
+
+DO NOT remove a difficult target because it hurts the metric.
+
+DO NOT call an oracle method deployable.
+
+DO NOT call synthetic camera experiments real clinical validation.
+
+DO NOT call ensemble disagreement clinical confidence.
+
+DO NOT call ELAA a theoretical Bayes bound.
+
+DO NOT claim "first" unless literature search actually establishes it.
+
+The goal is not to manufacture a positive paper.
+
+The goal is to determine, with the strongest scientifically defensible
+evidence possible, whether Surface2Anatomy is genuinely an IPMI-level
+contribution.
+======================================================================

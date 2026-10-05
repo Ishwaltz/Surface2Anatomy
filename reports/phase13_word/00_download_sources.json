@@ -1,0 +1,19 @@
+{
+  "WORD_github_url": "https://github.com/HiLab-git/WORD.git",
+  "WORD_repo_commit": "c5ab3973ff74188b2f7bdf666bff8b583878ace7",
+  "RAOS_github_url": "https://github.com/Luoxd1996/RAOS.git",
+  "RAOS_repo_commit": "10295d751cd498b8a301bb84e793266ac76a77cc",
+  "google_drive_folder_url": "https://drive.google.com/drive/folders/16qwlCxH7XtJD9MyPnAbmY4ATxu2mKu67",
+  "google_drive_dataset_file_id": "19OWCXZGrimafREhXm8O8w2HBHZTfxEgU",
+  "baidu_pan_url": "https://pan.baidu.com/s/1mXUDbUPgKRm_yueXT6E_Kw",
+  "baidu_pan_access_code": "ABOD",
+  "access_date": "2026-09-14 17:08:32",
+  "archive_filenames": [
+    "WORD-V0.1.0.zip",
+    "WORD_V0.1.0_labelsTs.zip"
+  ],
+  "archive_sizes": {
+    "WORD-V0.1.0.zip": 6809125051,
+    "WORD_V0.1.0_labelsTs.zip": 4148364
+  }
+}

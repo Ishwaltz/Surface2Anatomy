@@ -1,0 +1,8 @@
+Metric,Dataset V3 (Training),FLARE22 (Phase 11 Preproc),Discrepancy (V3 - FLARE)
+surface_bbox_min_y (mm),-72.86 +/- 17.59,-145.60 +/- 17.03,+72.74 mm
+surface_bbox_max_y (mm),186.07 +/- 36.87,145.60 +/- 17.03,+40.46 mm
+surface_bbox_mid_y (mm),56.60 +/- 14.33,0.00 +/- 0.00,+56.60 mm
+surface_centroid_y (mm),44.53 +/- 19.44,-29.50 +/- 15.51,+74.03 mm
+organ_GT_mean_y (mm),54.53 +/- 15.38,3.93 +/- 10.04,+50.60 mm
+organ_GT_relative_to_bbox_mid_y (mm),-2.16 +/- 15.80,3.93 +/- 10.04,-6.08 mm
+organ_GT_relative_to_surface_centroid_y (mm),10.33 +/- 20.67,33.42 +/- 22.14,-23.09 mm

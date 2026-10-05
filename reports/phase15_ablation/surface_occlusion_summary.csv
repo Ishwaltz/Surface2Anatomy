@@ -1,0 +1,12 @@
+mode_id,description,surface_hidden_percent,macro_mre_mm,micro_mre_mm,median_mm,p90_mm,delta_macro_mm,sdr10_percent,sdr20_percent
+Full_360_Reference,Full 360° Body Surface (Reference),0.0,23.22,22.97,18.79,41.12,0.0,15.3,53.9
+Anterior_Covered,Anterior Covered (Chest & Belly hidden; Y > 0 removed),50.0,62.6,64.0,43.77,144.51,39.38,2.7,15.6
+Posterior_Covered,Posterior Covered (Back & Spine hidden; Y < 0 removed),50.0,31.4,31.15,25.61,54.3,8.18,7.0,34.0
+Superior_Covered,Superior Covered (Upper Thorax hidden; Z > 0 removed),50.0,84.81,78.94,53.26,178.03,61.6,4.2,18.0
+Inferior_Covered,Inferior Covered (Pelvis & Lower Torso hidden; Z < 0 removed),50.0,64.58,65.1,34.6,177.88,41.36,6.0,25.9
+Right_Flank_Covered,Right Flank Covered (Right side hidden; X > 0 removed),50.0,32.66,32.48,25.76,60.39,9.45,7.8,35.0
+Left_Flank_Covered,Left Flank Covered (Left side hidden; X < 0 removed),50.0,37.17,36.9,27.48,72.5,13.95,6.8,31.4
+Central_Drape_Covered,Central Drape Covered (80mm anterior patch hidden),8.5,24.48,24.27,19.63,43.73,1.26,14.4,51.2
+Random_Drop_25,Sparse Sensor Decimation (25% points randomly dropped),25.0,23.5,23.23,19.05,42.03,0.28,16.4,53.2
+Random_Drop_50,Sparse Sensor Decimation (50% points randomly dropped),50.0,23.63,23.4,19.17,41.75,0.42,14.4,52.6
+Random_Drop_75,Sparse Sensor Decimation (75% points randomly dropped),75.0,23.92,23.65,19.62,42.42,0.7,14.1,51.3

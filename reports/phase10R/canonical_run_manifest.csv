@@ -1,0 +1,32 @@
+experiment_id,seed,macro_mre_mm,micro_mre_mm,median_mm,p90_mm,sdr10_pct,sdr20_pct,checkpoint_sha256,checkpoint_path,config,gpu,pytorch_cuda
+C0_Population_Atlas,42,65.97,64.57,50.12,115.1,2.5,12.2,63b99ea857c6af5a...,C0_Population_Atlas.pt,Zero-parameter atlas centroid,NVIDIA GeForce RTX 4070 Ti SUPER,2.13.0+cu130 / 13.0
+C1_Linear_Ridge,42,63.74,61.91,49.98,115.22,1.9,10.2,93d65622921bd2e6...,C1_Linear_Ridge.pt,Surface Ridge regressor alpha=100,NVIDIA GeForce RTX 4070 Ti SUPER,2.13.0+cu130 / 13.0
+C5_Internal_SSM_PCA,42,52.56,50.73,39.86,91.07,3.6,17.3,30c1bb0a21b0f528...,C5_Internal_SSM_PCA.pt,Internal SSM/PCA baseline: Surface PCA (64 comps) + Ridge,NVIDIA GeForce RTX 4070 Ti SUPER,2.13.0+cu130 / 13.0
+C4_Proposed_seed42,42,25.09,25.0,19.47,43.61,15.2,51.7,760adfee1c47d80f...,C4_Proposed_seed42.pt,Proposed Target-Query Transformer 65-epoch canonical,NVIDIA GeForce RTX 4070 Ti SUPER,2.13.0+cu130 / 13.0
+C4_Proposed_seed43,43,24.08,23.91,19.12,42.11,15.5,52.9,3e3c739c992b80f1...,C4_Proposed_seed43.pt,Proposed Target-Query Transformer 65-epoch canonical,NVIDIA GeForce RTX 4070 Ti SUPER,2.13.0+cu130 / 13.0
+C4_Proposed_seed44,44,24.91,24.74,19.6,44.02,14.5,51.4,28fbc7b30d8539f8...,C4_Proposed_seed44.pt,Proposed Target-Query Transformer 65-epoch canonical,NVIDIA GeForce RTX 4070 Ti SUPER,2.13.0+cu130 / 13.0
+C2_PointNet2_seed42,42,41.18,39.97,30.41,65.73,6.3,28.0,1f932c2a70986d69...,C2_PointNet2_seed42.pt,PointNet++ Direct Multi-Target Regressor 65-epoch,NVIDIA GeForce RTX 4070 Ti SUPER,2.13.0+cu130 / 13.0
+C2_PointNet2_seed43,43,40.79,40.04,29.09,69.29,7.9,30.3,bdf48c1f8208b8a5...,C2_PointNet2_seed43.pt,PointNet++ Direct Multi-Target Regressor 65-epoch,NVIDIA GeForce RTX 4070 Ti SUPER,2.13.0+cu130 / 13.0
+C2_PointNet2_seed44,44,42.22,41.39,30.14,73.75,6.9,27.7,13cfb23e693292bd...,C2_PointNet2_seed44.pt,PointNet++ Direct Multi-Target Regressor 65-epoch,NVIDIA GeForce RTX 4070 Ti SUPER,2.13.0+cu130 / 13.0
+C3_DGCNN_seed42,42,44.37,43.67,31.88,75.77,5.9,25.5,0b67f983b6c9d014...,C3_DGCNN_seed42.pt,PointNet++ + DGCNN Target Decoder 65-epoch,NVIDIA GeForce RTX 4070 Ti SUPER,2.13.0+cu130 / 13.0
+C3_DGCNN_seed43,43,42.38,41.78,31.38,71.4,5.6,25.4,c141fdec5267ea55...,C3_DGCNN_seed43.pt,PointNet++ + DGCNN Target Decoder 65-epoch,NVIDIA GeForce RTX 4070 Ti SUPER,2.13.0+cu130 / 13.0
+C3_DGCNN_seed44,44,43.71,42.71,30.42,75.45,6.0,25.7,037edc8177f88d4a...,C3_DGCNN_seed44.pt,PointNet++ + DGCNN Target Decoder 65-epoch,NVIDIA GeForce RTX 4070 Ti SUPER,2.13.0+cu130 / 13.0
+Domain_V2only_seed42,42,49.91,46.59,30.24,91.66,7.9,29.9,51905c362676a388...,Domain_V2only_seed42.pt,Domain Transfer: V2-only 65-epoch,NVIDIA GeForce RTX 4070 Ti SUPER,2.13.0+cu130 / 13.0
+Domain_TSonly_seed42,42,28.42,28.47,22.92,48.82,9.5,40.9,8a67dd336e68a2d0...,Domain_TSonly_seed42.pt,Domain Transfer: TS-only 65-epoch,NVIDIA GeForce RTX 4070 Ti SUPER,2.13.0+cu130 / 13.0
+Domain_V2only_seed43,43,48.13,45.64,30.56,91.18,8.2,29.6,b102d3673dd7d7a6...,Domain_V2only_seed43.pt,Domain Transfer: V2-only 65-epoch,NVIDIA GeForce RTX 4070 Ti SUPER,2.13.0+cu130 / 13.0
+Domain_TSonly_seed43,43,27.58,27.62,22.3,48.97,10.2,42.8,816490bdeb1314ec...,Domain_TSonly_seed43.pt,Domain Transfer: TS-only 65-epoch,NVIDIA GeForce RTX 4070 Ti SUPER,2.13.0+cu130 / 13.0
+Domain_V2only_seed44,44,49.72,47.38,31.61,95.95,7.7,28.2,b739c16de9733743...,Domain_V2only_seed44.pt,Domain Transfer: V2-only 65-epoch,NVIDIA GeForce RTX 4070 Ti SUPER,2.13.0+cu130 / 13.0
+Domain_TSonly_seed44,44,27.83,27.84,22.22,48.0,9.8,43.3,99486b2b7b6fbce5...,Domain_TSonly_seed44.pt,Domain Transfer: TS-only 65-epoch,NVIDIA GeForce RTX 4070 Ti SUPER,2.13.0+cu130 / 13.0
+D2_SingleScale_SA3,42,25.7,25.57,19.8,43.34,14.0,50.6,22dd9a7a345cdd89...,D2_SingleScale_SA3.pt,Architecture ablation D2_SingleScale_SA3 (TRAINED ABLATION),NVIDIA GeForce RTX 4070 Ti SUPER,2.13.0+cu130 / 13.0
+D3_NoAtlasPrior,42,23.33,23.26,18.1,41.2,16.3,56.5,f89d6edaae5e5ac2...,D3_NoAtlasPrior.pt,Architecture ablation D3_NoAtlasPrior (TRAINED ABLATION),NVIDIA GeForce RTX 4070 Ti SUPER,2.13.0+cu130 / 13.0
+D4_GlobalTokenOnly,42,43.38,42.58,32.05,71.63,6.2,26.2,8dbd399bb3a22898...,D4_GlobalTokenOnly.pt,Architecture ablation D4_GlobalTokenOnly (TRAINED ABLATION),NVIDIA GeForce RTX 4070 Ti SUPER,2.13.0+cu130 / 13.0
+D5_SelfAttnOnly,42,46.09,45.34,34.92,80.01,4.4,21.5,eea62bb06a1561ef...,D5_SelfAttnOnly.pt,Architecture ablation D5_SelfAttnOnly (TRAINED ABLATION),NVIDIA GeForce RTX 4070 Ti SUPER,2.13.0+cu130 / 13.0
+D6_SelfAndCrossAttn,42,25.45,25.1,20.09,43.95,13.6,49.7,0f8e516fa39a896b...,D6_SelfAndCrossAttn.pt,Architecture ablation D6_SelfAndCrossAttn (TRAINED ABLATION),NVIDIA GeForce RTX 4070 Ti SUPER,2.13.0+cu130 / 13.0
+D7_Layer2,42,24.77,24.74,19.19,42.89,14.7,52.7,38e57b938247b213...,D7_Layer2.pt,Architecture ablation D7_Layer2 (TRAINED ABLATION),NVIDIA GeForce RTX 4070 Ti SUPER,2.13.0+cu130 / 13.0
+D7_Layer6,42,31.94,31.28,25.19,56.4,8.3,35.9,50b233b5d7b71283...,D7_Layer6.pt,Architecture ablation D7_Layer6 (TRAINED ABLATION),NVIDIA GeForce RTX 4070 Ti SUPER,2.13.0+cu130 / 13.0
+D9_QueryPermutation_Diagnostic,42,46.63,48.01,37.07,89.44,4.0,19.5,40a082ecd9670497...,D9_QueryPermutation_Diagnostic.pt,Architecture ablation D9_QueryPermutation_Diagnostic (INFERENCE DIAGNOSTIC),NVIDIA GeForce RTX 4070 Ti SUPER,2.13.0+cu130 / 13.0
+D10_TokenShuffle_Diagnostic,42,96.59,94.46,76.76,177.59,2.2,9.2,6650d76f3c8119f2...,D10_TokenShuffle_Diagnostic.pt,Architecture ablation D10_TokenShuffle_Diagnostic (INFERENCE DIAGNOSTIC),NVIDIA GeForce RTX 4070 Ti SUPER,2.13.0+cu130 / 13.0
+E1_Points_1024,42,25.15,25.12,19.47,42.41,14.2,51.7,71cf1aa4fd4f3419...,E1_Points_1024.pt,Input representation ablation: E1_Points_1024,NVIDIA GeForce RTX 4070 Ti SUPER,2.13.0+cu130 / 13.0
+E1_Points_2048,42,24.33,24.27,18.88,41.72,15.8,53.7,e8769f9a2fe8d8a8...,E1_Points_2048.pt,Input representation ablation: E1_Points_2048,NVIDIA GeForce RTX 4070 Ti SUPER,2.13.0+cu130 / 13.0
+E1_Points_8192,42,24.37,24.29,18.32,42.34,16.2,56.0,976184619f756346...,E1_Points_8192.pt,Input representation ablation: E1_Points_8192,NVIDIA GeForce RTX 4070 Ti SUPER,2.13.0+cu130 / 13.0
+E2_XYZ_Plus_Normals,42,25.46,25.33,19.73,42.87,13.8,51.1,3c018ff8398aea27...,E2_XYZ_Plus_Normals.pt,Input representation ablation: E2_XYZ_Plus_Normals,NVIDIA GeForce RTX 4070 Ti SUPER,2.13.0+cu130 / 13.0

@@ -1,0 +1,11 @@
+Ablation ID,Description,Type,Macro MRE (mm),Micro MRE (mm),Median (mm),Delta vs Full (mm)
+D1_Full,Proposed MultiScale Target-Query,TRAINED,25.09,25.00,19.47,0.00
+D2_SingleScale_SA3,D2_SingleScale_SA3,TRAINED ABLATION,25.70,25.57,19.80,+0.61
+D3_NoAtlasPrior,D3_NoAtlasPrior,TRAINED ABLATION,23.33,23.26,18.10,-1.76
+D4_GlobalTokenOnly,D4_GlobalTokenOnly,TRAINED ABLATION,43.38,42.58,32.05,+18.29
+D5_SelfAttnOnly,D5_SelfAttnOnly,TRAINED ABLATION,46.09,45.34,34.92,+21.01
+D6_SelfAndCrossAttn,D6_SelfAndCrossAttn,TRAINED ABLATION,25.45,25.10,20.09,+0.36
+D7_Layer2,D7_Layer2,TRAINED ABLATION,24.77,24.74,19.19,-0.32
+D7_Layer6,D7_Layer6,TRAINED ABLATION,31.94,31.28,25.19,+6.85
+D9_QueryPermutation_Diagnostic,D9_QueryPermutation_Diagnostic,INFERENCE DIAGNOSTIC,46.63,48.01,37.07,+21.54
+D10_TokenShuffle_Diagnostic,D10_TokenShuffle_Diagnostic,INFERENCE DIAGNOSTIC,96.59,94.46,76.76,+71.51

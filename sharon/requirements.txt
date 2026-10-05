@@ -1,0 +1,16 @@
+# Run: pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
+#after that run: pip install -r requirements.txt
+torch
+torchvision
+monai
+nibabel
+SimpleITK
+scipy
+scikit-image
+scikit-learn
+numpy
+tqdm
+tensorboard
+pyyaml
+open3d
+TotalSegmentator

@@ -1,0 +1,8 @@
+{
+  "n_resamples": 5000,
+  "seed": 42,
+  "resampling_unit": "patient",
+  "ensemble_macro_mre": 71.2267173118631,
+  "ci95_low": 57.08,
+  "ci95_high": 83.6
+}

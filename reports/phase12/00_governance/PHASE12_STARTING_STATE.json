@@ -1,0 +1,71 @@
+{
+  "phase": 12,
+  "purpose": "External Generalization Recovery & Canonical-Frame Forensics",
+  "timestamp_iso": "2026-09-14T00:06:00Z",
+  "frozen_checkpoints": {
+    "paths": {
+      "seed42": "experiments/phase10R/checkpoints/C4_Proposed_seed42.pt",
+      "seed43": "experiments/phase10R/checkpoints/C4_Proposed_seed43.pt",
+      "seed44": "experiments/phase10R/checkpoints/C4_Proposed_seed44.pt"
+    },
+    "sha256": {
+      "seed42": "760adfee1c47d80fc3f59492971b6c83459fc10ce2166f13fc1d7e4d708cb936",
+      "seed43": "3e3c739c992b80f193ec41041e62ff59191436e2e5f1e78bd0a328c8310f7d91",
+      "seed44": "28fbc7b30d8539f84c265b4f95f4f73b63978fb5b252f9a3ad20ea4fa1792cdd"
+    }
+  },
+  "phase11_predictions": {
+    "paths": {
+      "AMOS_ensemble": "reports/phase11/predictions/AMOS_ensemble.npz",
+      "AMOS_seed42": "reports/phase11/predictions/AMOS_seed42.npz",
+      "AMOS_seed43": "reports/phase11/predictions/AMOS_seed43.npz",
+      "AMOS_seed44": "reports/phase11/predictions/AMOS_seed44.npz",
+      "HuMMan_ensemble": "reports/phase11/predictions/HuMMan_ensemble.npz"
+    },
+    "sha256": {
+      "AMOS_ensemble": "8cfd7e47744d3d699de4bb145928160a794e88c6679606d7b487149ebdc5f036",
+      "AMOS_seed42": "a4d63ddd6a48936f518582b2d23d2b4cfd7591d0de7dd9794c4fba6811ec1c54",
+      "AMOS_seed43": "a704021d6233d633eb02be4f3dd119eac6cb65baea7ee1b205447d977ab4119d",
+      "AMOS_seed44": "b9d966a3b90bf11315126ebc0d3b09fa5a5e767453ccf275f06b5af9f5901c1a",
+      "HuMMan_ensemble": "e4d7ab9b5c6774a173e212984543335e846a162fc3c11e26cbf8709680af7dc0"
+    }
+  },
+  "ground_truth": {
+    "path": "data_external/AMOS22/processed/AMOS_GT_centroids.csv",
+    "sha256": "623919826cbfb028dd4212dd10c876dfe5c992cac99fc53d88707c1f13b0a1d5"
+  },
+  "pointclouds": {
+    "directory": "data_external/AMOS22/processed/pointclouds",
+    "count": 259,
+    "manifest_sha256": "b8154fb60d5801f63ac4b850a38fd6d46c3831e0f6515bbed1d9f789ee119085"
+  },
+  "mappings_and_fov": {
+    "target_mapping_path": "reports/phase11/mappings/AMOS_target_mapping.csv",
+    "target_mapping_sha256": "15bb5c66500ab4bb4a2544f8d103869dd59972429780cfe0b0f8cae49d856362",
+    "fov_audit_path": "reports/phase11/amos/AMOS_fov_audit.csv",
+    "fov_audit_sha256": "2f619bdbf3bc46ea24b9ef69f8e73a255412b278bb892c6084c638c5fd20b51b"
+  },
+  "canonicalization_code": {
+    "path": "tools/phase11/04_amos_surface_and_gt.py",
+    "sha256": "d0640cbb0d8e139cadd70826c413df6271d8b0ebaea3ddc1dcf12ece3c235baf"
+  },
+  "historical_baselines": {
+    "v3_common_target_macro_mre_mm": 26.69,
+    "v3_locked_test_full_macro_mre_mm": 27.04,
+    "amos_overall_macro_mre_mm": 55.71703650415198,
+    "amos_overall_micro_mre_mm": 55.55673583426131,
+    "amos_overall_median_mm": 54.554070224531344,
+    "amos_overall_p90_mm": 76.26007161503834,
+    "amos_overall_95ci_mm": [
+      54.38137997184564,
+      57.08659601231331
+    ],
+    "amos_ct_macro_mre_mm": 54.16155011867273,
+    "amos_ct_median_mm": 53.2486338069069,
+    "amos_mri_macro_mre_mm": 60.98987170916639,
+    "amos_mri_median_mm": 59.50220921011383,
+    "generalization_gap_mm": 29.027036504151976,
+    "generalization_gap_pct": 108.75622519352557,
+    "evaluated_cases": 259
+  }
+}

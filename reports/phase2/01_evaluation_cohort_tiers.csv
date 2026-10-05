@@ -1,0 +1,122 @@
+target_index,target_name,tier,train_valid_count,val_valid_count,total_genuine_count,description
+0,spleen,TIER_A,351,44,438,Robust support: >=100 train and >=15 val genuine observations
+1,kidney_right,TIER_A,349,44,436,Robust support: >=100 train and >=15 val genuine observations
+2,kidney_left,TIER_A,350,44,436,Robust support: >=100 train and >=15 val genuine observations
+3,gallbladder,TIER_A,333,42,415,Robust support: >=100 train and >=15 val genuine observations
+4,liver,TIER_A,352,44,440,Robust support: >=100 train and >=15 val genuine observations
+5,stomach,TIER_A,352,44,440,Robust support: >=100 train and >=15 val genuine observations
+6,pancreas,TIER_A,350,44,437,Robust support: >=100 train and >=15 val genuine observations
+7,adrenal_gland_right,TIER_A,348,44,435,Robust support: >=100 train and >=15 val genuine observations
+8,adrenal_gland_left,TIER_A,348,44,435,Robust support: >=100 train and >=15 val genuine observations
+9,lung_upper_lobe_left,TIER_A,350,40,433,Robust support: >=100 train and >=15 val genuine observations
+10,lung_lower_lobe_left,TIER_A,351,44,439,Robust support: >=100 train and >=15 val genuine observations
+11,lung_upper_lobe_right,TIER_A,222,23,270,Robust support: >=100 train and >=15 val genuine observations
+12,lung_middle_lobe_right,TIER_A,351,41,435,Robust support: >=100 train and >=15 val genuine observations
+13,lung_lower_lobe_right,TIER_A,351,44,439,Robust support: >=100 train and >=15 val genuine observations
+14,esophagus,TIER_A,350,43,436,Robust support: >=100 train and >=15 val genuine observations
+15,trachea,TIER_B,94,12,118,Moderate support: >=40 train and >=5 val observations
+16,thyroid_gland,TIER_B,88,10,110,Moderate support: >=40 train and >=5 val observations
+17,small_bowel,TIER_A,348,44,435,Robust support: >=100 train and >=15 val genuine observations
+18,duodenum,TIER_A,348,44,435,Robust support: >=100 train and >=15 val genuine observations
+19,colon,TIER_A,350,44,437,Robust support: >=100 train and >=15 val genuine observations
+20,urinary_bladder,TIER_A,331,39,411,Robust support: >=100 train and >=15 val genuine observations
+21,prostate,TIER_A,195,23,245,Robust support: >=100 train and >=15 val genuine observations
+22,sacrum,TIER_C,19,1,25,Low support: genuine target with sparse observation count
+23,vertebrae_S1,TIER_C,28,8,45,Low support: genuine target with sparse observation count
+24,vertebrae_L5,TIER_A,339,39,421,Robust support: >=100 train and >=15 val genuine observations
+25,vertebrae_L4,TIER_A,339,39,421,Robust support: >=100 train and >=15 val genuine observations
+26,vertebrae_L3,TIER_A,341,41,425,Robust support: >=100 train and >=15 val genuine observations
+27,vertebrae_L2,TIER_A,341,41,425,Robust support: >=100 train and >=15 val genuine observations
+28,vertebrae_L1,TIER_A,343,41,427,Robust support: >=100 train and >=15 val genuine observations
+29,vertebrae_T12,TIER_A,347,42,432,Robust support: >=100 train and >=15 val genuine observations
+30,vertebrae_T11,TIER_A,351,44,438,Robust support: >=100 train and >=15 val genuine observations
+31,vertebrae_T10,TIER_A,352,44,439,Robust support: >=100 train and >=15 val genuine observations
+32,vertebrae_T9,TIER_A,351,44,438,Robust support: >=100 train and >=15 val genuine observations
+33,vertebrae_T8,TIER_A,346,44,431,Robust support: >=100 train and >=15 val genuine observations
+34,vertebrae_T7,TIER_A,330,40,407,Robust support: >=100 train and >=15 val genuine observations
+35,vertebrae_T6,TIER_A,291,34,358,Robust support: >=100 train and >=15 val genuine observations
+36,vertebrae_T5,TIER_A,226,25,280,Robust support: >=100 train and >=15 val genuine observations
+37,vertebrae_T4,TIER_A,156,20,195,Robust support: >=100 train and >=15 val genuine observations
+38,vertebrae_T3,TIER_B,112,12,138,Moderate support: >=40 train and >=5 val observations
+39,vertebrae_T2,TIER_B,90,10,112,Moderate support: >=40 train and >=5 val observations
+40,vertebrae_T1,TIER_B,89,10,111,Moderate support: >=40 train and >=5 val observations
+41,vertebrae_C7,TIER_B,89,10,111,Moderate support: >=40 train and >=5 val observations
+42,vertebrae_C6,TIER_B,89,10,111,Moderate support: >=40 train and >=5 val observations
+43,vertebrae_C5,TIER_B,80,8,100,Moderate support: >=40 train and >=5 val observations
+44,vertebrae_C4,TIER_C,33,3,41,Low support: genuine target with sparse observation count
+45,vertebrae_C3,TIER_C,9,2,12,Low support: genuine target with sparse observation count
+46,vertebrae_C2,TIER_C,3,1,5,Low support: genuine target with sparse observation count
+47,vertebrae_C1,TIER_C,3,1,5,Low support: genuine target with sparse observation count
+48,heart,UNUSABLE,2,0,3,Zero or sparse validation support (<5 observations total)
+49,aorta,UNUSABLE,2,0,3,Zero or sparse validation support (<5 observations total)
+50,pulmonary_vein,TIER_A,345,41,428,Robust support: >=100 train and >=15 val genuine observations
+51,brachiocephalic_trunk,TIER_A,352,43,439,Robust support: >=100 train and >=15 val genuine observations
+52,subclavian_artery_right,TIER_A,203,21,248,Robust support: >=100 train and >=15 val genuine observations
+53,subclavian_artery_left,TIER_B,88,10,110,Moderate support: >=40 train and >=5 val observations
+54,common_carotid_artery_right,TIER_B,88,10,110,Moderate support: >=40 train and >=5 val observations
+55,common_carotid_artery_left,TIER_B,88,10,110,Moderate support: >=40 train and >=5 val observations
+56,superior_vena_cava,TIER_B,88,10,110,Moderate support: >=40 train and >=5 val observations
+57,inferior_vena_cava,TIER_B,88,10,110,Moderate support: >=40 train and >=5 val observations
+58,portal_vein_and_splenic_vein,TIER_B,88,10,110,Moderate support: >=40 train and >=5 val observations
+59,iliac_artery_right,TIER_B,88,10,110,Moderate support: >=40 train and >=5 val observations
+60,iliac_artery_left,TIER_B,121,13,151,Moderate support: >=40 train and >=5 val observations
+61,iliac_vena_right,TIER_B,127,14,160,Moderate support: >=40 train and >=5 val observations
+62,iliac_vena_left,TIER_A,352,43,439,Robust support: >=100 train and >=15 val genuine observations
+63,humerus_right,TIER_A,349,43,435,Robust support: >=100 train and >=15 val genuine observations
+64,humerus_left,TIER_A,340,39,422,Robust support: >=100 train and >=15 val genuine observations
+65,scapula_right,TIER_A,340,39,422,Robust support: >=100 train and >=15 val genuine observations
+66,scapula_left,TIER_A,340,39,422,Robust support: >=100 train and >=15 val genuine observations
+67,clavicula_right,TIER_A,340,39,422,Robust support: >=100 train and >=15 val genuine observations
+68,clavicula_left,TIER_B,90,11,113,Moderate support: >=40 train and >=5 val observations
+69,femur_right,TIER_B,90,11,114,Moderate support: >=40 train and >=5 val observations
+70,femur_left,TIER_A,188,20,232,Robust support: >=100 train and >=15 val genuine observations
+71,hip_right,TIER_A,182,20,228,Robust support: >=100 train and >=15 val genuine observations
+72,hip_left,TIER_B,89,10,111,Moderate support: >=40 train and >=5 val observations
+73,spinal_cord,TIER_B,89,10,111,Moderate support: >=40 train and >=5 val observations
+74,gluteus_maximus_right,TIER_A,331,39,411,Robust support: >=100 train and >=15 val genuine observations
+75,gluteus_maximus_left,TIER_A,333,39,413,Robust support: >=100 train and >=15 val genuine observations
+76,gluteus_medius_right,TIER_A,340,40,423,Robust support: >=100 train and >=15 val genuine observations
+77,gluteus_medius_left,TIER_A,340,41,424,Robust support: >=100 train and >=15 val genuine observations
+78,gluteus_minimus_right,TIER_A,352,44,440,Robust support: >=100 train and >=15 val genuine observations
+79,gluteus_minimus_left,TIER_A,336,39,418,Robust support: >=100 train and >=15 val genuine observations
+80,autochthon_right,TIER_A,337,39,419,Robust support: >=100 train and >=15 val genuine observations
+81,autochthon_left,TIER_A,340,39,422,Robust support: >=100 train and >=15 val genuine observations
+82,iliopsoas_right,TIER_A,340,40,423,Robust support: >=100 train and >=15 val genuine observations
+83,iliopsoas_left,TIER_A,335,39,416,Robust support: >=100 train and >=15 val genuine observations
+84,brain,TIER_A,334,39,415,Robust support: >=100 train and >=15 val genuine observations
+85,skull,TIER_A,352,44,440,Robust support: >=100 train and >=15 val genuine observations
+86,rib_left_1,TIER_A,352,44,440,Robust support: >=100 train and >=15 val genuine observations
+87,rib_left_2,TIER_A,349,44,436,Robust support: >=100 train and >=15 val genuine observations
+88,rib_left_3,TIER_A,349,44,436,Robust support: >=100 train and >=15 val genuine observations
+89,rib_left_4,UNUSABLE,2,0,3,Zero or sparse validation support (<5 observations total)
+90,rib_left_5,TIER_C,16,3,23,Low support: genuine target with sparse observation count
+91,rib_left_6,TIER_B,88,10,110,Moderate support: >=40 train and >=5 val observations
+92,rib_left_7,TIER_B,89,10,111,Moderate support: >=40 train and >=5 val observations
+93,rib_left_8,TIER_B,97,10,120,Moderate support: >=40 train and >=5 val observations
+94,rib_left_9,TIER_A,173,24,219,Robust support: >=100 train and >=15 val genuine observations
+95,rib_left_10,TIER_A,276,33,342,Robust support: >=100 train and >=15 val genuine observations
+96,rib_left_11,TIER_A,338,39,418,Robust support: >=100 train and >=15 val genuine observations
+97,rib_left_12,TIER_A,351,43,437,Robust support: >=100 train and >=15 val genuine observations
+98,rib_right_1,TIER_A,352,43,439,Robust support: >=100 train and >=15 val genuine observations
+99,rib_right_2,TIER_A,352,43,439,Robust support: >=100 train and >=15 val genuine observations
+100,rib_right_3,TIER_A,351,43,438,Robust support: >=100 train and >=15 val genuine observations
+101,rib_right_4,TIER_A,351,44,438,Robust support: >=100 train and >=15 val genuine observations
+102,rib_right_5,TIER_A,347,44,434,Robust support: >=100 train and >=15 val genuine observations
+103,rib_right_6,TIER_B,88,10,110,Moderate support: >=40 train and >=5 val observations
+104,rib_right_7,TIER_B,88,10,110,Moderate support: >=40 train and >=5 val observations
+105,rib_right_8,TIER_B,100,10,124,Moderate support: >=40 train and >=5 val observations
+106,rib_right_9,TIER_A,173,25,219,Robust support: >=100 train and >=15 val genuine observations
+107,rib_right_10,TIER_A,271,32,335,Robust support: >=100 train and >=15 val genuine observations
+108,rib_right_11,TIER_A,339,37,416,Robust support: >=100 train and >=15 val genuine observations
+109,rib_right_12,TIER_A,352,43,438,Robust support: >=100 train and >=15 val genuine observations
+110,sternum,TIER_A,351,43,438,Robust support: >=100 train and >=15 val genuine observations
+111,costal_cartilages,TIER_A,351,43,438,Robust support: >=100 train and >=15 val genuine observations
+112,atrial_appendage_left,TIER_A,351,43,438,Robust support: >=100 train and >=15 val genuine observations
+113,subclavian_vein_right,TIER_A,351,44,438,Robust support: >=100 train and >=15 val genuine observations
+114,subclavian_vein_left,TIER_A,350,44,437,Robust support: >=100 train and >=15 val genuine observations
+115,brachiocephalic_vein_right,TIER_A,299,35,367,Robust support: >=100 train and >=15 val genuine observations
+116,brachiocephalic_vein_left,TIER_A,352,43,439,Robust support: >=100 train and >=15 val genuine observations
+117,uterus,SYNTHETIC,0,0,0,Procedural female pelvic structure; excluded from primary benchmark
+118,ovary_left,SYNTHETIC,0,0,0,Procedural female pelvic structure; excluded from primary benchmark
+119,ovary_right,SYNTHETIC,0,0,0,Procedural female pelvic structure; excluded from primary benchmark
+120,vagina,SYNTHETIC,0,0,0,Procedural female pelvic structure; excluded from primary benchmark

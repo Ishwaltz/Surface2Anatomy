@@ -1,0 +1,7 @@
+organ,shape,diff_voxel_vs_mesh_mm,diff_voxel_vs_bbox_mm
+liver,"Concave, large lobular",0.42,18.65
+spleen,"Convex, parenchymal",0.28,5.12
+kidney_right,"Reniform, compact",0.31,4.88
+stomach,"J-shaped, hollow",0.85,22.4
+pancreas,"Elongated, C-curved",0.54,12.1
+aorta,"Tubular, highly elongated",0.35,4.2

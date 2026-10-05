@@ -1,0 +1,13 @@
+source,feature,mean,median,std,p5,p95
+V2,width_mm,357.2,354.5,41.6,299.2,431.0
+V2,depth_mm,241.3,238.9,31.8,197.4,290.3
+V2,covered_height_mm,436.1,434.2,112.7,234.6,640.1
+V2,body_volume_cm3,38336.4,35836.6,14657.2,17612.8,64438.4
+TotalSegmentator,width_mm,336.7,351.0,87.2,161.1,457.4
+TotalSegmentator,depth_mm,265.3,267.0,53.9,173.7,358.1
+TotalSegmentator,covered_height_mm,338.0,306.7,177.8,100.0,647.2
+TotalSegmentator,body_volume_cm3,34201.5,28812.2,25276.8,3867.2,82892.4
+Pooled,width_mm,342.1,352.3,78.3,170.9,450.9
+Pooled,depth_mm,258.9,256.5,50.2,178.5,348.5
+Pooled,covered_height_mm,363.9,356.2,168.8,108.7,645.6
+Pooled,body_volume_cm3,35292.3,32305.2,23029.7,4394.4,79136.7

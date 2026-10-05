@@ -1,0 +1,65 @@
+{
+  "protocol": "Phase 12C Exact-8 Target Freeze",
+  "count": 8,
+  "selection_criterion": "Semantically and morphologically identical structures between Phase10R (TotalSegmentator-derived) and AMOS-22 label definitions, as determined in Phase 12 Target Equivalence Audit (reports/phase12/07_target_equivalence/TARGET_EQUIVALENCE.csv).",
+  "excluded": [
+    "aorta (NON-EQUIVALENT: abdominal vs whole)",
+    "esophagus (NON-EQUIVALENT: abdominal vs whole)",
+    "gallbladder (NEAR MATCH: physiological distension)",
+    "stomach (NEAR MATCH: peristalsis)",
+    "duodenum (NEAR MATCH: border ambiguity)",
+    "urinary_bladder (NEAR MATCH: filling variation)",
+    "prostate/uterus (NON-EQUIVALENT: sex-conflated)"
+  ],
+  "targets": [
+    {
+      "name": "spleen",
+      "phase10r_slot": 0,
+      "amos_id": 1,
+      "reason": "Direct parenchymal equivalence"
+    },
+    {
+      "name": "kidney_right",
+      "phase10r_slot": 1,
+      "amos_id": 2,
+      "reason": "Direct anatomical identity (patient right)"
+    },
+    {
+      "name": "kidney_left",
+      "phase10r_slot": 2,
+      "amos_id": 3,
+      "reason": "Direct anatomical identity (patient left)"
+    },
+    {
+      "name": "liver",
+      "phase10r_slot": 4,
+      "amos_id": 6,
+      "reason": "Standard parenchymal segmentation"
+    },
+    {
+      "name": "pancreas",
+      "phase10r_slot": 6,
+      "amos_id": 10,
+      "reason": "Consistent retroperitoneal landmark"
+    },
+    {
+      "name": "adrenal_gland_right",
+      "phase10r_slot": 7,
+      "amos_id": 11,
+      "reason": "Small localized structure"
+    },
+    {
+      "name": "adrenal_gland_left",
+      "phase10r_slot": 8,
+      "amos_id": 12,
+      "reason": "Small localized structure"
+    },
+    {
+      "name": "inferior_vena_cava",
+      "phase10r_slot": 62,
+      "amos_id": 9,
+      "reason": "Direct anatomical identity"
+    }
+  ],
+  "sha256": "211c214c0d5c31a1d881235b1b40c42489658f72c16d4bcfc84f81b92b7c910c"
+}

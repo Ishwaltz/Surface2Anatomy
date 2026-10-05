@@ -1,0 +1,16 @@
+AMOS_label_id,AMOS_label_name,Phase10R_target_name,Phase10R_target_index,mapping_status,reason,sex_specific,primary_external_target_yes_no
+1,spleen,spleen,0,EXACT_MATCH,Direct anatomical identity,NO,YES
+2,right kidney,kidney_right,1,EXACT_MATCH,Direct anatomical identity (patient right),NO,YES
+3,left kidney,kidney_left,2,EXACT_MATCH,Direct anatomical identity (patient left),NO,YES
+4,gallbladder,gallbladder,3,EXACT_MATCH,Direct anatomical identity,NO,YES
+5,esophagus,esophagus,14,EXACT_MATCH,Direct anatomical identity (distal/abdominal segment),NO,YES
+6,liver,liver,4,EXACT_MATCH,Direct anatomical identity,NO,YES
+7,stomach,stomach,5,EXACT_MATCH,Direct anatomical identity,NO,YES
+8,aorta,aorta,51,EXACT_MATCH,Direct anatomical identity (abdominal aorta),NO,YES
+9,inferior vena cava,inferior_vena_cava,62,EXACT_MATCH,Direct anatomical identity,NO,YES
+10,pancreas,pancreas,6,EXACT_MATCH,Direct anatomical identity,NO,YES
+11,right adrenal gland,adrenal_gland_right,7,EXACT_MATCH,Direct anatomical identity (patient right),NO,YES
+12,left adrenal gland,adrenal_gland_left,8,EXACT_MATCH,Direct anatomical identity (patient left),NO,YES
+13,duodenum,duodenum,18,EXACT_MATCH,Direct anatomical identity,NO,YES
+14,urinary bladder,urinary_bladder,20,EXACT_MATCH,Direct anatomical identity,NO,YES
+15,prostate/uterus,prostate,21,SEX_SPECIFIC_MATCH,Male prostate maps to slot 21; female uterus not in 117-ontology,YES,NO

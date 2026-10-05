@@ -1,0 +1,22 @@
+{
+  "protocol": "PHASE 12B \u2014 V2 CANONICAL-FRAME SANITY & NON-REGRESSION AUDIT",
+  "timestamp": "2026-09-14T00:40:00",
+  "immutability_declaration": "Phase 10R checkpoints, Phase 12 external canonical frame parameters, S_global=500mm, and target definitions are 100% frozen. No parameter may be changed after looking at V2 results.",
+  "historical_amos_baselines": {
+    "Raw AMOS MRE": "55.72 mm",
+    "New External Frame MRE": "27.25 mm",
+    "Phase12-FOV + New Frame MRE": "23.98 mm"
+  },
+  "file_hashes": {
+    "reports/phase12/PHASE12_EXTERNAL_GENERALIZATION_FINAL.md": "7ed9ba4729be28e6314e3e8b00fb11ecb5fd16f4ec6c130bd442a0f6fdd20154",
+    "reports/phase12/04_external_frame/FRAME_SELECTION_FREEZE.md": "c25a1a8042d92a71a634b8fbba9da58273f8a88b9789a5aa3bbd0a5be2faedfe",
+    "reports/phase12/04_external_frame/FRAME_STABILITY_BENCHMARK.csv": "dcce2b7b9b050056625747f32bea04aef78d24c8464012bd6d895fbd798ab575",
+    "reports/phase12/tables/CRITICAL_RESULT_TABLE.csv": "ee55170b3c8f0885d85c47ed8f8323179d78108f6cf3f1e3bcf5b9b71b12275d",
+    "reports/phase12/07_target_equivalence/TARGET_EQUIVALENCE.csv": "c73f0b5d77145c26e900029ec57ad08a372d613f599a87208c415ea24e6b4936",
+    "experiments/phase10R/checkpoints/C4_Proposed_seed42.pt": "760adfee1c47d80fc3f59492971b6c83459fc10ce2166f13fc1d7e4d708cb936",
+    "experiments/phase10R/checkpoints/C4_Proposed_seed43.pt": "3e3c739c992b80f193ec41041e62ff59191436e2e5f1e78bd0a328c8310f7d91",
+    "experiments/phase10R/checkpoints/C4_Proposed_seed44.pt": "28fbc7b30d8539f84c265b4f95f4f73b63978fb5b252f9a3ad20ea4fa1792cdd",
+    "sharon/dataset_v3/pointclouds_v3.pt": "2ce1f1f1d098afaf62a9a4a14c7eaea9b96689aeee5b6bf9656508d7fc8b5aaf",
+    "sharon/dataset_v3/splits_v3_iid.json": "bc78d5a953fe0431d124a66c33dc3b33afc131657b1140a1595e64c7f30fedf6"
+  }
+}

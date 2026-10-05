@@ -1,0 +1,108 @@
+{
+  "manifest_name": "PHASE10R_REPRODUCIBILITY_MANIFEST",
+  "timestamp_iso": "2026-09-12T14:00:44Z",
+  "fixed_scientific_context": {
+    "dataset_version": "Dataset V3.0.0-FROZEN",
+    "total_cases": 1668,
+    "split_counts": {
+      "train": 1334,
+      "validation": 166,
+      "locked_test": 168
+    },
+    "primary_benchmark_targets_count": 104,
+    "ontology_total_targets": 117,
+    "global_normalization_scale_mm": 500.0,
+    "canonical_coordinate_frame": "+X Right, +Y Anterior, +Z Superior",
+    "canonical_training_recipe": {
+      "epochs": 65,
+      "batch_size": 16,
+      "optimizer": "AdamW",
+      "encoder_lr": 0.0002,
+      "decoder_lr": 0.0005,
+      "weight_decay": 0.0001,
+      "lr_scheduler": "CosineAnnealingLR(T_max=65)",
+      "surface_jitter_train_sigma_mm": 0.5,
+      "checkpoint_selection_rule": "Lowest validation macro MRE on primary 104 benchmark targets"
+    },
+    "hardware_context": {
+      "gpu": "NVIDIA GeForce RTX 4070 Ti SUPER",
+      "vram_gb": 16,
+      "driver_version": "595.84",
+      "cuda_version": "13.2"
+    }
+  },
+  "file_hashes": {
+    "dataset_pointclouds_v3": {
+      "path": "sharon/dataset_v3/pointclouds_v3.pt",
+      "sha256": "2ce1f1f1d098afaf62a9a4a14c7eaea9b96689aeee5b6bf9656508d7fc8b5aaf",
+      "exists": true,
+      "size_bytes": 496959221
+    },
+    "dataset_v3_frozen_spec": {
+      "path": "sharon/dataset_v3/DATASET_V3_FROZEN.json",
+      "sha256": "25fc6759b70ac5c0f9acd249154bc7037d173e6186173dfbd829c5a90cf46e2a",
+      "exists": true,
+      "size_bytes": 1314
+    },
+    "dataset_v3_version_spec": {
+      "path": "sharon/dataset_v3/DATASET_V3_VERSION.json",
+      "sha256": "c3918ec7265a299c17d97c3d9ff041dcb70967d9c317048e0e824a0c5ef7de92",
+      "exists": true,
+      "size_bytes": 823
+    },
+    "splits_v3_iid": {
+      "path": "sharon/dataset_v3/splits_v3_iid.json",
+      "sha256": "bc78d5a953fe0431d124a66c33dc3b33afc131657b1140a1595e64c7f30fedf6",
+      "exists": true,
+      "size_bytes": 114008
+    },
+    "target_ontology_v3": {
+      "path": "sharon/dataset_v3/target_ontology_v3.csv",
+      "sha256": "a0cc18265b442f85d4acd7e8408e00ac4c6fe1e407d89c048f0d8c50ed096101",
+      "exists": true,
+      "size_bytes": 18139
+    },
+    "benchmark_primary_targets_v3": {
+      "path": "sharon/dataset_v3/benchmark_primary_targets_v3.json",
+      "sha256": "9a1f39666343c867a305a552585cc2c0f2d77aa3e8bbf9adfa0b5ad6e1e417d7",
+      "exists": true,
+      "size_bytes": 29991
+    },
+    "dataset_manifest_v3": {
+      "path": "sharon/dataset_v3/manifest_v3.csv",
+      "sha256": "5d74656f6cde0a0de8045487b72729c8ebca00dd97143e91c8f92315b4187556",
+      "exists": true,
+      "size_bytes": 190830
+    },
+    "model_source_target_query": {
+      "path": "sharon/model_target_query.py",
+      "sha256": "c675a5a3e4d233d8172ea015507c2121ff045987f298b5df9df53e0f3f625275",
+      "exists": true,
+      "size_bytes": 9510
+    },
+    "model_source_gnn": {
+      "path": "sharon/model_gnn.py",
+      "sha256": "e1dca16bb98c1c9e7eed4fc70d4f55a477d16db018a82ed4b56f9e521e65db9f",
+      "exists": true,
+      "size_bytes": 11994
+    },
+    "training_source_train": {
+      "path": "sharon/train.py",
+      "sha256": "fae9e00c42cbc8d2e422359dc8d4947cb28a9dc8778611e6e173448b1a03298a",
+      "exists": true,
+      "size_bytes": 14752
+    },
+    "scaling_experiments_runner": {
+      "path": "tools/phase9/run_phase9b_scaling_experiments.py",
+      "sha256": "7680c9c66292cf14a4977c81f13dcf944f2a85cd652dc3673393c6a50def1ada",
+      "exists": true,
+      "size_bytes": 29893
+    },
+    "phase10_master_runner": {
+      "path": "tools/phase10/run_phase10_master.py",
+      "sha256": "3ed3e8b4ae30b2893f4c084abb72bdd830b593d9cb85acee25a7a53b46acc4cf",
+      "exists": true,
+      "size_bytes": 84522
+    }
+  }
+}

@@ -1,0 +1,13 @@
+source,split,num_cases,num_unique_subjects
+v2,TRAIN,336,336
+v2,VAL,63,63
+v2,TEST,41,41
+v2,TOTAL,440,440
+totalsegmentator,TRAIN,998,998
+totalsegmentator,VAL,103,103
+totalsegmentator,TEST,127,127
+totalsegmentator,TOTAL,1228,1228
+dap_atlas,TRAIN,0,0
+dap_atlas,VAL,0,0
+dap_atlas,TEST,0,0
+dap_atlas,TOTAL,0,0

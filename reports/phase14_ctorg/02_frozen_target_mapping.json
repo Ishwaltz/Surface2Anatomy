@@ -1,0 +1,51 @@
+{
+  "dataset": "CT-ORG",
+  "description": "Frozen target mapping rules for zero-shot external evaluation of Phase 10R model on CT-ORG",
+  "targets": {
+    "liver": {
+      "ctorg_id": 1,
+      "slot": 4,
+      "canonical_name": "liver",
+      "mapping_type": "EXACT",
+      "evaluation_criterion": "voxel count >= 10 in segmentation"
+    },
+    "urinary_bladder": {
+      "ctorg_id": 2,
+      "slot": 20,
+      "canonical_name": "urinary_bladder",
+      "mapping_type": "EXACT",
+      "evaluation_criterion": "voxel count >= 10 in segmentation"
+    },
+    "brain": {
+      "ctorg_id": 6,
+      "slot": 89,
+      "canonical_name": "brain",
+      "mapping_type": "EXACT",
+      "evaluation_criterion": "voxel count >= 10 in segmentation and scan covers cranial region"
+    },
+    "kidney_right": {
+      "ctorg_id": 4,
+      "slot": 1,
+      "canonical_name": "kidney_right",
+      "mapping_type": "DERIVED_BILATERAL",
+      "evaluation_criterion": "3D CC analysis in canonical RAS: two largest CC >= 95% total kidney volume; component with larger X coord is patient Right"
+    },
+    "kidney_left": {
+      "ctorg_id": 4,
+      "slot": 2,
+      "canonical_name": "kidney_left",
+      "mapping_type": "DERIVED_BILATERAL",
+      "evaluation_criterion": "3D CC analysis in canonical RAS: two largest CC >= 95% total kidney volume; component with smaller X coord is patient Left"
+    }
+  },
+  "incompatible_labels": {
+    "lungs": {
+      "ctorg_id": 3,
+      "reason": "Whole lung mask cannot be mapped onto individual lung lobes"
+    },
+    "bone": {
+      "ctorg_id": 5,
+      "reason": "Whole bone mask cannot be mapped onto individual vertebrae/ribs"
+    }
+  }
+}

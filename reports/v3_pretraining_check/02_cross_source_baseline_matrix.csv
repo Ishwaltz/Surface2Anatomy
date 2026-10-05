@@ -1,0 +1,7 @@
+train_source,val_source,mean_atlas_mre_mm,body_ridge_mre_mm
+V2,V2,54.28,44.40
+V2,TS,173.43,154.27
+TS,TS,89.35,65.38
+TS,V2,160.91,145.10
+Pooled,V2,125.58,98.86
+Pooled,TS,100.84,77.62

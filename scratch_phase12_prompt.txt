@@ -1,0 +1,1461 @@
+<USER_REQUEST>
+You are acting as the senior medical-imaging ML engineer,
+3D geometry scientist, external-validation auditor, and skeptical reviewer for:
+
+3D INTERNAL ORGAN / ANATOMICAL LANDMARK LOCALIZATION
+FROM EXTERNAL BODY SURFACE GEOMETRY
+
+Repository root:
+
+~/Desktop/3D-Organ-Location-Prediction-Model/
+
+We have completed:
+
+PHASE 10R
+- frozen target-query surface model
+- locked-test ensemble MRE ~23.34 mm
+
+PHASE 11
+- AMOS22 independent external evaluation:
+    Macro MRE ~55.72 mm
+    CT ~54.16 mm
+    MRI ~60.99 mm
+- HuMMan real-sensor evaluation
+- model remained numerically stable but external anatomical performance
+  degraded substantially
+
+Create:
+
+PHASE 12 — EXTERNAL GENERALIZATION RECOVERY &
+CANONICAL-FRAME FORENSICS
+
+PRIMARY QUESTION:
+
+Is the AMOS performance gap:
+
+V3 common-target ≈ 26.7 mm
+vs
+AMOS ≈ 55.7 mm
+
+primarily caused by:
+
+A. coordinate origin / centering mismatch?
+B. orientation mismatch?
+C. scale mismatch?
+D. scan-field-of-view mismatch?
+E. target-definition mismatch?
+F. true surface→internal anatomy domain shift?
+
+AND:
+
+Can we reduce external AMOS error toward 25–30 mm using ONLY
+external geometry and rules that would be available at deployment?
+
+======================================================================
+0. NON-NEGOTIABLE SCIENTIFIC RULES
+======================================================================
+
+DO NOT immediately retrain the anatomical predictor.
+
+DO NOT use AMOS organ masks to construct:
+- body coordinate frame
+- external landmarks
+- cropping
+- registration
+- scale
+- canonicalization
+- model input
+
+AMOS internal labels may be used ONLY for:
+
+1. ground-truth evaluation
+2. diagnostic oracle experiments explicitly labeled ORACLE
+3. target-definition auditing
+
+ORACLE experiments must NEVER be reported as deployable performance.
+
+The following must remain strictly separated:
+
+DIAGNOSTIC ORACLE
+vs
+DEPLOYABLE EXTERNAL-GEOMETRY METHOD
+
+Do not mix them.
+
+Do not tune a deployable transformation directly to minimize AMOS GT error.
+
+Do not silently select parameters using AMOS organ labels.
+
+Any method intended for deployment must use ONLY:
+
+- external body surface
+- camera/depth geometry
+- visible external landmarks
+- patient orientation
+- gravity / scanner orientation
+- externally measurable body geometry
+
+======================================================================
+1. CREATE PHASE 12 DIRECTORY
+======================================================================
+
+Create:
+
+reports/phase12/
+    00_governance/
+    01_axis_bias/
+    02_oracles/
+    03_centering_audit/
+    04_external_frame/
+    05_v3_fov_training/
+    06_fov_augmentation/
+    07_target_equivalence/
+    08_optional_domain_adaptation/
+    tables/
+    figures/
+    predictions/
+    statistics/
+    logs/
+
+tools/phase12/
+
+Do not overwrite Phase 10R or Phase 11.
+
+======================================================================
+2. FREEZE CURRENT RAW RESULTS
+======================================================================
+
+Before changing anything:
+
+hash and archive:
+
+- Phase-10R seed42 checkpoint
+- seed43 checkpoint
+- seed44 checkpoint
+- Phase-11 AMOS predictions
+- AMOS GT centroid file
+- AMOS 4096-point clouds
+- target mapping
+- FOV categories
+- current canonicalization code
+
+Create:
+
+reports/phase12/00_governance/PHASE12_STARTING_STATE.json
+
+Record:
+
+V3 common-target baseline
+AMOS overall
+AMOS CT
+AMOS MRI
+AMOS target-wise MRE
+
+Expected approximately:
+
+V3 common targets:
+26.69 mm
+
+AMOS:
+55.72 mm
+
+Do not replace these historical Phase-11 values.
+
+======================================================================
+3. TASK 1 — SIGNED X/Y/Z ERROR FORENSICS
+======================================================================
+
+This is the first critical diagnostic.
+
+For every AMOS patient i and target k compute:
+
+delta_ik =
+p_pred_ik - p_GT_ik
+
+with components:
+
+dx = x_pred - x_GT
+dy = y_pred - y_GT
+dz = z_pred - z_GT
+
+Coordinate frame:
+
++X Right
++Y Anterior
++Z Superior
+
+Calculate:
+
+GLOBAL:
+mean dx, dy, dz
+median dx, dy, dz
+SD
+IQR
+95% CI
+
+BY MODALITY:
+CT
+MRI
+
+BY TARGET:
+all mapped AMOS targets
+
+BY PATIENT:
+mean signed vector per patient
+
+BY FOV GROUP:
+A
+B
+C
+
+Also calculate absolute axis errors:
+
+|dx|
+|dy|
+|dz|
+
+and relative contribution to radial error.
+
+Produce:
+
+reports/phase12/01_axis_bias/signed_axis_errors.csv
+
+and:
+
+reports/phase12/01_axis_bias/01_SIGNED_AXIS_BIAS.md
+
+Generate plots:
+
+1. violin plot of dx/dy/dz
+2. target × axis heatmap
+3. CT vs MRI bias
+4. patient mean bias vector distribution
+
+HARD INTERPRETATION RULE:
+
+If one axis contains a strong cohort-wide signed displacement,
+state:
+
+"systematic coordinate bias detected"
+
+Do NOT yet correct it.
+
+======================================================================
+4. TASK 2 — ORACLE TRANSFORMATION HIERARCHY
+======================================================================
+
+Run diagnostic transformations using GT.
+
+These are NOT deployable.
+
+Their purpose is to determine how much of the 55.7 mm error is due to
+coordinate-frame mismatch.
+
+--------------------------------------------------
+4A. PATIENT TRANSLATION ORACLE
+--------------------------------------------------
+
+For each patient:
+
+t_i =
+mean_k (
+p_GT_ik - p_pred_ik
+)
+
+over all valid mapped targets.
+
+Apply:
+
+p_pred_corrected =
+p_pred + t_i
+
+Recompute:
+
+Macro MRE
+Micro MRE
+Median
+P90
+per-target MRE
+
+Record:
+
+RAW:
+~55.7 mm
+
+TRANSLATION ORACLE:
+??? mm
+
+This is diagnostic only.
+
+--------------------------------------------------
+4B. COHORT TRANSLATION ORACLE
+--------------------------------------------------
+
+Compute ONE fixed translation vector:
+
+t_cohort =
+mean over training/evaluated AMOS patient-target residuals
+
+Apply same vector to every patient.
+
+But report as:
+
+POST-HOC COHORT BIAS DIAGNOSTIC
+
+NOT deployable zero-shot performance.
+
+--------------------------------------------------
+4C. RIGID TRANSFORM ORACLE
+--------------------------------------------------
+
+For each patient solve optimal:
+
+rotation R
+translation t
+
+minimizing:
+
+sum_k || R p_pred_k + t - p_GT_k ||²
+
+using Kabsch / Procrustes without scaling.
+
+Recompute MRE.
+
+--------------------------------------------------
+4D. SIMILARITY TRANSFORM ORACLE
+--------------------------------------------------
+
+Allow:
+
+uniform scale s
+rotation R
+translation t
+
+Solve:
+
+min sum_k || s R p_pred_k + t - p_GT_k ||²
+
+Recompute MRE.
+
+--------------------------------------------------
+4E. OPTIONAL AFFINE ORACLE
+--------------------------------------------------
+
+For diagnosis only, compute full affine mapping.
+
+Do not overinterpret.
+
+--------------------------------------------------
+4F. ORACLE DECISION TABLE
+--------------------------------------------------
+
+Create:
+
+RAW
+Translation
+Rigid
+Similarity
+Affine
+
+with:
+
+MRE
+median
+P90
+absolute improvement
+relative improvement
+
+Interpret:
+
+CASE A:
+
+55.7 → 25–30 with translation
+
+=> dominant origin/centering problem
+
+CASE B:
+
+55.7 → 25–30 only with rigid
+
+=> orientation + centering problem
+
+CASE C:
+
+55.7 → 25–30 only with similarity
+
+=> scale mismatch important
+
+CASE D:
+
+still >40 after similarity
+
+=> genuine anatomy/domain shift dominates
+
+Create:
+
+reports/phase12/02_oracles/02_ORACLE_TRANSFORM_DIAGNOSIS.md
+
+VERY IMPORTANT:
+
+Every table cell must visibly say:
+
+DIAGNOSTIC ORACLE — USES INTERNAL GT
+
+======================================================================
+5. TASK 3 — EXACT CENTERING RULE AUDIT
+======================================================================
+
+Audit Phase-10R / Dataset V3 body centering.
+
+Determine exactly how C_body is computed.
+
+Expected concept:
+
+C_body =
+0.5 * (min(surface) + max(surface))
+
+But verify code.
+
+For V3 and AMOS compare:
+
+body bbox midpoint
+surface centroid
+scan physical center
+available SI midpoint
+body-mask centroid
+
+Calculate per patient:
+
+C_bbox
+C_surface
+C_scan
+
+Analyze:
+
+AMOS vs V3 distributions
+
+especially:
+
+Z-center / SI origin
+
+because AMOS has variable axial FOV.
+
+Compute correlations between localization error and:
+
+- SI midpoint
+- scan height
+- superior boundary
+- inferior boundary
+- surface centroid
+- bbox center
+
+Generate:
+
+reports/phase12/03_centering_audit/03_CENTERING_AUDIT.md
+
+Also answer:
+
+Does truncating the torso change C_body by tens of millimetres?
+
+If yes, quantify exactly.
+
+======================================================================
+6. TASK 4 — BUILD A FOV-INVARIANT EXTERNAL-ONLY CANONICAL FRAME
+======================================================================
+
+This is the main deployable fix.
+
+Do NOT use organs.
+
+Build candidate body frames using ONLY external geometry.
+
+Test several predefined candidate canonicalizers.
+
+--------------------------------------------------
+FRAME A — CURRENT
+--------------------------------------------------
+
+Existing bbox midpoint.
+
+--------------------------------------------------
+FRAME B — SURFACE ROBUST CENTROID
+--------------------------------------------------
+
+Use robust trimmed external-surface centroid.
+
+Example:
+
+exclude extreme 2–5% points per axis
+before computing centroid.
+
+Do not optimize trimming percentage on AMOS MRE.
+
+Choose using V3-only robustness experiments.
+
+--------------------------------------------------
+FRAME C — MID-SAGITTAL SYMMETRY FRAME
+--------------------------------------------------
+
+Estimate left/right symmetry plane from torso surface.
+
+Define:
+
+X origin:
+mid-sagittal plane
+
+X axis:
+left-right
+
+Y axis:
+posterior→anterior
+
+Z axis:
+inferior→superior
+
+Use only external geometry.
+
+--------------------------------------------------
+FRAME D — BODY PCA + ANATOMICAL DISAMBIGUATION
+--------------------------------------------------
+
+Use PCA only for coarse axes.
+
+Resolve sign ambiguity using:
+
+known scanner gravity/up direction
+anterior/posterior surface geometry
+left/right symmetry cues
+
+Do not rely on PCA alone if axis sign is ambiguous.
+
+--------------------------------------------------
+FRAME E — EXTERNAL LANDMARK FRAME
+--------------------------------------------------
+
+Use externally detectable landmarks if available or inferable from surface:
+
+potential examples:
+
+- suprasternal notch / upper sternum
+- shoulder line
+- left/right acromial region
+- pelvic/hip lateral extrema
+- umbilical-level surface if objectively detectable
+- torso waist geometry
+
+Do not use CT-internal sternum centroids or internal bones directly.
+
+If using landmark detectors:
+they must operate from external geometry only.
+
+--------------------------------------------------
+FRAME F — PARTIAL-FOV-INVARIANT RELATIVE FRAME
+--------------------------------------------------
+
+Design origin using robust local torso geometry rather than scan ends.
+
+Goal:
+
+if superior/inferior parts are cropped,
+the coordinate origin should remain approximately stable.
+
+Potential strategy:
+
+estimate standardized torso cross-sections
+from local width/depth profile.
+
+Use V3 synthetic crops to design this.
+
+======================================================================
+7. CANONICAL FRAME EVALUATION RULE
+======================================================================
+
+DO NOT choose the winning frame based on AMOS organ MRE.
+
+Instead:
+
+Use Dataset V3 TRAIN/VAL surfaces.
+
+Create synthetic FOV perturbations.
+
+Measure frame stability directly:
+
+same patient's full surface
+vs
+cropped surface
+
+Frame error:
+
+translation difference
+rotation difference
+scale difference
+
+Select canonicalizer using:
+
+V3-only frame stability.
+
+Freeze it.
+
+ONLY THEN evaluate frozen canonicalizer on AMOS.
+
+This prevents AMOS GT tuning.
+
+Create:
+
+reports/phase12/04_external_frame/FRAME_SELECTION_FREEZE.md
+
+Hash it BEFORE AMOS re-evaluation.
+
+======================================================================
+8. TASK 5 — V3 FOV-MATCHING EXPERIMENT
+======================================================================
+
+Use Dataset V3 ONLY.
+
+Do not use AMOS labels.
+
+Take V3 train/validation surfaces.
+
+Generate AMOS-like FOV crops.
+
+Match observed AMOS distributions for:
+
+SI extent
+superior truncation
+inferior truncation
+partial abdominal coverage
+
+But derive crop distributions from EXTERNAL SURFACE/FOV metadata only.
+
+Generate variants:
+
+FULL
+
+450 mm SI
+
+350 mm SI
+
+300 mm SI
+
+250 mm SI
+
+200 mm SI
+
+asymmetric superior crop
+
+asymmetric inferior crop
+
+random abdominal window
+
+Then apply the CURRENT model without retraining first.
+
+Question:
+
+Does V3 error rise toward AMOS levels solely from cropping/recentering?
+
+Create:
+
+reports/phase12/05_v3_fov_training/
+05_V3_FOV_MATCH_DIAGNOSTIC.md
+
+Plot:
+
+MRE vs visible SI extent
+
+If V3 cropped error approaches 50–60 mm:
+
+strong evidence FOV sensitivity explains much of AMOS gap.
+
+======================================================================
+9. TASK 6 — FOV-AWARE TRAINING AUGMENTATION
+======================================================================
+
+Only after the diagnostic is complete.
+
+This creates a NEW model version:
+
+Phase12-FOV
+
+Do NOT replace Phase-10R historically.
+
+Train ONLY on Dataset V3 training data.
+
+Never train on AMOS labels.
+
+During training randomly generate:
+
+full surface
+partial SI surface
+superior crop
+inferior crop
+asymmetric crop
+camera-like partial surface
+
+IMPORTANT:
+
+Target coordinates remain defined in a stable external canonical frame.
+
+Do NOT recenter each crop using its own truncated bounding box if that causes
+coordinate drift.
+
+The key design principle is:
+
+canonical frame should describe the PERSON,
+not the scan window.
+
+Train seeds:
+
+42
+43
+44
+
+Use matched 65-epoch protocol unless a justified schedule change is frozen in
+advance.
+
+Evaluate on:
+
+V3 validation
+V3 locked predictions if allowed only as historic comparison
+
+IMPORTANT:
+
+The original locked V3 test has already been seen.
+
+Do not use it for tuning Phase12-FOV.
+
+Use V3 validation for development.
+
+If a separate untouched V3 partition exists, use it only if genuinely untouched.
+
+======================================================================
+10. EXTERNAL FRAME + FOV MODEL COMBINATIONS
+======================================================================
+
+Evaluate pre-frozen candidate systems on AMOS:
+
+SYSTEM 0
+Phase10R + original frame
+
+SYSTEM 1
+Phase10R + new external frame
+
+SYSTEM 2
+Phase12-FOV model + original frame
+
+SYSTEM 3
+Phase12-FOV model + new external frame
+
+AMOS remains external evaluation.
+
+Do not tune after seeing these results.
+
+Report:
+
+Overall
+CT
+MRI
+target-wise
+FOV group
+
+Goal:
+
+determine whether 25–30 mm is achievable without AMOS supervision.
+
+======================================================================
+11. TASK 7 — TARGET-DEFINITION EQUIVALENCE AUDIT
+======================================================================
+
+Audit every common target.
+
+For each AMOS target compare:
+
+AMOS definition
+Dataset V3 definition
+TotalSegmentator definition
+Phase10R target definition
+
+Check:
+
+whole organ vs partial organ
+mask centroid vs landmark
+left/right labeling
+combined structures
+vessel definition
+truncation
+sex-specific anatomy
+
+For each target create:
+
+EXACT MATCH
+NEAR MATCH
+NON-EQUIVALENT
+
+Examples to inspect carefully:
+
+esophagus
+inferior vena cava
+duodenum
+gallbladder
+adrenal glands
+prostate/uterus
+bladder
+
+Calculate centroid-definition sensitivity where possible.
+
+For the SAME dataset mask:
+
+- voxel centroid
+- mesh centroid
+- bbox center
+
+Quantify typical difference.
+
+Do not change the primary endpoint post hoc.
+
+Instead report definition mismatch as a source of external error.
+
+Create:
+
+reports/phase12/07_target_equivalence/
+07_TARGET_DEFINITION_AUDIT.md
+
+and:
+
+TARGET_EQUIVALENCE.csv
+
+======================================================================
+12. TARGET-CONDITIONAL RESIDUAL ANALYSIS
+======================================================================
+
+After coordinate-oracle analysis, decompose error into:
+
+GLOBAL PATIENT COMPONENT
+
+and
+
+TARGET-SPECIFIC RESIDUAL COMPONENT.
+
+For patient i:
+
+global residual:
+mean_k(error vector)
+
+target residual:
+error_ik - global_residual_i
+
+Report:
+
+raw MRE
+global component magnitude
+target-specific residual magnitude
+
+This tells us whether AMOS error is mostly:
+
+whole-patient frame shift
+
+or
+
+organ-specific prediction failure.
+
+======================================================================
+13. BODY-FRAME STABILITY METRIC
+======================================================================
+
+Define an external canonicalization stability metric.
+
+For the same V3 subject under:
+
+full surface
+350 mm crop
+300 mm crop
+250 mm crop
+camera crop
+
+measure:
+
+origin shift in mm
+axis angular deviation
+scale variation
+
+A good frame should show:
+
+low origin drift
+low angular drift
+
+even as FOV changes.
+
+Create:
+
+FRAME_STABILITY_SCORE.
+
+Use this for model/frame selection.
+
+NOT AMOS organ MRE.
+
+======================================================================
+14. TASK 8 — DOMAIN ADAPTATION ONLY IF NEEDED
+======================================================================
+
+This is OPTIONAL and may run only after Tasks 1–7.
+
+Trigger only if:
+
+best external-only + V3-FOV system still yields:
+
+AMOS MRE > 35 mm
+
+If <=35 mm:
+DO NOT run domain adaptation yet.
+
+--------------------------------------------------
+14A. VERY IMPORTANT DATA GOVERNANCE
+--------------------------------------------------
+
+AMOS has already been evaluated.
+
+Therefore the current 259 AMOS cases are NOT a pristine unseen test set for
+any AMOS-supervised adaptation experiment.
+
+Do NOT train on these cases and then claim external validation.
+
+Check whether additional labeled AMOS cases exist that have NOT been used in
+Phase 11.
+
+If unused labeled cases exist:
+
+classify them BEFORE training as:
+
+AMOS-DEV
+AMOS-HOLDOUT
+
+But if their labels/results have already been inspected by previous scripts,
+they are not truly untouched.
+
+Document this honestly.
+
+Preferred strategy:
+
+Use AMOS only for unsupervised surface-domain adaptation,
+without organ labels.
+
+For example:
+
+- feature distribution alignment
+- external surface canonicalizer adaptation
+- self-supervised reconstruction
+- contrastive surface representation alignment
+
+DO NOT use organ labels.
+
+--------------------------------------------------
+14B. UNSUPERVISED DOMAIN ADAPTATION
+--------------------------------------------------
+
+Potential methods:
+
+CORAL
+MMD feature alignment
+domain adversarial surface encoder
+self-supervised point-cloud contrastive learning
+
+But:
+
+freeze decoder initially.
+
+No organ GT.
+
+Compare:
+
+no adaptation
+unsupervised surface adaptation
+
+AMOS GT is used only after training for final evaluation.
+
+--------------------------------------------------
+14C. SUPERVISED AMOS ADAPTATION
+--------------------------------------------------
+
+Only if scientifically justified.
+
+If organ labels are used:
+
+the experiment must be renamed:
+
+AMOS-SUPERVISED DOMAIN ADAPTATION
+
+NOT zero-shot external validation.
+
+Need:
+
+development subset
+held-out subset
+strict split
+no leakage
+
+Because AMOS results are already partially known,
+this experiment is exploratory unless a genuinely untouched cohort remains.
+
+======================================================================
+15. QUANTITATIVE SUCCESS GATES
+======================================================================
+
+Define BEFORE running corrections:
+
+GATE A:
+Translation oracle <= 32 mm
+
+Interpretation:
+coordinate origin dominates.
+
+GATE B:
+Rigid oracle <= 30 mm
+
+Interpretation:
+external frame/orientation dominates.
+
+GATE C:
+Similarity oracle <= 28 mm
+
+Interpretation:
+frame + scale explain most gap.
+
+GATE D:
+V3 FOV cropping increases MRE by >=15 mm
+
+Interpretation:
+FOV mismatch is a major driver.
+
+GATE E:
+New external frame reduces V3 crop-induced coordinate drift by >=50%.
+
+GATE F:
+Frozen Phase10R + new frame achieves AMOS <=40 mm.
+
+GATE G:
+Phase12-FOV + new frame achieves AMOS <=35 mm.
+
+STRETCH GATE H:
+AMOS <=30 mm
+
+EXCELLENT:
+AMOS 25–30 mm
+
+Do not manipulate thresholds after results.
+
+======================================================================
+16. CRITICAL RESULT TABLE
+======================================================================
+
+Generate:
+
+| System | Uses AMOS organ GT for fitting? | Deployable? | AMOS MRE |
+|---|---:|---:|---:|
+| Raw Phase10R | No | Yes | 55.72 |
+| Translation oracle | YES | NO | ? |
+| Rigid oracle | YES | NO | ? |
+| Similarity oracle | YES | NO | ? |
+| New external frame | No | Yes | ? |
+| Phase12-FOV | No | Yes | ? |
+| Phase12-FOV + external frame | No | Yes | ? |
+| Unsupervised adaptation | No organ GT | Potentially | ? |
+| Supervised AMOS adaptation | YES | No longer zero-shot | ? |
+
+This table is mandatory.
+
+======================================================================
+17. CHECK FOR GLOBAL TRANSLATION VISUALLY
+======================================================================
+
+For at least 30 AMOS cases render:
+
+body surface
+GT organ centroid
+raw prediction
+translation-oracle prediction
+
+Color-code error vectors.
+
+If most raw error arrows point in the same direction:
+
+document it.
+
+Generate:
+
+reports/phase12/figures/translation_vectors/
+
+======================================================================
+18. MRI-SPECIFIC DIAGNOSIS
+======================================================================
+
+Since MRI error is worse:
+
+compare CT vs MRI for:
+
+signed dx
+signed dy
+signed dz
+surface SI extent
+body centroid
+bbox origin
+body dimensions
+canonical frame origin
+canonical frame angles
+
+Test whether MRI difference remains after:
+
+translation oracle
+new external frame
+
+If CT/MRI gap largely disappears:
+
+do not call it a modality-learning failure.
+
+Call it:
+
+surface/FOV canonicalization difference.
+
+======================================================================
+19. CAMERA ROBUSTNESS AFTER FRAME FIX
+======================================================================
+
+Repeat:
+
+360°
+3-camera
+2-camera
+1-camera
+
+ONLY after the new external frame is frozen.
+
+Question:
+
+Does the new canonicalizer reduce partial-view degradation?
+
+Report AMOS GT MRE.
+
+Do not use camera results to tune frame design after freeze.
+
+======================================================================
+20. STATISTICAL ANALYSIS
+======================================================================
+
+Use:
+
+5,000 patient bootstrap resamples
+
+95% CI
+
+For paired same-patient comparisons:
+
+raw vs new frame
+raw vs Phase12-FOV
+raw vs combined
+
+use paired bootstrap and Wilcoxon.
+
+For CT vs MRI:
+
+Mann-Whitney or bootstrap difference.
+
+Correct target-wise multiple tests with BH-FDR.
+
+Report effect sizes.
+
+======================================================================
+21. REQUIRED FIGURES
+======================================================================
+
+FIG 1
+Signed X/Y/Z AMOS bias
+
+FIG 2
+Oracle hierarchy:
+Raw → Translation → Rigid → Similarity
+
+FIG 3
+Patient error vectors in 3D
+
+FIG 4
+V3 error vs artificial FOV crop
+
+FIG 5
+Canonical-frame origin drift vs crop size
+
+FIG 6
+Old frame vs new external frame
+
+FIG 7
+Raw Phase10R vs Phase12-FOV vs combined on AMOS
+
+FIG 8
+CT vs MRI before/after frame correction
+
+FIG 9
+Target-wise raw vs corrected error
+
+FIG 10
+Camera-count results after frame correction
+
+======================================================================
+22. REQUIRED REPORTS
+======================================================================
+
+Create:
+
+reports/phase12/
+    00_governance/PHASE12_STARTING_STATE.json
+    01_axis_bias/01_SIGNED_AXIS_BIAS.md
+    02_oracles/02_ORACLE_TRANSFORM_DIAGNOSIS.md
+    03_centering_audit/03_CENTERING_AUDIT.md
+    04_external_frame/04_EXTERNAL_FRAME_METHOD.md
+    04_external_frame/FRAME_SELECTION_FREEZE.md
+    05_v3_fov_training/05_V3_FOV_MATCH_DIAGNOSTIC.md
+    06_fov_augmentation/06_FOV_AWARE_MODEL.md
+    07_target_equivalence/07_TARGET_DEFINITION_AUDIT.md
+    08_optional_domain_adaptation/08_DOMAIN_ADAPTATION.md
+    PHASE12_EXTERNAL_GENERALIZATION_FINAL.md
+
+======================================================================
+23. FINAL SCIENTIFIC QUESTIONS
+======================================================================
+
+The final report must answer:
+
+1. What are mean signed dx/dy/dz errors on AMOS?
+
+2. Is there a clear shared translation bias?
+
+3. Raw AMOS MRE?
+
+4. Translation-oracle MRE?
+
+5. Rigid-oracle MRE?
+
+6. Similarity-oracle MRE?
+
+7. What fraction of raw error is explained by patient-global frame error?
+
+8. How much does V3 FOV cropping alone hurt performance?
+
+9. How much does the current bbox-centering origin move under cropping?
+
+10. Which external-only canonical frame is most stable?
+
+11. Was frame selection performed WITHOUT AMOS GT?
+
+12. Frozen Phase10R + new frame AMOS MRE?
+
+13. Phase12-FOV AMOS MRE?
+
+14. Phase12-FOV + new frame AMOS MRE?
+
+15. CT MRE after correction?
+
+16. MRI MRE after correction?
+
+17. Does CT-vs-MRI gap remain?
+
+18. Which targets are still intrinsically difficult?
+
+19. Are target definitions truly equivalent?
+
+20. Is AMOS <=30 mm achieved without AMOS supervision?
+
+21. Is 25–30 mm scientifically achievable from external geometry alone?
+
+22. Is unsupervised domain adaptation necessary?
+
+23. Is supervised AMOS adaptation necessary?
+
+24. What is the primary remaining bottleneck:
+    - translation
+    - orientation
+    - scale
+    - FOV
+    - domain shift
+    - anatomy observability
+
+======================================================================
+24. DECISION TREE
+======================================================================
+
+IF:
+
+translation oracle <=30 mm
+
+THEN:
+
+prioritize external origin/canonicalization.
+
+Do NOT redesign anatomy network.
+
+IF:
+
+rigid oracle <=30 but translation oracle >35
+
+THEN:
+
+orientation estimation is important.
+
+IF:
+
+similarity oracle <=30 but rigid >35
+
+THEN:
+
+scale normalization is important.
+
+IF:
+
+all oracles >40
+
+THEN:
+
+coordinate frame is not sufficient.
+
+Focus on:
+true domain shift
+target definitions
+surface→anatomy observability.
+
+IF:
+
+V3 synthetic FOV crop causes >15 mm degradation
+
+THEN:
+
+FOV robustness is a major causal factor.
+
+IF:
+
+new external frame + V3-only FOV training reaches AMOS 25–30 mm
+
+THEN:
+
+STOP.
+
+Do not add AMOS-supervised training.
+
+This is the strongest scientific result.
+
+======================================================================
+25. CLAIM GOVERNANCE
+======================================================================
+
+If AMOS drops from 55.7 → 28 mm using a new frame trained/designed only on
+V3 external geometry:
+
+ALLOWED:
+
+"A substantial component of the apparent external-domain degradation was
+attributable to field-of-view-dependent coordinate canonicalization rather
+than failure of patient-specific anatomy inference."
+
+NOT ALLOWED:
+
+"We fixed AMOS using AMOS ground truth."
+
+If only translation ORACLE reaches 28 mm but deployable frame remains 50 mm:
+
+state:
+
+"The error is theoretically recoverable by patient-level registration, but
+a deployable external-only registration method remains unresolved."
+
+If supervised AMOS adaptation reaches 28 mm:
+
+state:
+
+"Supervised domain adaptation reduced AMOS error to 28 mm."
+
+DO NOT call that:
+
+zero-shot generalization.
+
+======================================================================
+26. FINAL RETURN FORMAT
+======================================================================
+
+When finished, return exactly:
+
+PHASE 12 — FINAL
+
+RAW AMOS:
+MRE:
+
+SIGNED ERROR:
+dx:
+dy:
+dz:
+
+ORACLE DIAGNOSTICS:
+Translation:
+Rigid:
+Similarity:
+Affine:
+
+ERROR EXPLAINED BY GLOBAL FRAME:
+%
+
+V3 FOV EFFECT:
+Full:
+350 mm:
+300 mm:
+250 mm:
+200 mm:
+
+CURRENT FRAME CROP DRIFT:
+mm:
+
+NEW EXTERNAL FRAME:
+method:
+crop drift:
+AMOS MRE:
+
+PHASE12-FOV MODEL:
+AMOS MRE:
+
+PHASE12-FOV + NEW FRAME:
+AMOS MRE:
+95% CI:
+
+CT:
+MRI:
+
+CAMERA:
+360:
+3-cam:
+2-cam:
+1-cam:
+
+TARGET DEFINITION ISSUES:
+YES/NO
+details:
+
+UNSUPERVISED ADAPTATION:
+RUN / NOT NEEDED
+AMOS MRE:
+
+SUPERVISED AMOS ADAPTATION:
+RUN / NOT RUN
+reason:
+
+BEST DEPLOYABLE AMOS RESULT:
+MRE:
+
+DID WE REACH <=30 mm WITHOUT AMOS LABEL TRAINING?
+YES/NO
+
+PRIMARY ROOT CAUSE:
+
+PUBLICATION INTERPRETATION:
+
+NEXT STEP:
+
+Do not hide negative results.
+Do not use oracle numbers as deployable performance.
+Do not tune external-frame parameters using AMOS organ labels.
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-09-14T00:05:30+05:30.
+</ADDITIONAL_METADATA>

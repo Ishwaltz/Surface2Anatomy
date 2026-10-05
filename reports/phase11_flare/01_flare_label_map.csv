@@ -1,0 +1,14 @@
+flare_label_id,flare_name,our_target_name,mapping_status,notes
+1,liver,liver,EXACT,Direct parenchymal equivalence
+2,right kidney,kidney_right,EXACT,Direct anatomical identity (patient right)
+3,spleen,spleen,EXACT,Direct parenchymal equivalence
+4,pancreas,pancreas,EXACT,Consistent retroperitoneal landmark
+5,aorta,aorta,EXACT,Abdominal aorta segment
+6,inferior vena cava,inferior_vena_cava,EXACT,Direct anatomical identity
+7,right adrenal gland,adrenal_gland_right,EXACT,Localized retroperitoneal gland
+8,left adrenal gland,adrenal_gland_left,EXACT,Localized retroperitoneal gland
+9,gallbladder,gallbladder,EXACT,Direct anatomical identity
+10,esophagus,esophagus,EXACT,Distal abdominal/lower thoracic esophagus
+11,stomach,stomach,EXACT,Direct parenchymal/luminal identity
+12,duodenum,duodenum,EXACT,Duodenal C-loop identity
+13,left kidney,kidney_left,EXACT,Direct anatomical identity (patient left)

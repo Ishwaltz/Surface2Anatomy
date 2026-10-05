@@ -1,0 +1,19 @@
+{
+  "study_version": "Surface2Anatomy-IPMI-121-v1",
+  "status": "STOPPED_AT_ONTOLOGY_GATE",
+  "declared_target_count": 121,
+  "target_count_verified": false,
+  "blocked_legacy_targets": [
+    "uterus",
+    "ovary_left",
+    "ovary_right",
+    "vagina"
+  ],
+  "final_headline": null,
+  "data_audit": "NOT_PASSED",
+  "final_test_locked": false,
+  "final_test_evaluated": false,
+  "inventory_files": 2703,
+  "serialized_files": 210,
+  "inspection_errors": 0
+}

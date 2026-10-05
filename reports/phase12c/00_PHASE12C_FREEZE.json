@@ -1,0 +1,25 @@
+{
+  "protocol": "PHASE 12C \u2014 Deployment-Compatible Cross-Cohort Consistency Audit",
+  "timestamp": "2026-09-14T03:31:17.570692",
+  "governance": "All systems, targets, transformations, and checkpoints were frozen before cross-cohort evaluation. No result-dependent parameter adjustment is permitted.",
+  "critical_disclosure": "Phase12-FOV checkpoints DO NOT EXIST. System 3 is a parametric projection of System 1 using fov_residual_factor=0.88. The primary executable deployment system is System 1 (Phase10R + External Frame).",
+  "system_definitions": {
+    "System_0": "Phase10R C4_Proposed ensemble (seeds 42,43,44) + original V3 canonical frame (internal T12 reference on V2/V3, bbox midpoint on AMOS). RETROSPECTIVE ONLY.",
+    "System_1": "Phase10R C4_Proposed ensemble (seeds 42,43,44) + Phase 12 external-only canonical frame (deployable, no internal landmarks). PRIMARY DEPLOYMENT SYSTEM.",
+    "System_3_projected": "System 1 predictions with 0.88 residual reduction factor applied. NOT a real neural network inference. PARAMETRIC PROJECTION ONLY."
+  },
+  "file_hashes": {
+    "Phase10R_seed42": "760adfee1c47d80fc3f59492971b6c83459fc10ce2166f13fc1d7e4d708cb936",
+    "Phase10R_seed43": "3e3c739c992b80f193ec41041e62ff59191436e2e5f1e78bd0a328c8310f7d91",
+    "Phase10R_seed44": "28fbc7b30d8539f84c265b4f95f4f73b63978fb5b252f9a3ad20ea4fa1792cdd",
+    "target_ontology": "a0cc18265b442f85d4acd7e8408e00ac4c6fe1e407d89c048f0d8c50ed096101",
+    "amos_mapping": "15bb5c66500ab4bb4a2544f8d103869dd59972429780cfe0b0f8cae49d856362",
+    "v3_splits": "bc78d5a953fe0431d124a66c33dc3b33afc131657b1140a1595e64c7f30fedf6",
+    "v3_pointclouds": "2ce1f1f1d098afaf62a9a4a14c7eaea9b96689aeee5b6bf9656508d7fc8b5aaf",
+    "amos_gt_centroids": "623919826cbfb028dd4212dd10c876dfe5c992cac99fc53d88707c1f13b0a1d5",
+    "amos_ensemble_preds": "8cfd7e47744d3d699de4bb145928160a794e88c6679606d7b487149ebdc5f036",
+    "amos_fov_audit": "2f619bdbf3bc46ea24b9ef69f8e73a255412b278bb892c6084c638c5fd20b51b",
+    "frame_freeze": "c25a1a8042d92a71a634b8fbba9da58273f8a88b9789a5aa3bbd0a5be2faedfe",
+    "target_equivalence": "c73f0b5d77145c26e900029ec57ad08a372d613f599a87208c415ea24e6b4936"
+  }
+}

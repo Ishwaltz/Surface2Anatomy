@@ -1,0 +1,145 @@
+source_label_id,source_label_name,source_description,annotation_provenance
+0,Background,DAP Atlas 142-class structure Background,AUTOMATIC_POSTPROCESSED_NNUNET
+1,Left to annotate,DAP Atlas 142-class structure Left to annotate,AUTOMATIC_POSTPROCESSED_NNUNET
+2,muscles,DAP Atlas 142-class structure muscles,AUTOMATIC_POSTPROCESSED_NNUNET
+3,fat,DAP Atlas 142-class structure fat,AUTOMATIC_POSTPROCESSED_NNUNET
+4,abdominal tissue,DAP Atlas 142-class structure abdominal tissue,AUTOMATIC_POSTPROCESSED_NNUNET
+5,mediastinal tissue,DAP Atlas 142-class structure mediastinal tissue,AUTOMATIC_POSTPROCESSED_NNUNET
+6,esophagus,DAP Atlas 142-class structure esophagus,AUTOMATIC_POSTPROCESSED_NNUNET
+7,stomach,DAP Atlas 142-class structure stomach,AUTOMATIC_POSTPROCESSED_NNUNET
+8,small bowel,DAP Atlas 142-class structure small bowel,AUTOMATIC_POSTPROCESSED_NNUNET
+9,duodenum,DAP Atlas 142-class structure duodenum,AUTOMATIC_POSTPROCESSED_NNUNET
+10,colon,DAP Atlas 142-class structure colon,AUTOMATIC_POSTPROCESSED_NNUNET
+11,rectum,DAP Atlas 142-class structure rectum,AUTOMATIC_POSTPROCESSED_NNUNET
+12,gallbladder,DAP Atlas 142-class structure gallbladder,AUTOMATIC_POSTPROCESSED_NNUNET
+13,liver,DAP Atlas 142-class structure liver,AUTOMATIC_POSTPROCESSED_NNUNET
+14,pancreas,DAP Atlas 142-class structure pancreas,AUTOMATIC_POSTPROCESSED_NNUNET
+15,kidney left,DAP Atlas 142-class structure kidney left,AUTOMATIC_POSTPROCESSED_NNUNET
+16,kidney right,DAP Atlas 142-class structure kidney right,AUTOMATIC_POSTPROCESSED_NNUNET
+17,bladder,DAP Atlas 142-class structure bladder,AUTOMATIC_POSTPROCESSED_NNUNET
+18,gonads,DAP Atlas 142-class structure gonads,AUTOMATIC_POSTPROCESSED_NNUNET
+19,prostate,DAP Atlas 142-class structure prostate,AUTOMATIC_POSTPROCESSED_NNUNET
+20,uterocervix,DAP Atlas 142-class structure uterocervix,AUTOMATIC_POSTPROCESSED_NNUNET
+21,uterus,DAP Atlas 142-class structure uterus,AUTOMATIC_POSTPROCESSED_NNUNET
+22,breast left,DAP Atlas 142-class structure breast left,AUTOMATIC_POSTPROCESSED_NNUNET
+23,breast right,DAP Atlas 142-class structure breast right,AUTOMATIC_POSTPROCESSED_NNUNET
+24,spinal canal,DAP Atlas 142-class structure spinal canal,AUTOMATIC_POSTPROCESSED_NNUNET
+25,brain,DAP Atlas 142-class structure brain,AUTOMATIC_POSTPROCESSED_NNUNET
+26,spleen,DAP Atlas 142-class structure spleen,AUTOMATIC_POSTPROCESSED_NNUNET
+27,adrenal gland left,DAP Atlas 142-class structure adrenal gland left,AUTOMATIC_POSTPROCESSED_NNUNET
+28,adrenal gland right,DAP Atlas 142-class structure adrenal gland right,AUTOMATIC_POSTPROCESSED_NNUNET
+29,thyroid left,DAP Atlas 142-class structure thyroid left,AUTOMATIC_POSTPROCESSED_NNUNET
+30,thyroid right,DAP Atlas 142-class structure thyroid right,AUTOMATIC_POSTPROCESSED_NNUNET
+31,thymus,DAP Atlas 142-class structure thymus,AUTOMATIC_POSTPROCESSED_NNUNET
+32,gluteus maximus left,DAP Atlas 142-class structure gluteus maximus left,AUTOMATIC_POSTPROCESSED_NNUNET
+33,gluteus maximus right,DAP Atlas 142-class structure gluteus maximus right,AUTOMATIC_POSTPROCESSED_NNUNET
+34,gluteus medius left,DAP Atlas 142-class structure gluteus medius left,AUTOMATIC_POSTPROCESSED_NNUNET
+35,gluteus medius right,DAP Atlas 142-class structure gluteus medius right,AUTOMATIC_POSTPROCESSED_NNUNET
+36,gluteus minimus left,DAP Atlas 142-class structure gluteus minimus left,AUTOMATIC_POSTPROCESSED_NNUNET
+37,gluteus minimus right,DAP Atlas 142-class structure gluteus minimus right,AUTOMATIC_POSTPROCESSED_NNUNET
+38,iliopsoas left,DAP Atlas 142-class structure iliopsoas left,AUTOMATIC_POSTPROCESSED_NNUNET
+39,iliopsoas right,DAP Atlas 142-class structure iliopsoas right,AUTOMATIC_POSTPROCESSED_NNUNET
+40,autochthon left,DAP Atlas 142-class structure autochthon left,AUTOMATIC_POSTPROCESSED_NNUNET
+41,autochthon right,DAP Atlas 142-class structure autochthon right,AUTOMATIC_POSTPROCESSED_NNUNET
+42,skin,DAP Atlas 142-class structure skin,AUTOMATIC_POSTPROCESSED_NNUNET
+43,vertebrae C1,DAP Atlas 142-class structure vertebrae C1,AUTOMATIC_POSTPROCESSED_NNUNET
+44,vertebrae C2,DAP Atlas 142-class structure vertebrae C2,AUTOMATIC_POSTPROCESSED_NNUNET
+45,vertebrae C3,DAP Atlas 142-class structure vertebrae C3,AUTOMATIC_POSTPROCESSED_NNUNET
+46,vertebrae C4,DAP Atlas 142-class structure vertebrae C4,AUTOMATIC_POSTPROCESSED_NNUNET
+47,vertebrae C5,DAP Atlas 142-class structure vertebrae C5,AUTOMATIC_POSTPROCESSED_NNUNET
+48,vertebrae C6,DAP Atlas 142-class structure vertebrae C6,AUTOMATIC_POSTPROCESSED_NNUNET
+49,vertebrae C7,DAP Atlas 142-class structure vertebrae C7,AUTOMATIC_POSTPROCESSED_NNUNET
+50,vertebrae T1,DAP Atlas 142-class structure vertebrae T1,AUTOMATIC_POSTPROCESSED_NNUNET
+51,vertebrae T2,DAP Atlas 142-class structure vertebrae T2,AUTOMATIC_POSTPROCESSED_NNUNET
+52,vertebrae T3,DAP Atlas 142-class structure vertebrae T3,AUTOMATIC_POSTPROCESSED_NNUNET
+53,vertebrae T4,DAP Atlas 142-class structure vertebrae T4,AUTOMATIC_POSTPROCESSED_NNUNET
+54,vertebrae T5,DAP Atlas 142-class structure vertebrae T5,AUTOMATIC_POSTPROCESSED_NNUNET
+55,vertebrae T6,DAP Atlas 142-class structure vertebrae T6,AUTOMATIC_POSTPROCESSED_NNUNET
+56,vertebrae T7,DAP Atlas 142-class structure vertebrae T7,AUTOMATIC_POSTPROCESSED_NNUNET
+57,vertebrae T8,DAP Atlas 142-class structure vertebrae T8,AUTOMATIC_POSTPROCESSED_NNUNET
+58,vertebrae T9,DAP Atlas 142-class structure vertebrae T9,AUTOMATIC_POSTPROCESSED_NNUNET
+59,vertebrae T10,DAP Atlas 142-class structure vertebrae T10,AUTOMATIC_POSTPROCESSED_NNUNET
+60,vertebrae T11,DAP Atlas 142-class structure vertebrae T11,AUTOMATIC_POSTPROCESSED_NNUNET
+61,vertebrae T12,DAP Atlas 142-class structure vertebrae T12,AUTOMATIC_POSTPROCESSED_NNUNET
+62,vertebrae L1,DAP Atlas 142-class structure vertebrae L1,AUTOMATIC_POSTPROCESSED_NNUNET
+63,vertebrae L2,DAP Atlas 142-class structure vertebrae L2,AUTOMATIC_POSTPROCESSED_NNUNET
+64,vertebrae L3,DAP Atlas 142-class structure vertebrae L3,AUTOMATIC_POSTPROCESSED_NNUNET
+65,vertebrae L4,DAP Atlas 142-class structure vertebrae L4,AUTOMATIC_POSTPROCESSED_NNUNET
+66,vertebrae L5,DAP Atlas 142-class structure vertebrae L5,AUTOMATIC_POSTPROCESSED_NNUNET
+67,costa 1 left,DAP Atlas 142-class structure costa 1 left,AUTOMATIC_POSTPROCESSED_NNUNET
+68,costa 1 right,DAP Atlas 142-class structure costa 1 right,AUTOMATIC_POSTPROCESSED_NNUNET
+69,costa 2 left,DAP Atlas 142-class structure costa 2 left,AUTOMATIC_POSTPROCESSED_NNUNET
+70,costa 2 right,DAP Atlas 142-class structure costa 2 right,AUTOMATIC_POSTPROCESSED_NNUNET
+71,costa 3 left,DAP Atlas 142-class structure costa 3 left,AUTOMATIC_POSTPROCESSED_NNUNET
+72,costa 3 right,DAP Atlas 142-class structure costa 3 right,AUTOMATIC_POSTPROCESSED_NNUNET
+73,costa 4 left,DAP Atlas 142-class structure costa 4 left,AUTOMATIC_POSTPROCESSED_NNUNET
+74,costa 4 right,DAP Atlas 142-class structure costa 4 right,AUTOMATIC_POSTPROCESSED_NNUNET
+75,costa 5 left,DAP Atlas 142-class structure costa 5 left,AUTOMATIC_POSTPROCESSED_NNUNET
+76,costa 5 right,DAP Atlas 142-class structure costa 5 right,AUTOMATIC_POSTPROCESSED_NNUNET
+77,costa 6 left,DAP Atlas 142-class structure costa 6 left,AUTOMATIC_POSTPROCESSED_NNUNET
+78,costa 6 right,DAP Atlas 142-class structure costa 6 right,AUTOMATIC_POSTPROCESSED_NNUNET
+79,costa 7 left,DAP Atlas 142-class structure costa 7 left,AUTOMATIC_POSTPROCESSED_NNUNET
+80,costa 7 right,DAP Atlas 142-class structure costa 7 right,AUTOMATIC_POSTPROCESSED_NNUNET
+81,costa 8 left,DAP Atlas 142-class structure costa 8 left,AUTOMATIC_POSTPROCESSED_NNUNET
+82,costa 8 right,DAP Atlas 142-class structure costa 8 right,AUTOMATIC_POSTPROCESSED_NNUNET
+83,costa 9 left,DAP Atlas 142-class structure costa 9 left,AUTOMATIC_POSTPROCESSED_NNUNET
+84,costa 9 right,DAP Atlas 142-class structure costa 9 right,AUTOMATIC_POSTPROCESSED_NNUNET
+85,costa 10 left,DAP Atlas 142-class structure costa 10 left,AUTOMATIC_POSTPROCESSED_NNUNET
+86,costa 10 right,DAP Atlas 142-class structure costa 10 right,AUTOMATIC_POSTPROCESSED_NNUNET
+87,costa 11 left,DAP Atlas 142-class structure costa 11 left,AUTOMATIC_POSTPROCESSED_NNUNET
+88,costa 11 right,DAP Atlas 142-class structure costa 11 right,AUTOMATIC_POSTPROCESSED_NNUNET
+89,costa 12 left,DAP Atlas 142-class structure costa 12 left,AUTOMATIC_POSTPROCESSED_NNUNET
+90,costa 12 right,DAP Atlas 142-class structure costa 12 right,AUTOMATIC_POSTPROCESSED_NNUNET
+91,rib_cartilage,DAP Atlas 142-class structure rib_cartilage,AUTOMATIC_POSTPROCESSED_NNUNET
+92,sternum,DAP Atlas 142-class structure sternum,AUTOMATIC_POSTPROCESSED_NNUNET
+93,clavicle left,DAP Atlas 142-class structure clavicle left,AUTOMATIC_POSTPROCESSED_NNUNET
+94,clavicle right,DAP Atlas 142-class structure clavicle right,AUTOMATIC_POSTPROCESSED_NNUNET
+95,scapula left,DAP Atlas 142-class structure scapula left,AUTOMATIC_POSTPROCESSED_NNUNET
+96,scapula right,DAP Atlas 142-class structure scapula right,AUTOMATIC_POSTPROCESSED_NNUNET
+97,humerus left,DAP Atlas 142-class structure humerus left,AUTOMATIC_POSTPROCESSED_NNUNET
+98,humerus right,DAP Atlas 142-class structure humerus right,AUTOMATIC_POSTPROCESSED_NNUNET
+99,skull,DAP Atlas 142-class structure skull,AUTOMATIC_POSTPROCESSED_NNUNET
+100,hip left,DAP Atlas 142-class structure hip left,AUTOMATIC_POSTPROCESSED_NNUNET
+101,hip right,DAP Atlas 142-class structure hip right,AUTOMATIC_POSTPROCESSED_NNUNET
+102,sacrum,DAP Atlas 142-class structure sacrum,AUTOMATIC_POSTPROCESSED_NNUNET
+103,femur left,DAP Atlas 142-class structure femur left,AUTOMATIC_POSTPROCESSED_NNUNET
+104,femur right,DAP Atlas 142-class structure femur right,AUTOMATIC_POSTPROCESSED_NNUNET
+105,heart,DAP Atlas 142-class structure heart,AUTOMATIC_POSTPROCESSED_NNUNET
+106,heart atrium left,DAP Atlas 142-class structure heart atrium left,AUTOMATIC_POSTPROCESSED_NNUNET
+107,heart tissue,DAP Atlas 142-class structure heart tissue,AUTOMATIC_POSTPROCESSED_NNUNET
+108,heart atrium right,DAP Atlas 142-class structure heart atrium right,AUTOMATIC_POSTPROCESSED_NNUNET
+109,heart myocardium,DAP Atlas 142-class structure heart myocardium,AUTOMATIC_POSTPROCESSED_NNUNET
+110,heart ventricle left,DAP Atlas 142-class structure heart ventricle left,AUTOMATIC_POSTPROCESSED_NNUNET
+111,heart ventricle right,DAP Atlas 142-class structure heart ventricle right,AUTOMATIC_POSTPROCESSED_NNUNET
+112,iliac artery left,DAP Atlas 142-class structure iliac artery left,AUTOMATIC_POSTPROCESSED_NNUNET
+113,iliac artery right,DAP Atlas 142-class structure iliac artery right,AUTOMATIC_POSTPROCESSED_NNUNET
+114,aorta,DAP Atlas 142-class structure aorta,AUTOMATIC_POSTPROCESSED_NNUNET
+115,iliac vena left,DAP Atlas 142-class structure iliac vena left,AUTOMATIC_POSTPROCESSED_NNUNET
+116,iliac vena right,DAP Atlas 142-class structure iliac vena right,AUTOMATIC_POSTPROCESSED_NNUNET
+117,inferior vena cava,DAP Atlas 142-class structure inferior vena cava,AUTOMATIC_POSTPROCESSED_NNUNET
+118,portal vein and splenic vein,DAP Atlas 142-class structure portal vein and splenic vein,AUTOMATIC_POSTPROCESSED_NNUNET
+119,celiac trunk,DAP Atlas 142-class structure celiac trunk,AUTOMATIC_POSTPROCESSED_NNUNET
+120,lung lower lobe left,DAP Atlas 142-class structure lung lower lobe left,AUTOMATIC_POSTPROCESSED_NNUNET
+121,lung upper lobe left,DAP Atlas 142-class structure lung upper lobe left,AUTOMATIC_POSTPROCESSED_NNUNET
+122,lung lower lobe right,DAP Atlas 142-class structure lung lower lobe right,AUTOMATIC_POSTPROCESSED_NNUNET
+123,lung middle lobe right,DAP Atlas 142-class structure lung middle lobe right,AUTOMATIC_POSTPROCESSED_NNUNET
+124,lung upper lobe right,DAP Atlas 142-class structure lung upper lobe right,AUTOMATIC_POSTPROCESSED_NNUNET
+125,bronchie,DAP Atlas 142-class structure bronchie,AUTOMATIC_POSTPROCESSED_NNUNET
+126,trachea,DAP Atlas 142-class structure trachea,AUTOMATIC_POSTPROCESSED_NNUNET
+127,pulmonary artery,DAP Atlas 142-class structure pulmonary artery,AUTOMATIC_POSTPROCESSED_NNUNET
+128,cheek left,DAP Atlas 142-class structure cheek left,AUTOMATIC_POSTPROCESSED_NNUNET
+129,cheek right,DAP Atlas 142-class structure cheek right,AUTOMATIC_POSTPROCESSED_NNUNET
+130,eyeball left,DAP Atlas 142-class structure eyeball left,AUTOMATIC_POSTPROCESSED_NNUNET
+131,eyeball right,DAP Atlas 142-class structure eyeball right,AUTOMATIC_POSTPROCESSED_NNUNET
+132,nasal cavity,DAP Atlas 142-class structure nasal cavity,AUTOMATIC_POSTPROCESSED_NNUNET
+133,ARTERY_COMMONCAROTID_RECHTS,DAP Atlas 142-class structure ARTERY_COMMONCAROTID_RECHTS,AUTOMATIC_POSTPROCESSED_NNUNET
+134,ARTERY_COMMONCAROTID_LINKS,DAP Atlas 142-class structure ARTERY_COMMONCAROTID_LINKS,AUTOMATIC_POSTPROCESSED_NNUNET
+136,ARTERY_INTERNALCAROTID_RECHTS,DAP Atlas 142-class structure ARTERY_INTERNALCAROTID_RECHTS,AUTOMATIC_POSTPROCESSED_NNUNET
+137,ARTERY_INTERNALCAROTID_LINKS,DAP Atlas 142-class structure ARTERY_INTERNALCAROTID_LINKS,AUTOMATIC_POSTPROCESSED_NNUNET
+138,IJV_RECHTS,DAP Atlas 142-class structure IJV_RECHTS,AUTOMATIC_POSTPROCESSED_NNUNET
+139,IJV_LINKS,DAP Atlas 142-class structure IJV_LINKS,AUTOMATIC_POSTPROCESSED_NNUNET
+140,ARTERY_BRACHIOCEPHALIC,DAP Atlas 142-class structure ARTERY_BRACHIOCEPHALIC,AUTOMATIC_POSTPROCESSED_NNUNET
+141,VEIN_BRACHIOCEPHALIC_RECHTS,DAP Atlas 142-class structure VEIN_BRACHIOCEPHALIC_RECHTS,AUTOMATIC_POSTPROCESSED_NNUNET
+142,VEIN_BRACHIOCEPHALIC_LINKS,DAP Atlas 142-class structure VEIN_BRACHIOCEPHALIC_LINKS,AUTOMATIC_POSTPROCESSED_NNUNET
+143,ARTERY_SUBCLAVIAN_RECHTS,DAP Atlas 142-class structure ARTERY_SUBCLAVIAN_RECHTS,AUTOMATIC_POSTPROCESSED_NNUNET
+144,ARTERY_SUBCLAVIAN_LINKS,DAP Atlas 142-class structure ARTERY_SUBCLAVIAN_LINKS,AUTOMATIC_POSTPROCESSED_NNUNET

@@ -1,0 +1,8 @@
+ctorg_label_id,ctorg_label_name,our_target_name,mapping_type,usable,notes
+0,Background,none,INCOMPATIBLE,NO,Background air and non-annotated voxels
+1,Liver,liver,EXACT,YES,Direct 1-to-1 match with target liver (slot 4)
+2,Bladder,urinary_bladder,EXACT,YES,Direct 1-to-1 match with target urinary_bladder (slot 20)
+3,Lungs,none,INCOMPATIBLE,NO,Whole-lung mask cannot be mapped to individual lung lobes
+4,Kidneys,"kidney_right,kidney_left",DERIVED_BILATERAL,YES,Combined bilateral mask split via 3D CC in canonical RAS into kidney_right (slot 1) and kidney_left (slot 2)
+5,Bone,none,INCOMPATIBLE,NO,Whole-skeleton mask cannot be mapped to specific individual vertebra or rib targets
+6,Brain,brain,EXACT,YES,Direct match with target brain (slot 89) for scans covering cranial region

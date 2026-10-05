@@ -1,0 +1,1289 @@
+[
+  {
+    "id": "spleen",
+    "index": 0,
+    "name": "Spleen",
+    "category": "Abdominal",
+    "canonical_coords_mm": [
+      -94.56,
+      21.02,
+      0.4
+    ]
+  },
+  {
+    "id": "kidney_right",
+    "index": 1,
+    "name": "Kidney Right",
+    "category": "Abdominal",
+    "canonical_coords_mm": [
+      65.58,
+      23.35,
+      -54.76
+    ]
+  },
+  {
+    "id": "kidney_left",
+    "index": 2,
+    "name": "Kidney Left",
+    "category": "Abdominal",
+    "canonical_coords_mm": [
+      -68.45,
+      22.1,
+      -49.51
+    ]
+  },
+  {
+    "id": "gallbladder",
+    "index": 3,
+    "name": "Gallbladder",
+    "category": "Abdominal",
+    "canonical_coords_mm": [
+      69.49,
+      99.77,
+      -32.44
+    ]
+  },
+  {
+    "id": "liver",
+    "index": 4,
+    "name": "Liver",
+    "category": "Abdominal",
+    "canonical_coords_mm": [
+      63.13,
+      74.22,
+      5.2
+    ]
+  },
+  {
+    "id": "stomach",
+    "index": 5,
+    "name": "Stomach",
+    "category": "Abdominal",
+    "canonical_coords_mm": [
+      -45.52,
+      90.24,
+      -1.04
+    ]
+  },
+  {
+    "id": "pancreas",
+    "index": 6,
+    "name": "Pancreas",
+    "category": "Abdominal",
+    "canonical_coords_mm": [
+      -18.25,
+      77.32,
+      -32.19
+    ]
+  },
+  {
+    "id": "adrenal_gland_right",
+    "index": 7,
+    "name": "Adrenal Gland Right",
+    "category": "Abdominal",
+    "canonical_coords_mm": [
+      32.85,
+      36.03,
+      -9.98
+    ]
+  },
+  {
+    "id": "adrenal_gland_left",
+    "index": 8,
+    "name": "Adrenal Gland Left",
+    "category": "Abdominal",
+    "canonical_coords_mm": [
+      -36.97,
+      44.72,
+      -17.72
+    ]
+  },
+  {
+    "id": "lung_upper_lobe_left",
+    "index": 9,
+    "name": "Lung Upper Lobe Left",
+    "category": "Thoracic / Respiratory",
+    "canonical_coords_mm": [
+      -79.44,
+      72.83,
+      116.58
+    ]
+  },
+  {
+    "id": "lung_lower_lobe_left",
+    "index": 10,
+    "name": "Lung Lower Lobe Left",
+    "category": "Thoracic / Respiratory",
+    "canonical_coords_mm": [
+      -73.55,
+      11.25,
+      74.61
+    ]
+  },
+  {
+    "id": "lung_upper_lobe_right",
+    "index": 11,
+    "name": "Lung Upper Lobe Right",
+    "category": "Thoracic / Respiratory",
+    "canonical_coords_mm": [
+      56.72,
+      67.26,
+      137.4
+    ]
+  },
+  {
+    "id": "lung_middle_lobe_right",
+    "index": 12,
+    "name": "Lung Middle Lobe Right",
+    "category": "Thoracic / Respiratory",
+    "canonical_coords_mm": [
+      71.21,
+      99.15,
+      80.52
+    ]
+  },
+  {
+    "id": "lung_lower_lobe_right",
+    "index": 13,
+    "name": "Lung Lower Lobe Right",
+    "category": "Thoracic / Respiratory",
+    "canonical_coords_mm": [
+      66.74,
+      14.55,
+      74.16
+    ]
+  },
+  {
+    "id": "esophagus",
+    "index": 14,
+    "name": "Esophagus",
+    "category": "Thoracic / Respiratory",
+    "canonical_coords_mm": [
+      -8.5,
+      42.87,
+      99.79
+    ]
+  },
+  {
+    "id": "trachea",
+    "index": 15,
+    "name": "Trachea",
+    "category": "Thoracic / Respiratory",
+    "canonical_coords_mm": [
+      3.22,
+      52.78,
+      164.39
+    ]
+  },
+  {
+    "id": "thyroid_gland",
+    "index": 16,
+    "name": "Thyroid Gland",
+    "category": "Thoracic / Respiratory",
+    "canonical_coords_mm": [
+      1.4,
+      79.49,
+      215.77
+    ]
+  },
+  {
+    "id": "small_bowel",
+    "index": 17,
+    "name": "Small Bowel",
+    "category": "Abdominal",
+    "canonical_coords_mm": [
+      -24.46,
+      91.81,
+      -113.43
+    ]
+  },
+  {
+    "id": "duodenum",
+    "index": 18,
+    "name": "Duodenum",
+    "category": "Abdominal",
+    "canonical_coords_mm": [
+      24.45,
+      76.93,
+      -58.55
+    ]
+  },
+  {
+    "id": "colon",
+    "index": 19,
+    "name": "Colon",
+    "category": "Abdominal",
+    "canonical_coords_mm": [
+      -9.61,
+      83.68,
+      -94.81
+    ]
+  },
+  {
+    "id": "urinary_bladder",
+    "index": 20,
+    "name": "Urinary Bladder",
+    "category": "Pelvis",
+    "canonical_coords_mm": [
+      1.33,
+      62.23,
+      -244.09
+    ]
+  },
+  {
+    "id": "prostate",
+    "index": 21,
+    "name": "Prostate",
+    "category": "Pelvis",
+    "canonical_coords_mm": [
+      -1.64,
+      35.87,
+      -273.35
+    ]
+  },
+  {
+    "id": "kidney_cyst_left",
+    "index": 22,
+    "name": "Kidney Cyst Left",
+    "category": "Abdominal",
+    "canonical_coords_mm": [
+      -77.0,
+      22.57,
+      -58.0
+    ]
+  },
+  {
+    "id": "kidney_cyst_right",
+    "index": 23,
+    "name": "Kidney Cyst Right",
+    "category": "Abdominal",
+    "canonical_coords_mm": [
+      66.75,
+      28.72,
+      -80.09
+    ]
+  },
+  {
+    "id": "sacrum",
+    "index": 24,
+    "name": "Sacrum",
+    "category": "Pelvis",
+    "canonical_coords_mm": [
+      0.55,
+      -14.18,
+      -181.08
+    ]
+  },
+  {
+    "id": "vertebrae_S1",
+    "index": 25,
+    "name": "Vertebrae S1",
+    "category": "Spine",
+    "canonical_coords_mm": [
+      0.25,
+      10.41,
+      -163.61
+    ]
+  },
+  {
+    "id": "vertebrae_L5",
+    "index": 26,
+    "name": "Vertebrae L5",
+    "category": "Spine",
+    "canonical_coords_mm": [
+      -0.1,
+      20.69,
+      -138.31
+    ]
+  },
+  {
+    "id": "vertebrae_L4",
+    "index": 27,
+    "name": "Vertebrae L4",
+    "category": "Spine",
+    "canonical_coords_mm": [
+      -0.53,
+      23.09,
+      -109.59
+    ]
+  },
+  {
+    "id": "vertebrae_L3",
+    "index": 28,
+    "name": "Vertebrae L3",
+    "category": "Spine",
+    "canonical_coords_mm": [
+      -0.49,
+      18.48,
+      -83.05
+    ]
+  },
+  {
+    "id": "vertebrae_L2",
+    "index": 29,
+    "name": "Vertebrae L2",
+    "category": "Spine",
+    "canonical_coords_mm": [
+      -0.35,
+      13.02,
+      -56.81
+    ]
+  },
+  {
+    "id": "vertebrae_L1",
+    "index": 30,
+    "name": "Vertebrae L1",
+    "category": "Spine",
+    "canonical_coords_mm": [
+      -0.06,
+      6.39,
+      -29.36
+    ]
+  },
+  {
+    "id": "vertebrae_T12",
+    "index": 31,
+    "name": "Vertebrae T12",
+    "category": "Spine",
+    "canonical_coords_mm": [
+      0.38,
+      0.15,
+      0.06
+    ]
+  },
+  {
+    "id": "vertebrae_T11",
+    "index": 32,
+    "name": "Vertebrae T11",
+    "category": "Spine",
+    "canonical_coords_mm": [
+      0.84,
+      -5.0,
+      26.59
+    ]
+  },
+  {
+    "id": "vertebrae_T10",
+    "index": 33,
+    "name": "Vertebrae T10",
+    "category": "Spine",
+    "canonical_coords_mm": [
+      1.25,
+      -9.63,
+      50.52
+    ]
+  },
+  {
+    "id": "vertebrae_T9",
+    "index": 34,
+    "name": "Vertebrae T9",
+    "category": "Spine",
+    "canonical_coords_mm": [
+      1.68,
+      -14.67,
+      70.69
+    ]
+  },
+  {
+    "id": "vertebrae_T8",
+    "index": 35,
+    "name": "Vertebrae T8",
+    "category": "Spine",
+    "canonical_coords_mm": [
+      1.83,
+      -17.97,
+      89.05
+    ]
+  },
+  {
+    "id": "vertebrae_T7",
+    "index": 36,
+    "name": "Vertebrae T7",
+    "category": "Spine",
+    "canonical_coords_mm": [
+      2.6,
+      -19.0,
+      107.85
+    ]
+  },
+  {
+    "id": "vertebrae_T6",
+    "index": 37,
+    "name": "Vertebrae T6",
+    "category": "Spine",
+    "canonical_coords_mm": [
+      2.26,
+      -16.7,
+      128.52
+    ]
+  },
+  {
+    "id": "vertebrae_T5",
+    "index": 38,
+    "name": "Vertebrae T5",
+    "category": "Spine",
+    "canonical_coords_mm": [
+      1.6,
+      -10.99,
+      149.51
+    ]
+  },
+  {
+    "id": "vertebrae_T4",
+    "index": 39,
+    "name": "Vertebrae T4",
+    "category": "Spine",
+    "canonical_coords_mm": [
+      0.37,
+      -2.79,
+      168.82
+    ]
+  },
+  {
+    "id": "vertebrae_T3",
+    "index": 40,
+    "name": "Vertebrae T3",
+    "category": "Spine",
+    "canonical_coords_mm": [
+      -0.3,
+      6.38,
+      187.33
+    ]
+  },
+  {
+    "id": "vertebrae_T2",
+    "index": 41,
+    "name": "Vertebrae T2",
+    "category": "Spine",
+    "canonical_coords_mm": [
+      -0.58,
+      17.9,
+      203.81
+    ]
+  },
+  {
+    "id": "vertebrae_T1",
+    "index": 42,
+    "name": "Vertebrae T1",
+    "category": "Spine",
+    "canonical_coords_mm": [
+      -0.36,
+      29.02,
+      220.13
+    ]
+  },
+  {
+    "id": "vertebrae_C7",
+    "index": 43,
+    "name": "Vertebrae C7",
+    "category": "Spine",
+    "canonical_coords_mm": [
+      0.1,
+      43.75,
+      231.66
+    ]
+  },
+  {
+    "id": "vertebrae_C6",
+    "index": 44,
+    "name": "Vertebrae C6",
+    "category": "Spine",
+    "canonical_coords_mm": [
+      -0.35,
+      55.99,
+      239.48
+    ]
+  },
+  {
+    "id": "vertebrae_C5",
+    "index": 45,
+    "name": "Vertebrae C5",
+    "category": "Spine",
+    "canonical_coords_mm": [
+      -1.72,
+      59.09,
+      246.6
+    ]
+  },
+  {
+    "id": "vertebrae_C4",
+    "index": 46,
+    "name": "Vertebrae C4",
+    "category": "Spine",
+    "canonical_coords_mm": [
+      -1.72,
+      59.74,
+      253.25
+    ]
+  },
+  {
+    "id": "vertebrae_C3",
+    "index": 47,
+    "name": "Vertebrae C3",
+    "category": "Spine",
+    "canonical_coords_mm": [
+      -2.04,
+      62.38,
+      270.19
+    ]
+  },
+  {
+    "id": "vertebrae_C2",
+    "index": 48,
+    "name": "Vertebrae C2",
+    "category": "Spine",
+    "canonical_coords_mm": [
+      -3.06,
+      61.56,
+      270.04
+    ]
+  },
+  {
+    "id": "vertebrae_C1",
+    "index": 49,
+    "name": "Vertebrae C1",
+    "category": "Spine",
+    "canonical_coords_mm": [
+      -3.17,
+      63.57,
+      280.3
+    ]
+  },
+  {
+    "id": "heart",
+    "index": 50,
+    "name": "Heart",
+    "category": "Thoracic / Respiratory",
+    "canonical_coords_mm": [
+      -25.8,
+      87.16,
+      75.84
+    ]
+  },
+  {
+    "id": "aorta",
+    "index": 51,
+    "name": "Aorta",
+    "category": "Vascular",
+    "canonical_coords_mm": [
+      -11.61,
+      48.93,
+      58.28
+    ]
+  },
+  {
+    "id": "pulmonary_vein",
+    "index": 52,
+    "name": "Pulmonary Vein",
+    "category": "Vascular",
+    "canonical_coords_mm": [
+      -2.54,
+      40.66,
+      97.75
+    ]
+  },
+  {
+    "id": "brachiocephalic_trunk",
+    "index": 53,
+    "name": "Brachiocephalic Trunk",
+    "category": "Vascular",
+    "canonical_coords_mm": [
+      6.42,
+      76.85,
+      176.12
+    ]
+  },
+  {
+    "id": "subclavian_artery_right",
+    "index": 54,
+    "name": "Subclavian Artery Right",
+    "category": "Vascular",
+    "canonical_coords_mm": [
+      43.54,
+      61.42,
+      201.01
+    ]
+  },
+  {
+    "id": "subclavian_artery_left",
+    "index": 55,
+    "name": "Subclavian Artery Left",
+    "category": "Vascular",
+    "canonical_coords_mm": [
+      -38.7,
+      57.55,
+      195.23
+    ]
+  },
+  {
+    "id": "common_carotid_artery_right",
+    "index": 56,
+    "name": "Common Carotid Artery Right",
+    "category": "Vascular",
+    "canonical_coords_mm": [
+      20.59,
+      72.5,
+      213.59
+    ]
+  },
+  {
+    "id": "common_carotid_artery_left",
+    "index": 57,
+    "name": "Common Carotid Artery Left",
+    "category": "Vascular",
+    "canonical_coords_mm": [
+      -16.71,
+      69.58,
+      199.82
+    ]
+  },
+  {
+    "id": "brachiocephalic_vein_left",
+    "index": 58,
+    "name": "Brachiocephalic Vein Left",
+    "category": "Vascular",
+    "canonical_coords_mm": [
+      -6.53,
+      84.29,
+      173.6
+    ]
+  },
+  {
+    "id": "brachiocephalic_vein_right",
+    "index": 59,
+    "name": "Brachiocephalic Vein Right",
+    "category": "Vascular",
+    "canonical_coords_mm": [
+      29.13,
+      74.42,
+      178.37
+    ]
+  },
+  {
+    "id": "atrial_appendage_left",
+    "index": 60,
+    "name": "Atrial Appendage Left",
+    "category": "Vascular",
+    "canonical_coords_mm": [
+      -35.67,
+      63.23,
+      103.21
+    ]
+  },
+  {
+    "id": "superior_vena_cava",
+    "index": 61,
+    "name": "Superior Vena Cava",
+    "category": "Vascular",
+    "canonical_coords_mm": [
+      24.87,
+      68.95,
+      127.96
+    ]
+  },
+  {
+    "id": "inferior_vena_cava",
+    "index": 62,
+    "name": "Inferior Vena Cava",
+    "category": "Vascular",
+    "canonical_coords_mm": [
+      20.29,
+      58.93,
+      -11.41
+    ]
+  },
+  {
+    "id": "portal_vein_and_splenic_vein",
+    "index": 63,
+    "name": "Portal Vein And Splenic Vein",
+    "category": "Vascular",
+    "canonical_coords_mm": [
+      6.16,
+      73.71,
+      -14.51
+    ]
+  },
+  {
+    "id": "iliac_artery_left",
+    "index": 64,
+    "name": "Iliac Artery Left",
+    "category": "Vascular",
+    "canonical_coords_mm": [
+      -40.0,
+      67.58,
+      -179.06
+    ]
+  },
+  {
+    "id": "iliac_artery_right",
+    "index": 65,
+    "name": "Iliac Artery Right",
+    "category": "Vascular",
+    "canonical_coords_mm": [
+      37.65,
+      70.07,
+      -181.37
+    ]
+  },
+  {
+    "id": "iliac_vena_left",
+    "index": 66,
+    "name": "Iliac Vena Left",
+    "category": "Vascular",
+    "canonical_coords_mm": [
+      -35.4,
+      57.78,
+      -187.69
+    ]
+  },
+  {
+    "id": "iliac_vena_right",
+    "index": 67,
+    "name": "Iliac Vena Right",
+    "category": "Vascular",
+    "canonical_coords_mm": [
+      40.96,
+      60.56,
+      -191.55
+    ]
+  },
+  {
+    "id": "humerus_left",
+    "index": 68,
+    "name": "Humerus Left",
+    "category": "Ribs & Thoracic Skeleton",
+    "canonical_coords_mm": [
+      -147.81,
+      41.55,
+      219.87
+    ]
+  },
+  {
+    "id": "humerus_right",
+    "index": 69,
+    "name": "Humerus Right",
+    "category": "Ribs & Thoracic Skeleton",
+    "canonical_coords_mm": [
+      144.62,
+      44.5,
+      214.73
+    ]
+  },
+  {
+    "id": "scapula_left",
+    "index": 70,
+    "name": "Scapula Left",
+    "category": "Ribs & Thoracic Skeleton",
+    "canonical_coords_mm": [
+      -117.34,
+      -3.35,
+      164.92
+    ]
+  },
+  {
+    "id": "scapula_right",
+    "index": 71,
+    "name": "Scapula Right",
+    "category": "Ribs & Thoracic Skeleton",
+    "canonical_coords_mm": [
+      118.22,
+      -0.7,
+      163.33
+    ]
+  },
+  {
+    "id": "clavicula_left",
+    "index": 72,
+    "name": "Clavicula Left",
+    "category": "Ribs & Thoracic Skeleton",
+    "canonical_coords_mm": [
+      -55.69,
+      74.37,
+      210.37
+    ]
+  },
+  {
+    "id": "clavicula_right",
+    "index": 73,
+    "name": "Clavicula Right",
+    "category": "Ribs & Thoracic Skeleton",
+    "canonical_coords_mm": [
+      57.93,
+      72.88,
+      210.66
+    ]
+  },
+  {
+    "id": "femur_left",
+    "index": 74,
+    "name": "Femur Left",
+    "category": "Pelvis",
+    "canonical_coords_mm": [
+      -105.86,
+      36.73,
+      -282.31
+    ]
+  },
+  {
+    "id": "femur_right",
+    "index": 75,
+    "name": "Femur Right",
+    "category": "Pelvis",
+    "canonical_coords_mm": [
+      104.75,
+      37.22,
+      -285.03
+    ]
+  },
+  {
+    "id": "hip_left",
+    "index": 76,
+    "name": "Hip Left",
+    "category": "Pelvis",
+    "canonical_coords_mm": [
+      -72.5,
+      28.57,
+      -204.62
+    ]
+  },
+  {
+    "id": "hip_right",
+    "index": 77,
+    "name": "Hip Right",
+    "category": "Pelvis",
+    "canonical_coords_mm": [
+      72.56,
+      29.1,
+      -205.52
+    ]
+  },
+  {
+    "id": "spinal_cord",
+    "index": 78,
+    "name": "Spinal Cord",
+    "category": "Spine",
+    "canonical_coords_mm": [
+      -0.15,
+      1.29,
+      34.62
+    ]
+  },
+  {
+    "id": "gluteus_maximus_left",
+    "index": 79,
+    "name": "Gluteus Maximus Left",
+    "category": "Pelvis",
+    "canonical_coords_mm": [
+      -87.87,
+      -20.57,
+      -247.64
+    ]
+  },
+  {
+    "id": "gluteus_maximus_right",
+    "index": 80,
+    "name": "Gluteus Maximus Right",
+    "category": "Pelvis",
+    "canonical_coords_mm": [
+      87.55,
+      -20.41,
+      -250.41
+    ]
+  },
+  {
+    "id": "gluteus_medius_left",
+    "index": 81,
+    "name": "Gluteus Medius Left",
+    "category": "Pelvis",
+    "canonical_coords_mm": [
+      -115.72,
+      24.17,
+      -184.41
+    ]
+  },
+  {
+    "id": "gluteus_medius_right",
+    "index": 82,
+    "name": "Gluteus Medius Right",
+    "category": "Pelvis",
+    "canonical_coords_mm": [
+      117.53,
+      24.74,
+      -191.72
+    ]
+  },
+  {
+    "id": "gluteus_minimus_left",
+    "index": 83,
+    "name": "Gluteus Minimus Left",
+    "category": "Pelvis",
+    "canonical_coords_mm": [
+      -112.01,
+      47.58,
+      -210.22
+    ]
+  },
+  {
+    "id": "gluteus_minimus_right",
+    "index": 84,
+    "name": "Gluteus Minimus Right",
+    "category": "Pelvis",
+    "canonical_coords_mm": [
+      111.84,
+      46.22,
+      -213.73
+    ]
+  },
+  {
+    "id": "autochthon_left",
+    "index": 85,
+    "name": "Autochthon Left",
+    "category": "Spine",
+    "canonical_coords_mm": [
+      -29.2,
+      -28.81,
+      8.54
+    ]
+  },
+  {
+    "id": "autochthon_right",
+    "index": 86,
+    "name": "Autochthon Right",
+    "category": "Spine",
+    "canonical_coords_mm": [
+      28.69,
+      -28.08,
+      7.58
+    ]
+  },
+  {
+    "id": "iliopsoas_left",
+    "index": 87,
+    "name": "Iliopsoas Left",
+    "category": "Pelvis",
+    "canonical_coords_mm": [
+      -60.06,
+      44.67,
+      -146.73
+    ]
+  },
+  {
+    "id": "iliopsoas_right",
+    "index": 88,
+    "name": "Iliopsoas Right",
+    "category": "Pelvis",
+    "canonical_coords_mm": [
+      56.94,
+      42.36,
+      -146.44
+    ]
+  },
+  {
+    "id": "brain",
+    "index": 89,
+    "name": "Brain",
+    "category": "Head & Cranial",
+    "canonical_coords_mm": [
+      -2.94,
+      55.26,
+      331.86
+    ]
+  },
+  {
+    "id": "skull",
+    "index": 90,
+    "name": "Skull",
+    "category": "Head & Cranial",
+    "canonical_coords_mm": [
+      0.82,
+      110.86,
+      270.07
+    ]
+  },
+  {
+    "id": "rib_left_1",
+    "index": 91,
+    "name": "Rib Left 1",
+    "category": "Ribs & Thoracic Skeleton",
+    "canonical_coords_mm": [
+      -55.38,
+      66.51,
+      199.02
+    ]
+  },
+  {
+    "id": "rib_left_2",
+    "index": 92,
+    "name": "Rib Left 2",
+    "category": "Ribs & Thoracic Skeleton",
+    "canonical_coords_mm": [
+      -73.9,
+      51.8,
+      190.03
+    ]
+  },
+  {
+    "id": "rib_left_3",
+    "index": 93,
+    "name": "Rib Left 3",
+    "category": "Ribs & Thoracic Skeleton",
+    "canonical_coords_mm": [
+      -84.63,
+      48.61,
+      168.14
+    ]
+  },
+  {
+    "id": "rib_left_4",
+    "index": 94,
+    "name": "Rib Left 4",
+    "category": "Ribs & Thoracic Skeleton",
+    "canonical_coords_mm": [
+      -91.14,
+      54.91,
+      140.99
+    ]
+  },
+  {
+    "id": "rib_left_5",
+    "index": 95,
+    "name": "Rib Left 5",
+    "category": "Ribs & Thoracic Skeleton",
+    "canonical_coords_mm": [
+      -96.1,
+      62.75,
+      115.36
+    ]
+  },
+  {
+    "id": "rib_left_6",
+    "index": 96,
+    "name": "Rib Left 6",
+    "category": "Ribs & Thoracic Skeleton",
+    "canonical_coords_mm": [
+      -104.85,
+      62.72,
+      92.5
+    ]
+  },
+  {
+    "id": "rib_left_7",
+    "index": 97,
+    "name": "Rib Left 7",
+    "category": "Ribs & Thoracic Skeleton",
+    "canonical_coords_mm": [
+      -113.0,
+      50.09,
+      73.44
+    ]
+  },
+  {
+    "id": "rib_left_8",
+    "index": 98,
+    "name": "Rib Left 8",
+    "category": "Ribs & Thoracic Skeleton",
+    "canonical_coords_mm": [
+      -113.64,
+      28.32,
+      56.48
+    ]
+  },
+  {
+    "id": "rib_left_9",
+    "index": 99,
+    "name": "Rib Left 9",
+    "category": "Ribs & Thoracic Skeleton",
+    "canonical_coords_mm": [
+      -109.24,
+      7.2,
+      39.05
+    ]
+  },
+  {
+    "id": "rib_left_10",
+    "index": 100,
+    "name": "Rib Left 10",
+    "category": "Ribs & Thoracic Skeleton",
+    "canonical_coords_mm": [
+      -100.13,
+      -8.91,
+      16.7
+    ]
+  },
+  {
+    "id": "rib_left_11",
+    "index": 101,
+    "name": "Rib Left 11",
+    "category": "Ribs & Thoracic Skeleton",
+    "canonical_coords_mm": [
+      -82.43,
+      -20.48,
+      -5.9
+    ]
+  },
+  {
+    "id": "rib_left_12",
+    "index": 102,
+    "name": "Rib Left 12",
+    "category": "Ribs & Thoracic Skeleton",
+    "canonical_coords_mm": [
+      -57.7,
+      -21.41,
+      -22.43
+    ]
+  },
+  {
+    "id": "rib_right_1",
+    "index": 103,
+    "name": "Rib Right 1",
+    "category": "Ribs & Thoracic Skeleton",
+    "canonical_coords_mm": [
+      54.42,
+      65.62,
+      198.19
+    ]
+  },
+  {
+    "id": "rib_right_2",
+    "index": 104,
+    "name": "Rib Right 2",
+    "category": "Ribs & Thoracic Skeleton",
+    "canonical_coords_mm": [
+      72.79,
+      52.09,
+      188.99
+    ]
+  },
+  {
+    "id": "rib_right_3",
+    "index": 105,
+    "name": "Rib Right 3",
+    "category": "Ribs & Thoracic Skeleton",
+    "canonical_coords_mm": [
+      81.86,
+      50.33,
+      166.24
+    ]
+  },
+  {
+    "id": "rib_right_4",
+    "index": 106,
+    "name": "Rib Right 4",
+    "category": "Ribs & Thoracic Skeleton",
+    "canonical_coords_mm": [
+      88.59,
+      54.3,
+      139.34
+    ]
+  },
+  {
+    "id": "rib_right_5",
+    "index": 107,
+    "name": "Rib Right 5",
+    "category": "Ribs & Thoracic Skeleton",
+    "canonical_coords_mm": [
+      93.14,
+      61.58,
+      115.31
+    ]
+  },
+  {
+    "id": "rib_right_6",
+    "index": 108,
+    "name": "Rib Right 6",
+    "category": "Ribs & Thoracic Skeleton",
+    "canonical_coords_mm": [
+      101.77,
+      62.22,
+      94.05
+    ]
+  },
+  {
+    "id": "rib_right_7",
+    "index": 109,
+    "name": "Rib Right 7",
+    "category": "Ribs & Thoracic Skeleton",
+    "canonical_coords_mm": [
+      110.66,
+      50.79,
+      73.58
+    ]
+  },
+  {
+    "id": "rib_right_8",
+    "index": 110,
+    "name": "Rib Right 8",
+    "category": "Ribs & Thoracic Skeleton",
+    "canonical_coords_mm": [
+      113.43,
+      29.67,
+      55.42
+    ]
+  },
+  {
+    "id": "rib_right_9",
+    "index": 111,
+    "name": "Rib Right 9",
+    "category": "Ribs & Thoracic Skeleton",
+    "canonical_coords_mm": [
+      109.79,
+      7.53,
+      37.97
+    ]
+  },
+  {
+    "id": "rib_right_10",
+    "index": 112,
+    "name": "Rib Right 10",
+    "category": "Ribs & Thoracic Skeleton",
+    "canonical_coords_mm": [
+      100.38,
+      -8.86,
+      15.53
+    ]
+  },
+  {
+    "id": "rib_right_11",
+    "index": 113,
+    "name": "Rib Right 11",
+    "category": "Ribs & Thoracic Skeleton",
+    "canonical_coords_mm": [
+      83.31,
+      -19.97,
+      -8.36
+    ]
+  },
+  {
+    "id": "rib_right_12",
+    "index": 114,
+    "name": "Rib Right 12",
+    "category": "Ribs & Thoracic Skeleton",
+    "canonical_coords_mm": [
+      58.41,
+      -20.83,
+      -25.56
+    ]
+  },
+  {
+    "id": "sternum",
+    "index": 115,
+    "name": "Sternum",
+    "category": "Ribs & Thoracic Skeleton",
+    "canonical_coords_mm": [
+      -1.12,
+      131.0,
+      121.04
+    ]
+  },
+  {
+    "id": "costal_cartilages",
+    "index": 116,
+    "name": "Costal Cartilages",
+    "category": "Ribs & Thoracic Skeleton",
+    "canonical_coords_mm": [
+      -3.15,
+      138.01,
+      53.71
+    ]
+  }
+]

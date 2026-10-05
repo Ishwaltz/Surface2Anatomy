@@ -1,0 +1,1737 @@
+<USER_REQUEST>
+# PHASE 5 ONLY
+
+# TARGET-SPECIFIC EXTERNAL-SURFACE SUPPORT REFINEMENT
+
+You are acting as a senior geometric deep learning researcher, computational anatomy scientist, medical-imaging machine learning engineer, and point-cloud localization specialist.
+
+Phases 1 through 4 are complete.
+
+The project now has a scientifically valid Dataset V2 and a progressively improving surface-only inference system.
+
+The objective of Phase 5 is to test ONE new hypothesis:
+
+> Once a coarse internal target location has been predicted, can a dedicated target-specific refiner use the external surface regions most relevant to that target to predict a substantially more accurate residual correction?
+
+This phase must remain STRICTLY SURFACE-ONLY at inference.
+
+No CT voxel intensities, internal segmentation masks, or ground-truth organ geometry may be supplied to the model at inference.
+
+---
+
+# CURRENT VERIFIED PROGRESSION
+
+```text
+Phase 2 PointNet++:
+Macro MRE ≈ 24.93 mm
+
+Phase 3 target-query model:
+Macro MRE ≈ 18.64 mm
+
+Phase 4 V4 gated query-vote model:
+Macro MRE = 17.60 ± 0.35 mm
+
+Best single seed:
+17.11 mm
+
+Micro MRE:
+17.97 ± 0.34 mm
+
+SDR@10:
+24.52%
+
+SDR@15:
+62.89%
+
+Skeletal:
+16.44 mm
+
+Soft tissue:
+17.82 mm
+
+Hardest remaining target:
+colon ≈ 30.45 mm
+```
+
+Phase 4 voting results:
+
+```text
+Mean effective voters:
+61.2 / 64
+
+Attention selection benefit:
+~0.57 mm
+
+Learned confidence benefit:
+~0.33 mm
+
+Macro-MRE bootstrap improvement interval vs Phase 3:
+[-0.66, 3.30] mm
+```
+
+Therefore point-wise voting was useful but only PARTIALLY validated as a universal localization improvement.
+
+Do NOT treat voting as the main remaining solution.
+
+---
+
+# CORE SCIENTIFIC INTERPRETATION
+
+Phase 3 proved that target-specific local surface features matter.
+
+Phase 4 showed that broad aggregation of many independent surface votes provides only modest additional benefit.
+
+The next hypothesis is:
+
+> Different anatomical targets require different, structured external surface support regions, and a specialized residual refiner can extract local geometric relationships that a global query decoder cannot resolve.
+
+The refiner must NOT attempt to predict an organ from scratch.
+
+It receives a coarse prediction and predicts only a bounded correction.
+
+---
+
+# ABSOLUTE RULE 1
+
+# DATASET V2 ONLY
+
+Use only:
+
+```text
+sharon/dataset_v2/pointclouds_v2.pt
+sharon/dataset_v2/splits_v2.json
+```
+
+Never use Dataset V1.
+
+---
+
+# ABSOLUTE RULE 2
+
+# TEST SET REMAINS LOCKED
+
+Use:
+
+```text
+TRAIN = 352
+VALIDATION = 44
+```
+
+The held-out 44-patient TEST set remains untouched.
+
+Do not inspect test localization errors.
+
+---
+
+# ABSOLUTE RULE 3
+
+# SURFACE-ONLY INFERENCE
+
+At inference, the refiner may consume:
+
+```text
+external surface points
+surface features
+surface normals if authorized as an ablation
+Phase 4 target-query embeddings
+Phase 4 attention weights
+Phase 4 voting weights
+Phase 4 coarse target coordinate
+training-derived atlas coordinate
+external body dimensions
+sex if retained by the selected base model
+```
+
+It may NOT consume:
+
+```text
+CT intensities
+volumetric patches
+organ segmentation
+ground-truth internal coordinates
+distance maps derived from ground-truth organs
+ground-truth skeleton
+ground-truth organ shape
+```
+
+Any implementation that extracts an image/CT patch around the predicted target is INVALID for the intended inference problem.
+
+---
+
+# ABSOLUTE RULE 4
+
+# DO NOT USE GROUND TRUTH TO SELECT THE REFINEMENT REGION
+
+The external support region used during training must be selected exactly the same way it would be selected at inference.
+
+Do NOT select surface points using:
+
+```text
+distance to ground-truth target
+ground-truth organ projection
+ground-truth anatomical region
+ground-truth segmentation
+```
+
+The final model must rely on predicted/coarse information only.
+
+---
+
+# ABSOLUTE RULE 5
+
+# DO NOT ADD ANATOMICAL SHAPE DEFORMATION YET
+
+Do NOT implement:
+
+```text
+dense organ templates
+PCA internal anatomy deformation
+continuous deformation fields
+organ meshes
+CT teacher distillation
+graph refinement
+collision loss
+```
+
+Those belong to Phase 6 or later.
+
+Phase 5 must isolate the value of target-specific surface refinement.
+
+---
+
+# ABSOLUTE RULE 6
+
+# DO NOT REPLACE THE BACKBONE
+
+Use the best Phase 4 surface encoder and target-query system.
+
+Do not introduce:
+
+```text
+PointTransformer V3
+PointNeXt backbone replacement
+new pretrained encoder
+```
+
+The only major new component is the refinement stage.
+
+---
+
+# STAGE 0
+
+# REPRODUCE THE PHASE 4 BASE
+
+Create:
+
+```text
+R0_PHASE4_BASE
+```
+
+Reproduce the selected Phase 4 architecture.
+
+Expected macro MRE should be approximately:
+
+```text
+17.6 mm
+```
+
+within seed variation.
+
+Use identical:
+
+```text
+dataset
+split
+primary target mask
+encoder
+query decoder
+voting module
+coarse output
+training protocol
+```
+
+If reproduction materially fails:
+
+STOP.
+
+---
+
+# STAGE 1
+
+# DEFINE THE COARSE TARGET
+
+For target \(k\), denote the Phase 4 final estimate:
+
+$$
+p_k^0
+$$
+
+This must be calculated exactly as in the frozen/reproduced Phase 4 model.
+
+Phase 5 predicts:
+
+$$
+\Delta p_k
+$$
+
+and produces:
+
+$$
+p_k^1 = p_k^0 + \Delta p_k
+$$
+
+The refiner must never directly replace \(p_k^0\) with an unconstrained fresh coordinate unless specifically tested as an ablation.
+
+---
+
+# STAGE 2
+
+# FREEZE VS JOINT-FINETUNE COMPARISON
+
+Initially train refinement with the Phase 4 base frozen.
+
+Call:
+
+```text
+R1_FROZEN_BASE_REFINER
+```
+
+This isolates the contribution of the refiner.
+
+Only after R1 works should you test:
+
+```text
+R2_JOINT_FINETUNE
+```
+
+where the base receives a substantially lower learning rate.
+
+Example concept:
+
+```text
+base LR = 0.1 × refiner LR
+```
+
+Do not assume joint training is superior.
+
+---
+
+# STAGE 3
+
+# TARGET-SPECIFIC SURFACE SUPPORT SET
+
+For every target \(k\), construct a support set:
+
+$$
+S_k = \{j_1,\ldots,j_M\}
+$$
+
+from external surface tokens only.
+
+The support set should combine evidence already learned in Phases 3 and 4.
+
+Candidate scores may include:
+
+$$
+s_{jk}
+=
+\lambda_a \alpha_{jk}
++
+\lambda_v w_{jk}
+$$
+
+where:
+
+* \(\alpha_{jk}\) = target-query surface attention
+* \(w_{jk}\) = voting confidence
+
+Do not tune many arbitrary weights.
+
+Initial simple option:
+
+$$
+s_{jk}
+=
+\frac{1}{2}
+\left(
+\tilde\alpha_{jk}
++
+\tilde w_{jk}
+\right)
+$$
+
+after suitable normalization.
+
+---
+
+# STAGE 4
+
+# DO NOT USE AN INTERNAL SPHERE
+
+Do NOT define a refinement ROI simply as:
+
+$$
+\|x_j-p_k^0\| < 50\text{ mm}
+$$
+
+Many internal torso targets are much farther than 50 mm from the skin.
+
+Instead use externally meaningful support selection.
+
+Permitted support mechanisms include:
+
+### A. Attention-selected points
+
+Top-M by target-query attention.
+
+### B. Vote-selected points
+
+Top-M by voting confidence.
+
+### C. Combined attention/vote support
+
+Union or fused ranking.
+
+### D. Anatomical axial band
+
+Surface points near the coarse target's superior/inferior coordinate:
+
+$$
+|z_j-z_k^0| < h_k
+$$
+
+where \(h_k\) is chosen from TRAIN data or via INNER_DEV.
+
+### E. Multiple connected surface neighborhoods
+
+Take top scoring anchor surface tokens and expand around them using Euclidean/geodesic neighborhoods on the external surface.
+
+None may use the ground-truth target.
+
+---
+
+# STAGE 5
+
+# MULTI-ANCHOR SUPPORT
+
+Do not assume one external patch supports each organ.
+
+For each target, identify the top:
+
+```text
+K_anchor = 2–4
+```
+
+high-scoring surface anchors, subject to minimum spatial separation.
+
+For example:
+
+1. select highest-score token;
+2. suppress tokens within a chosen external-surface radius;
+3. select next anchor;
+4. repeat.
+
+This allows a target to use multiple views such as:
+
+```text
+anterior surface
+posterior surface
+left lateral surface
+right lateral surface
+```
+
+when useful.
+
+Choose anchor count on INNER_DEV.
+
+---
+
+# STAGE 6
+
+# SUPPORT SIZE
+
+Start with a manageable number of points/tokens per target.
+
+Candidate sizes:
+
+```text
+M = 64
+128
+256
+```
+
+Choose using INNER_DEV only.
+
+Do NOT select M using the external validation set.
+
+Initial recommended value:
+
+```text
+M = 128
+```
+
+if memory permits.
+
+---
+
+# STAGE 7
+
+# SUPPORT POINT FEATURES
+
+For selected external support token \(j\) and target \(k\), construct features including:
+
+$$
+x_j-p_k^0
+$$
+
+$$
+x_j-a_k
+$$
+
+where:
+
+* \(x_j\) = external surface coordinate
+* \(p_k^0\) = coarse Phase 4 prediction
+* \(a_k\) = training-only atlas coordinate
+
+Also include:
+
+```text
+local PointNet++ feature
+target query embedding
+Phase 3 attention score
+Phase 4 vote weight
+surface-token scale identity
+```
+
+Do not include ground-truth target relative coordinates.
+
+---
+
+# STAGE 8
+
+# PREDICTED-COORDINATE LOCAL FRAME
+
+Create a target-centered local coordinate system:
+
+$$
+r_{jk}=x_j-p_k^0
+$$
+
+This is important.
+
+The refiner should solve:
+
+> Given the coarse estimate, how does the observed patient-specific external surface indicate that this target should move?
+
+rather than relearning global localization.
+
+---
+
+# STAGE 9
+
+# NORMALIZE LOCAL OFFSETS CAREFULLY
+
+Do not independently normalize each support region to a unit cube.
+
+That would again remove physical scale.
+
+If numerical scaling is needed, use the existing fixed:
+
+$$
+S_{global}
+$$
+
+or one globally fixed local scale.
+
+All physical relationships must remain comparable across patients.
+
+---
+
+# STAGE 10
+
+# LOCAL REFINER ARCHITECTURE
+
+Build a small shared target-conditioned local surface encoder.
+
+Recommended concept:
+
+```text
+selected surface support tokens
+        ↓
+target-centered relative geometry
+        ↓
+shared point/token MLP
+        ↓
+2–3 local self-attention blocks
+        ↓
+attention pooling conditioned on target query
+        ↓
+target-specific refinement feature
+        ↓
+bounded XYZ residual
+```
+
+Do NOT build 107 separate networks.
+
+Share the refiner across targets and condition it on target identity/query.
+
+---
+
+# STAGE 11
+
+# REFINER SIZE
+
+Keep it modest because:
+
+```text
+training patients = 352
+```
+
+Starting configuration:
+
+```text
+embedding dimension:
+128–256
+
+local transformer blocks:
+2–3
+
+attention heads:
+4–8
+
+FFN expansion:
+2–4×
+
+dropout:
+0.0–0.1
+```
+
+Do not build a huge transformer.
+
+---
+
+# STAGE 12
+
+# TARGET-CONDITIONED POOLING
+
+Do not simply max-pool the support region.
+
+Use the target query to pool relevant local evidence.
+
+Conceptually:
+
+$$
+\beta_{jk}
+=
+softmax_j
+(
+q_k^\top W h_{jk}
+)
+$$
+
+$$
+r_k
+=
+\sum_j
+\beta_{jk}h_{jk}
+$$
+
+where \(h_{jk}\) is the locally refined support-token representation.
+
+This is a second-stage, target-specific evidence aggregation.
+
+---
+
+# STAGE 13
+
+# BOUNDED RESIDUAL
+
+The refiner must predict a correction, not a new unrestricted coordinate.
+
+Use:
+
+$$
+\Delta p_k
+=
+R_k
+\tanh(z_k)
+$$
+
+Determine \(R_k\) using TRAINING data.
+
+For each target calculate coarse Phase 4 residual magnitude:
+
+$$
+e_{ik}^{0}
+=
+\|p_{ik}-p_{ik}^{0}\|
+$$
+
+Use a robust training-only statistic such as:
+
+```text
+P95 or P99 of coarse residual magnitude
+```
+
+to define an appropriate bound.
+
+You may use:
+
+* one global R
+* anatomical-group R
+* target-specific R
+
+Compare simplicity and stability.
+
+Do NOT use validation residuals to choose R.
+
+---
+
+# STAGE 14
+
+# CORRECTION MAGNITUDE REGULARIZATION
+
+Add a weak penalty:
+
+$$
+L_{\Delta}
+=
+\|\Delta p_k\|_2
+$$
+
+or Smooth-L1 equivalent.
+
+Purpose:
+
+prevent the refiner from ignoring the successful coarse model and producing huge corrections.
+
+The weight must be small.
+
+Do not optimize anatomical plausibility over localization accuracy.
+
+---
+
+# STAGE 15
+
+# PRIMARY LOSS
+
+Final localization:
+
+$$
+L_{final}
+=
+\frac{
+\sum_{ik}
+m_{ik}
+\sqrt{
+\|p_{ik}^{1}-p_{ik}\|_2^2+\epsilon^2
+}
+}{
+\sum_{ik}m_{ik}
+}
+$$
+
+Retain auxiliary supervision on coarse prediction if jointly finetuning:
+
+$$
+L
+=
+L_{final}
++
+\lambda_0 L_{coarse}
++
+\lambda_\Delta L_\Delta
+$$
+
+Suggested starting values:
+
+```text
+lambda_coarse = 0.1–0.25
+lambda_delta = very small
+```
+
+Tune using INNER_DEV.
+
+---
+
+# STAGE 16
+
+# RESIDUAL ORACLE DIAGNOSTIC
+
+Before training the neural refiner, quantify how much correction is theoretically required.
+
+For each validation observation calculate:
+
+$$
+\Delta p_k^*
+=
+p_k-p_k^0
+$$
+
+Report distributions:
+
+```text
+mean correction magnitude
+median
+P75
+P90
+P95
+```
+
+per target.
+
+This is diagnostic only.
+
+Do NOT feed \(\Delta p^*\) into the inference model.
+
+---
+
+# STAGE 17
+
+# CORRECTION DIRECTION ANALYSIS
+
+For each target analyze whether Phase 4 residuals exhibit systematic direction.
+
+Calculate:
+
+$$
+\mu_{\Delta,k}
+=
+E[p_k-p_k^0]
+$$
+
+If a target has a large consistent directional bias, a simple learned bias correction may explain part of the error.
+
+This motivates an important control.
+
+---
+
+# STAGE 18
+
+# SIMPLE TARGET BIAS CORRECTION CONTROL
+
+Using TRAIN only, calculate average coarse residual per target:
+
+$$
+b_k
+=
+E_{train}[p_k-p_k^0]
+$$
+
+Predict:
+
+$$
+p_k^{bias}
+=
+p_k^0+b_k
+$$
+
+Call:
+
+```text
+D0_STATIC_BIAS_CORRECTION
+```
+
+This is mandatory.
+
+If the complex local refiner cannot beat this simple correction, it has not demonstrated meaningful use of patient-specific local geometry.
+
+---
+
+# STAGE 19
+
+# SMALL MLP COARSE-ONLY CONTROL
+
+Create:
+
+```text
+D1_COARSE_ONLY_MLP
+```
+
+Input:
+
+```text
+coarse coordinate
+target query
+atlas coordinate
+body metadata if retained
+```
+
+NO surface-support points.
+
+Predict residual.
+
+This measures how much refinement comes from learned target-wise regression rather than external geometry.
+
+The real local refiner must outperform this.
+
+---
+
+# STAGE 20
+
+# SHUFFLED SUPPORT CONTROL
+
+For each patient, replace the target's support features with the support features from another patient while keeping:
+
+```text
+coarse coordinate
+target identity
+metadata
+```
+
+unchanged.
+
+Call:
+
+```text
+D2_SHUFFLED_SUPPORT
+```
+
+Performance should degrade.
+
+If not, the refinement stage is not actually using patient-specific support geometry.
+
+---
+
+# STAGE 21
+
+# RANDOM SUPPORT CONTROL
+
+Replace target-specific support selection with M random external surface tokens.
+
+Call:
+
+```text
+D3_RANDOM_SUPPORT
+```
+
+The learned support selection should outperform this.
+
+---
+
+# STAGE 22
+
+# WRONG-TARGET SUPPORT CONTROL
+
+For target \(k\), provide support selected for another anatomical target \(l\).
+
+Call:
+
+```text
+D4_WRONG_TARGET_SUPPORT
+```
+
+Performance should degrade.
+
+This tests whether target-specific support regions actually matter.
+
+---
+
+# STAGE 23
+
+# SUPPORT STRATEGY ABLATION
+
+Compare at minimum:
+
+```text
+S1:
+attention only
+
+S2:
+voting confidence only
+
+S3:
+attention + voting
+
+S4:
+attention + voting + axial band
+```
+
+Use INNER_DEV.
+
+Do not test every combination on external validation.
+
+Select one support strategy before final training.
+
+---
+
+# STAGE 24
+
+# MULTI-ANCHOR ABLATION
+
+Compare on INNER_DEV:
+
+```text
+one anchor
+two anchors
+four anchors
+```
+
+Determine whether multiple surface regions provide complementary information.
+
+---
+
+# STAGE 25
+
+# SUPPORT-SPATIAL-DIVERSITY DIAGNOSTIC
+
+For selected support points calculate their physical spatial spread.
+
+Example:
+
+$$
+D^{support}_k
+=
+mean_{a<b}
+\|x_a-x_b\|
+$$
+
+Determine whether some targets rely on:
+
+```text
+localized surface regions
+```
+
+while others use:
+
+```text
+broad/global torso configuration
+```
+
+This may explain why query specialization was only partial.
+
+---
+
+# STAGE 26
+
+# OPTIONAL NORMALS ABLATION
+
+Dataset V2 may contain external surface normals.
+
+Do NOT use them in the primary R1 comparison if previous phases used XYZ only.
+
+After the refinement mechanism is proven, run a separate ablation:
+
+```text
+R3_REFINER_PLUS_NORMALS
+```
+
+Add:
+
+$$
+n_j=(n_x,n_y,n_z)
+$$
+
+to support-token features.
+
+Nothing else changes.
+
+This tests whether surface orientation contributes information.
+
+---
+
+# STAGE 27
+
+# OPTIONAL LOCAL CURVATURE ABLATION
+
+Only if normals are robust and R3 improves performance.
+
+Estimate simple external-surface geometric descriptors from neighboring surface points:
+
+```text
+local covariance eigenvalues
+surface variation
+principal curvature proxy
+```
+
+Do NOT introduce unstable high-order curvature estimates.
+
+Call:
+
+```text
+R4_REFINER_PLUS_GEOMETRY
+```
+
+Again, only one feature change.
+
+---
+
+# STAGE 28
+
+# EIGHT-PATIENT MEMORIZATION
+
+Use the SAME fixed 8 training patients from Phases 3/4.
+
+Required:
+
+```text
+training MRE < 3 mm
+```
+
+Ideally:
+
+```text
+≤ Phase 4 memorization error
+```
+
+The refiner must not make optimization worse.
+
+---
+
+# STAGE 29
+
+# ERROR-GATED REFINEMENT
+
+A refiner can harm targets whose coarse estimate is already excellent.
+
+Investigate a learned correction gate:
+
+$$
+g_k=\sigma(MLP(r_k))
+$$
+
+Final:
+
+$$
+p_k^1
+=
+p_k^0
++
+g_k\Delta p_k
+$$
+
+This allows:
+
+```text
+g ≈ 0:
+keep coarse prediction
+
+g ≈ 1:
+apply correction
+```
+
+Call:
+
+```text
+R5_GATED_REFINEMENT
+```
+
+Compare against always applying the residual.
+
+---
+
+# STAGE 30
+
+# DO NOT USE GROUND-TRUTH ERROR TO GATE AT INFERENCE
+
+The gate must use only predicted features.
+
+It may consume:
+
+```text
+support representation
+coarse-query representation
+vote dispersion
+attention entropy
+vote/query disagreement
+```
+
+It may NOT consume:
+
+```text
+actual coarse prediction error
+ground-truth target
+```
+
+---
+
+# STAGE 31
+
+# QUERY-VOTE DISAGREEMENT FEATURE
+
+Phase 4 produced:
+
+$$
+p_k^{query}
+$$
+
+and:
+
+$$
+p_k^{vote}
+$$
+
+Calculate:
+
+$$
+d_k^{qv}
+=
+\|p_k^{query}-p_k^{vote}\|
+$$
+
+Use this as a possible refinement confidence feature.
+
+Large disagreement may indicate uncertainty or target ambiguity.
+
+Do not label it probabilistic uncertainty.
+
+---
+
+# STAGE 32
+
+# TARGET-WISE REFINEMENT BENEFIT
+
+For every target report:
+
+```text
+Phase4 MRE
+Phase5 MRE
+absolute improvement
+relative improvement
+mean correction magnitude
+mean gate
+support spread
+```
+
+Classify:
+
+```text
+REFINEMENT_STRONGLY_HELPFUL
+REFINEMENT_HELPFUL
+NEUTRAL
+HARMFUL
+```
+
+---
+
+# STAGE 33
+
+# CRITICAL HARD-TARGET ANALYSIS
+
+Pay particular attention to:
+
+```text
+colon
+duodenum
+stomach
+```
+
+if sufficiently supported and confirmed as high-error targets.
+
+However:
+
+DO NOT begin Phase 5 by asserting that their error is caused by "physiological deformation."
+
+That hypothesis has NOT yet been proven.
+
+For each difficult target analyze:
+
+```text
+training support
+population target variance
+surface-conditioned local variance
+coarse Phase 4 error
+correction magnitude
+support consistency
+support-region entropy
+body-dimension association
+scan coverage association
+```
+
+Only then discuss likely biological ambiguity.
+
+---
+
+# STAGE 34
+
+# RIGID VS MOBILE STRUCTURE COMPARISON
+
+Using repository-defined anatomy categories where possible, compare refinement gains for:
+
+```text
+skeletal/rigid
+muscular
+solid abdominal organs
+hollow abdominal organs
+vascular structures
+```
+
+Do not invent target membership.
+
+Question:
+
+> Is local surface refinement particularly useful for rigid anatomy, soft tissues, or both?
+
+---
+
+# STAGE 35
+
+# DEPTH-DEPENDENT REFINEMENT ANALYSIS
+
+Repeat target-to-surface depth analysis.
+
+For each observation calculate target depth:
+
+$$
+d_{ik}
+=
+\min_j \|p_{ik}-x_{ij}\|
+$$
+
+Compare:
+
+```text
+Phase 4 error vs depth
+Phase 5 error vs depth
+Phase 5 improvement vs depth
+```
+
+This will show whether external support refinement works for deep targets or mainly superficial ones.
+
+---
+
+# STAGE 36
+
+# COARSE-ERROR STRATIFICATION
+
+Group Phase 4 predictions into bins such as:
+
+```text
+0–10 mm
+10–15 mm
+15–20 mm
+20–30 mm
+>30 mm
+```
+
+Measure Phase 5 correction.
+
+Important question:
+
+> Does refinement improve poor predictions without damaging already-good predictions?
+
+Report:
+
+```text
+mean pre-refinement error
+mean post-refinement error
+percentage improved
+percentage worsened
+```
+
+for each bin.
+
+---
+
+# STAGE 37
+
+# OVERSHOOT ANALYSIS
+
+For every prediction determine whether the correction:
+
+```text
+moves toward ground truth
+moves away from ground truth
+overshoots past ground truth
+```
+
+Quantify these proportions.
+
+This is especially important for large residual corrections.
+
+---
+
+# STAGE 38
+
+# EXTERNAL VALIDATION PROTOCOL
+
+Choose:
+
+```text
+support strategy
+M
+anchor count
+residual bound
+refiner size
+```
+
+using INNER_DEV only.
+
+Once frozen:
+
+retrain on all 352 TRAIN patients.
+
+Evaluate once per seed on the fixed 44 VALIDATION patients.
+
+Use at least:
+
+```text
+3 seeds
+```
+
+for:
+
+```text
+R0 Phase4 base
+best Phase5 model
+```
+
+---
+
+# STAGE 39
+
+# BOOTSTRAP SIGNIFICANCE
+
+Use paired patient-level bootstrap:
+
+```text
+1000 resamples
+```
+
+Report 95% CI for:
+
+```text
+macro MRE improvement
+micro MRE improvement
+SDR@10 improvement
+SDR@15 improvement
+```
+
+Unlike Phase 4, we want the macro-MRE improvement interval itself to clearly exclude zero before calling Phase 5 a major success.
+
+---
+
+# STAGE 40
+
+# REQUIRED METRICS
+
+Report:
+
+```text
+macro target MRE
+micro MRE
+macro patient MRE
+
+median
+P75
+P90
+P95
+
+SDR@5
+SDR@10
+SDR@15
+SDR@20
+```
+
+All in physical millimetres.
+
+---
+
+# PHASE 5 SUCCESS GATES
+
+## GATE A — Optimization
+
+Eight-patient MRE:
+
+```text
+< 3 mm
+```
+
+## GATE B — Surface support matters
+
+Best local refiner must beat:
+
+```text
+D0 static bias correction
+D1 coarse-only MLP
+D2 shuffled support
+D3 random support
+```
+
+## GATE C — Validation improvement
+
+Best Phase 5 model must improve macro MRE over Phase 4.
+
+## GATE D — Statistical confidence
+
+Paired bootstrap 95% CI for macro-MRE improvement should exclude zero.
+
+## GATE E — Patient specificity
+
+Shuffling support features must materially degrade performance.
+
+---
+
+# STRONG SUCCESS TARGET
+
+A strong result is:
+
+```text
+Macro MRE < 15.5 mm
+```
+
+This would be approximately another:
+
+```text
+>10–12% relative reduction
+```
+
+from 17.60 mm.
+
+---
+
+# HIGHLY ENCOURAGING TARGET
+
+```text
+Macro MRE < 14 mm
+SDR@10 > 35%
+```
+
+would strongly justify moving to a structured anatomical deformation model next.
+
+These are milestones, not numbers to manipulate experiments toward.
+
+---
+
+# IMPORTANT
+
+Do NOT stack a dense atlas-deformation model merely because the refiner reaches 14–15 mm.
+
+Finish Phase 5 cleanly first.
+
+We need to know exactly how much target-specific external refinement contributes.
+
+---
+
+# WHAT PHASE 6 WILL LIKELY TEST
+
+Only after Phase 5 finishes, a reasonable Phase 6 candidate is:
+
+```text
+PATIENT-SPECIFIC INTERNAL ANATOMY DEFORMATION PRIOR
+```
+
+Possible forms include:
+
+```text
+low-dimensional PCA landmark deformation
+dense internal organ point-cloud template
+dual surface/internal template encoder
+joint patient-specific deformation field
+```
+
+This could address correlations among internal structures that individual target refiners cannot capture.
+
+Do NOT implement it in Phase 5.
+
+---
+
+# NO COLLISION LOSS
+
+Still prohibited.
+
+Target centroids are not physical organ volumes.
+
+Any future anatomical non-overlap constraint requires predicted structure shapes or occupancy.
+
+---
+
+# REQUIRED RESULT TABLE
+
+| ID | Model                           | Macro MRE | Micro MRE | SDR@10 | SDR@15 | P90 |
+| -- | ------------------------------- | --------: | --------: | -----: | -----: | --: |
+| R0 | Phase 4 Base                    |           |           |        |        |     |
+| D0 | Static Bias Correction          |           |           |        |        |     |
+| D1 | Coarse-Only Residual MLP        |           |           |        |        |     |
+| D3 | Random Surface Support          |           |           |        |        |     |
+| R1 | Target-Specific Surface Refiner |           |           |        |        |     |
+| R2 | Joint Finetuned Refiner         |           |           |        |        |     |
+| R3 | + Surface Normals               |           |           |        |        |     |
+| R5 | Gated Refinement                |           |           |        |        |     |
+
+Only include actually executed experiments.
+
+---
+
+# REQUIRED FINAL REPORT
+
+Create:
+
+```text
+reports/phase5/PHASE_5_TARGET_SPECIFIC_SURFACE_REFINEMENT_FINAL.md
+```
+
+Use:
+
+# 1. Executive Summary
+
+# 2. Phase 4 Reproduction
+
+# 3. Residual Error Structure
+
+# 4. Surface-Support Construction
+
+# 5. Multi-Anchor Selection
+
+# 6. Local Refinement Architecture
+
+# 7. Residual Bounding
+
+# 8. Memorization Test
+
+# 9. Support Strategy Ablations
+
+# 10. Baseline Controls
+
+# 11. Surface-Support Dependency Tests
+
+# 12. Target-Wise Results
+
+# 13. Anatomical Group Results
+
+# 14. Difficult-Target Analysis
+
+# 15. Target Depth Analysis
+
+# 16. Correction/Overshoot Analysis
+
+# 17. Statistical Significance
+
+# 18. Failure Modes
+
+# 19. Phase 5 Verdict
+
+# 20. Recommendation for Phase 6
+
+---
+
+# PHASE 5 VERDICT
+
+Choose exactly one:
+
+```text
+TARGET_SPECIFIC_REFINEMENT_STRONGLY_VALIDATED
+
+TARGET_SPECIFIC_REFINEMENT_PARTIALLY_VALIDATED
+
+TARGET_SPECIFIC_REFINEMENT_NOT_VALIDATED
+
+SURFACE_SUPPORT_NOT_INFORMATIVE
+
+REFINER_OPTIMIZATION_FAILURE
+
+INCONCLUSIVE
+```
+
+---
+
+# FINAL RESPONSE FORMAT
+
+Return:
+
+```text
+PHASE 5 STATUS:
+PASS / FAIL
+
+Phase 4 reproduced macro MRE:
+X mm
+
+Static bias correction macro MRE:
+X mm
+
+Coarse-only MLP macro MRE:
+X mm
+
+Random-support macro MRE:
+X mm
+
+Best surface-refinement macro MRE:
+X ± SD mm
+
+Best surface-refinement micro MRE:
+X ± SD mm
+
+Best SDR@10:
+X %
+
+Best SDR@15:
+X %
+
+Relative improvement over Phase 4:
+X %
+
+Eight-patient MRE:
+X mm
+
+Surface-support shuffle degrades performance:
+YES / NO
+
+Target-specific support beats random support:
+YES / NO
+
+Multi-anchor support beneficial:
+YES / NO
+
+Gated refinement beneficial:
+YES / NO
+
+Normals beneficial:
+YES / NO / NOT TESTED
+
+Mean predicted correction:
+X mm
+
+Predictions improved by refinement:
+X %
+
+Predictions worsened by refinement:
+X %
+
+Skeletal MRE:
+X mm
+
+Soft-tissue MRE:
+X mm
+
+Colon MRE:
+X mm
+
+Best-improved target:
+NAME: X → Y mm
+
+Hardest remaining target:
+NAME — X mm
+
+Macro-MRE paired bootstrap improvement 95% CI:
+[...]
+
+PHASE 5 VERDICT:
+...
+
+Recommended Phase 6:
+...
+```
+
+Then provide:
+
+```text
+reports/phase5/PHASE_5_TARGET_SPECIFIC_SURFACE_REFINEMENT_FINAL.md
+```
+
+STOP.
+
+DO NOT IMPLEMENT DENSE INTERNAL ATLAS DEFORMATION.
+
+DO NOT USE CT PATCHES AT INFERENCE.
+
+DO NOT IMPLEMENT COLLISION LOSS.
+
+DO NOT EVALUATE THE HELD-OUT TEST SET.
+
+The sole scientific objective of Phase 5 is to determine whether target-specific external surface regions can supply patient-specific residual information that materially improves the already successful coarse internal localization model.
+
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-09-05T15:35:55+05:30.
+</ADDITIONAL_METADATA>

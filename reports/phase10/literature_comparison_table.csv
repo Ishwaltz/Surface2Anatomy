@@ -1,0 +1,6 @@
+Framework / Paper,Published Modality,Matched Targets,Published MRE (mm),Proposed Model MRE (mm),Absolute Reduction (mm),Relative Improvement (%)
+Population Atlas (C0),Zero-parameter Atlas,104 Targets,65.97,23.36,42.61,64.6%
+Statistical Shape Model (BOSS),Surface PCA + Ridge,104 Targets,55.06,23.36,31.70,57.6%
+SAMe (Skeleton GNN),Skin Point Cloud,11 Visceral,53.67,27.03,26.64,49.6%
+Surface-to-Viscera,Multi-view RGB-D,20 Visceral,38.50,26.44,12.06,31.3%
+Depth-to-Anatomy,Single-view Depth,41 Targets,42.10,23.36,18.74,44.5%

@@ -1,0 +1,76 @@
+{
+  "manifest_version": "1.0.0",
+  "system_name": "Surface2Anatomy",
+  "release_version": "0.1.0",
+  "date_frozen": "2026-09-17",
+  "scientific_specification": {
+    "task": "Target-conditioned 3D Internal Anatomy Localization from External Body Surface Geometry",
+    "runtime_input": "External 3D body surface only (zero CT/MRI voxel requirements at runtime)",
+    "offline_supervision": "CT/MRI-derived annotations used offline for training supervision, target centroid extraction, and validation",
+    "architecture": "MultiScaleSurfacePointNet2Encoder + TargetQueryTransformerDecoder",
+    "surface_tokens": 320,
+    "surface_tokens_decomposition": "256 intermediate/local (SA2) + 64 coarse/global (SA3)",
+    "num_query_slots": 117,
+    "primary_benchmark_targets": 104,
+    "total_supported_targets": 121,
+    "decoder_layers": 4,
+    "decoder_attention_heads": 8,
+    "d_model": 256,
+    "global_normalization_scale_mm": 500.0,
+    "canonical_coordinate_system": "+X Right, +Y Anterior, +Z Superior",
+    "ensemble_policy": "Unweighted arithmetic mean across frozen Seeds 42, 43, 44"
+  },
+  "frozen_artifacts": {
+    "checkpoints": {
+      "phase10r_seed42": {
+        "filename": "C4_Proposed_seed42.pt",
+        "sha256": "760adfee1c47d80fc3f59492971b6c83459fc10ce2166f13fc1d7e4d708cb936",
+        "size_bytes": 20617387,
+        "protocol": "Phase 10R Locked Test Protocol Freeze"
+      },
+      "phase10r_seed43": {
+        "filename": "C4_Proposed_seed43.pt",
+        "sha256": "3e3c739c992b80f193ec41041e62ff59191436e2e5f1e78bd0a328c8310f7d91",
+        "size_bytes": 20617387,
+        "protocol": "Phase 10R Locked Test Protocol Freeze"
+      },
+      "phase10r_seed44": {
+        "filename": "C4_Proposed_seed44.pt",
+        "sha256": "28fbc7b30d8539f84c265b4f95f4f73b63978fb5b252f9a3ad20ea4fa1792cdd",
+        "size_bytes": 20617387,
+        "protocol": "Phase 10R Locked Test Protocol Freeze"
+      },
+      "phase16_brain_seed42": {
+        "filename": "BrainAware_seed42.pt",
+        "sha256": "3e1adad13a0db447cd1de28cd148c0a1ccb033358f3d7f143b211bb52a87980a",
+        "size_bytes": 19685651,
+        "protocol": "Phase 16 Brain-Aware Retrained Freeze"
+      },
+      "phase16_brain_seed43": {
+        "filename": "BrainAware_seed43.pt",
+        "sha256": "ee44025a72a936a55ada128e06c5648f9d363d7f707f14522d05b9361efdfed3",
+        "size_bytes": 19685651,
+        "protocol": "Phase 16 Brain-Aware Retrained Freeze"
+      },
+      "phase16_brain_seed44": {
+        "filename": "BrainAware_seed44.pt",
+        "sha256": "968782effdacfc445d0c86d8c85d6217705c6fe67b420904bd1cd4e1b1297e6b",
+        "size_bytes": 19685651,
+        "protocol": "Phase 16 Brain-Aware Retrained Freeze"
+      }
+    },
+    "canonical_alignment": {
+      "filename": "canonical_alignment_v3_ridge.joblib",
+      "sha256": "b9901d72c3aa73e70b1fa77aefdbc1ebf8e682d5f5fa011ee840772827488e26",
+      "size_bytes": 1729,
+      "algorithm": "Ridge regression (alpha=50.0) on 105 external-only morphology features",
+      "source_script": "tools/dataset_v3/apply_canonical_alignment.py"
+    },
+    "ontology": {
+      "filename": "target_ontology_v3.csv",
+      "sha256": "a0cc18265b442f85d4acd7e8408e00ac4c6fe1e407d89c048f0d8c50ed096101",
+      "size_bytes": 18139,
+      "num_classes": 117
+    }
+  }
+}
